@@ -1,0 +1,48 @@
+﻿@model List<ProjetoPortifolio.Models.ButtonSite>
+
+@{
+    
+    @using SmartBreadcrumbs;
+}
+
+<nav class="navbar navbar-expand-lg nav" id="menu_principal" style="background-color:black; display:flex;  justify-content: space-around;">
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="container" style="margin-left:20px; padding:0; width:auto;">
+        @if (!User.Identity.IsAuthenticated)
+        {
+            <div class="navbar-header btn icon">
+                @if (Model.Where(r => r.type == "linkMaster").Count() != 0)
+                {
+                    var dados = Model.Where(r => r.type == "linkMaster").First();
+                    <a class="navbar-brand" id="title_main" target="_blank" style="color:white;" href="@dados.caminhoUrl">@dados.descricao</a>
+                }
+            </div>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                @foreach (var botoes in Model.Where(r => r.type == "link"))
+                {
+
+                    <a class="btn_link btn btn-dark" style="margin-left:10px;" href="@("/Portifolio/"+botoes.caminhoUrl)"> @botoes.descricao.Replace("_", " ")</a>
+                }
+            </div>
+
+        }
+    </div>
+
+    @if (User.Identity.IsAuthenticated)
+    {
+
+        <div class="justify-content-end">
+            <div class="navbar-header btn icon">
+                <p style="color:white;"> Ola seja bem vindo <b> @User.Identity.Name </b> ! </p>
+                <a class="btn btn-dark" href="@("/Portifolio/logout")">Logout</a>
+            </div>
+        </div>
+    }
+</nav>
+
+
+<breadcrumb id="bread"></breadcrumb>

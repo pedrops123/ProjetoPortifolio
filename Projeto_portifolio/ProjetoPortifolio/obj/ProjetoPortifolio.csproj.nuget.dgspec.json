@@ -1,0 +1,101 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\pedro.furlan\\Desktop\\Projeto_portifolio\\Projeto_portifolio\\ProjetoPortifolio\\ProjetoPortifolio.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\pedro.furlan\\Desktop\\Projeto_portifolio\\Projeto_portifolio\\ProjetoPortifolio\\ProjetoPortifolio.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\pedro.furlan\\Desktop\\Projeto_portifolio\\Projeto_portifolio\\ProjetoPortifolio\\ProjetoPortifolio.csproj",
+        "projectName": "ProjetoPortifolio",
+        "projectPath": "C:\\Users\\pedro.furlan\\Desktop\\Projeto_portifolio\\Projeto_portifolio\\ProjetoPortifolio\\ProjetoPortifolio.csproj",
+        "packagesPath": "C:\\Users\\tap.ti\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\pedro.furlan\\Desktop\\Projeto_portifolio\\Projeto_portifolio\\ProjetoPortifolio\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\tap.ti\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "Microsoft.AspNetCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            },
+            "Microsoft.AspNetCore.Authentication.Cookies": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Razor.Design": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[2.2.4, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[2.2.4, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.4, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            },
+            "SmartBreadcrumbs": {
+              "target": "Package",
+              "version": "[2.1.0, )"
+            },
+            "System.Drawing.Common": {
+              "target": "Package",
+              "version": "[4.5.1, )"
+            },
+            "X.PagedList.Mvc.Core": {
+              "target": "Package",
+              "version": "[7.6.0, )"
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    }
+  }
+}

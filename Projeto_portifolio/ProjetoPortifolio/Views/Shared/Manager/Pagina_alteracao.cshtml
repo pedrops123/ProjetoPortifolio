@@ -1,0 +1,72 @@
+﻿@model ProjetoPortifolio.ViewModel.PortifolioViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string idPagina = ViewData["idPagina"].ToString();
+}
+
+<div id="hdnPagina" style="display:none" value="@idPagina"></div>
+
+<div class="alert alert-warning alert-dismissible fade show" id="msg-alerta" role="alert" style="display:none;">
+    <div id="titulo_alerta"></div> <br /> <br />
+    <div id="texto-alerta"> </div>
+    <button type="button" id="close-alert" class="close" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+@{
+    int contador = 1;
+    string IdFormulario = "formularioSubmit" + @contador.ToString();
+    <form class="form-group" id="@IdFormulario">
+        @foreach (string forms in Model.formularios)
+        {
+            @Html.Raw(forms);
+        }
+    </form>
+    <br />
+    <br />
+}
+
+<script type="text/javascript">
+    window.onload = function () {
+        if ("@idPagina" != "") {
+
+            $("#nome_pagina_id").removeClass("form-control").addClass("form-control-plaintext");
+            $("#nome_pagina_id").attr('disabled', 'disabled');
+
+            $.ajax({
+                type: "GET",
+                url: "getDadosTela",
+                data: {
+                    idTela:"@idPagina"
+                },
+                success: function (response) {
+                    document.getElementById("nome_pagina_id").value = response[0];
+                    document.getElementById("titulo_aba_id").value = response[1];
+                    document.getElementById("titulo_pagina_id").value = response[2];
+                    document.getElementById("conteudo_pagina_id").value = response[3];
+                    if (response[4] == 1) {
+                        document.getElementById("foto_pagina_id").value = "Sim";
+                    } else {
+                        document.getElementById("foto_pagina_id").value = "Não";
+                    }
+                    if (response[5] == 1) {
+                        document.getElementById("form_pagina_id").value = "Sim";
+                    } else {
+                        document.getElementById("form_pagina_id").value = "Não";
+                    }
+                },
+                failure: function () {
+                    alert("Ocorreu um erro na captura dos dados");
+                }
+            });
+        }
+    }
+
+
+
+
+
+
+</script>
