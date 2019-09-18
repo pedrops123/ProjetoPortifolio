@@ -34,6 +34,9 @@
 </div>
 
 
+<div hidden="hidden" style="align-content:center;" class="spinner-grow text-dark"></div>
+
+
 @if (Model.dadosPagina.nome_pagina == "_main")
 {
     <div id="item-principal" class="row">
@@ -41,11 +44,11 @@
         <div class="col-sm-11">
             @if (Model.mainFoto != "")
             {
-                <img style="display:none;" id="img-principal" class="rounded-circle" src="@Model.mainFoto" />
+                <img id="img-principal" class="rounded-circle" src="@Model.mainFoto" />
             }
             else
             {
-                <div style="display:none; width:300px; height:300px;" id="img-principal" class="rounded-circle"> Nenhuma Imagem </div>
+                <div style=" width:300px; height:300px; align-content:center; " id="img-principal" class="rounded-circle"> <div style="width:150px; margin: 123px 0px 0px 66px;">Nenhuma Imagem</div>  </div>
             }
             <div class="content">
                 <div style="display:none;" id="desc-principal" class="description-main">
@@ -96,8 +99,7 @@
             <div class="imagens-portifolio-item  view overlay zoom">
                 <div style="border:inset; width:253px; height:253px;  margin-left:20px; margin-top:20px;">
                     <a class="example-image-link" href="@foto.urlFoto" data-lightbox="example-1" data-title="@foto.descricao_foto"><img style="width:253px; height:253px;" class="example-image img-thumbnail" src="@foto.urlFoto" alt="image-1" /></a>
-                </div>
-                <br />
+                </div>               
             </div>
         }
 
