@@ -268,6 +268,14 @@ namespace ProjetoPortifolio.Controllers
                 }
             }
             var path = Directory.GetCurrentDirectory();
+
+            // Se nao existir pasta Fotos , cria uma automaticamente
+
+            if (!Directory.Exists(path + @"\wwwroot\Fotos\"))
+            {
+                Directory.CreateDirectory(path + @"\wwwroot\Fotos\");
+            }
+            
             foreach (var item in dadosRecebidos)
             {
                 var caminhoImg = path + @"\wwwroot\Fotos\" + Guid.NewGuid() + "." + item.FileName.Split('.')[item.FileName.Split('.').Length - 1];

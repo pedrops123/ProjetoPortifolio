@@ -183,11 +183,7 @@ $(document).ready(function () {
             "margin-right": "5%"
         });
 
-        $("#img-principal").css({
-            "height": "10%",
-            "margin-top": "5%",
-            "margin-left": "25%"
-        });
+
 
         $(".content").css({
             "margin-top": "-19%",
@@ -209,11 +205,6 @@ $(document).ready(function () {
             "margin-right": "5%"
         });
 
-        $("#img-principal").css({
-            "height": "10%",
-            "margin-top": "5%",
-            "margin-left": "23%"
-        });
 
         $(".content").css({
             "margin-top": "-19%",
@@ -226,6 +217,12 @@ $(document).ready(function () {
 
         return 1;
     }
+
+    $("#img-principal").css({
+        "width": "300px",
+        "height": "300px",
+        "margin":"0% 0% 6% 41%"
+    });
 
 
 });
