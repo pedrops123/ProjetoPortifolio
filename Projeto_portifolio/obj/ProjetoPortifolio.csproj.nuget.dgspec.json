@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\pedro.furlan\\Desktop\\PortifolioTeste\\ProjetoPortifolio\\Projeto_portifolio\\ProjetoPortifolio.csproj": {}
+    "C:\\Projeto_portifolio\\ProjetoPortifolio.csproj": {}
   },
   "projects": {
-    "C:\\Users\\pedro.furlan\\Desktop\\PortifolioTeste\\ProjetoPortifolio\\Projeto_portifolio\\ProjetoPortifolio.csproj": {
+    "C:\\Projeto_portifolio\\ProjetoPortifolio.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\pedro.furlan\\Desktop\\PortifolioTeste\\ProjetoPortifolio\\Projeto_portifolio\\ProjetoPortifolio.csproj",
+        "projectUniqueName": "C:\\Projeto_portifolio\\ProjetoPortifolio.csproj",
         "projectName": "ProjetoPortifolio",
-        "projectPath": "C:\\Users\\pedro.furlan\\Desktop\\PortifolioTeste\\ProjetoPortifolio\\Projeto_portifolio\\ProjetoPortifolio.csproj",
+        "projectPath": "C:\\Projeto_portifolio\\ProjetoPortifolio.csproj",
         "packagesPath": "C:\\Users\\tap.ti\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\pedro.furlan\\Desktop\\PortifolioTeste\\ProjetoPortifolio\\Projeto_portifolio\\obj\\",
+        "outputPath": "C:\\Projeto_portifolio\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -58,7 +58,7 @@
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[2.2.4, )"
+              "version": "[2.2.6, )"
             },
             "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
@@ -68,7 +68,7 @@
               "include": "Runtime, Build, Native, ContentFiles, Analyzers",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[2.2.4, )"
+              "version": "[2.2.6, )"
             },
             "Microsoft.NETCore.App": {
               "suppressParent": "All",

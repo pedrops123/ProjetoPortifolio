@@ -25,7 +25,7 @@ namespace ProjetoPortifolio.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             // optionsBuilder.UseSqlServer(@"Data Source=SP1DES064201\SQLEXPRESS;Initial Catalog=PortifolioDB;Integrated Security=True;Connect Timeout=30; User Id=pedro.furlan; Password=mudar123;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
-            optionsBuilder.UseSqlServer(@"Data Source=DSK-TI-02\SQLEXPRESS;Initial Catalog=PortifolioDB;Integrated Security=True;Connect Timeout=30;User Id=tap.ti;Password=TrameAp1112@;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            optionsBuilder.UseSqlServer(@"Data Source=DSK-TI-02\SQLEXPRESS; Initial Catalog=PortifolioDB;Integrated Security=True;Connect Timeout=30; User Id=tap.ti; Password=TrameAp112@;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -39,7 +39,7 @@ namespace ProjetoPortifolio.Data
                     titulo_pagina = "Minha pagina principal",
                     conteudo_pagina = "Meu site Portifolio , isto é o conteudo inicializado na pagina , para alterar ou incluir alguma tela  favor entrar no manager incluindo o parametro _Login",
                     hasForm = false,
-                    hasFoto = false
+                    hasFoto = false,
                 });
 
 
@@ -52,7 +52,8 @@ namespace ProjetoPortifolio.Data
                   titulo_pagina = "Manager Administrador",
                   conteudo_pagina = "",
                   hasForm = true,
-                  hasFoto = false
+                  hasFoto = false,
+                  pagina_pai = "_main"
               });
 
             modelBuilder.Entity<ModelFormularios>().HasData(

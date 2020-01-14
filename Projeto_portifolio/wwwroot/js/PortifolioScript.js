@@ -176,53 +176,53 @@ $(document).ready(function () {
 //Responsividade
 
 $(document).ready(function () {
-    var largura = $(window).width();
-    if (largura <= 880) {
+    //var largura = $(window).width();
+    //if (largura <= 880) {
 
-        $("#item-principal").css({
-            "margin-right": "5%"
-        });
-
-
-
-        $(".content").css({
-            "margin-top": "-19%",
-            "margin-left": "-1%",
-            "width": "110%",
-            "padding":"0%"
-        });
-
-        $("#footer-content").css({
-            "margin-left": "15%"
-        });
-
-        return 1;
-    }
-
-    if (largura <= 360) {
-
-        $("#item-principal").css({
-            "margin-right": "5%"
-        });
+    //    $("#item-principal").css({
+    //        "margin-right": "5%"
+    //    });
 
 
-        $(".content").css({
-            "margin-top": "-19%",
-            "margin-left": "15%"
-        });
 
-        $("#footer-content").css({
-            "margin-left": "15%"
-        });
+    //    $(".content").css({
+    //        "margin-top": "-19%",
+    //        "margin-left": "-1%",
+    //        "width": "110%",
+    //        "padding":"0%"
+    //    });
 
-        return 1;
-    }
+    //    $("#footer-content").css({
+    //        "margin-left": "15%"
+    //    });
 
-    $("#img-principal").css({
-        "width": "300px",
-        "height": "300px",
-        "margin":"0% 0% 6% 41%"
-    });
+    //    return 1;
+    //}
+
+    //if (largura <= 360) {
+
+    //    $("#item-principal").css({
+    //        "margin-right": "5%"
+    //    });
+
+
+    //    $(".content").css({
+    //        "margin-top": "-19%",
+    //        "margin-left": "15%"
+    //    });
+
+    //    $("#footer-content").css({
+    //        "margin-left": "15%"
+    //    });
+
+    //    return 1;
+    //}
+
+    //$("#img-principal").css({
+    //    "width": "300px",
+    //    "height": "300px",
+    //    "margin":"0% 0% 6% 41%"
+    //});
 
 
 });

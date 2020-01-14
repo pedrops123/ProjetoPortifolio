@@ -19,6 +19,7 @@ namespace ProjetoPortifolio.Models
         public bool hasFoto { get; set; }
         public bool hasForm { get; set; }
         public bool isMainPhoto { get; set; }
+        public string pagina_pai { get; set; }
 
     }
 }

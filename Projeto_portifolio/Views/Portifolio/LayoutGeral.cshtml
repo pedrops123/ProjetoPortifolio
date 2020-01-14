@@ -20,6 +20,24 @@
         flex-wrap: wrap;
         border: none;
     }
+
+       
+    .numberCircle {
+
+        width: 250px;
+        height: 250px;
+        border-radius: 50%;
+        text-align: center;
+        font-size: 21.6px;
+        border: 2px solid #3498db;
+        color:white;
+        background:#3498db;
+        position: absolute;
+        top: -132px;
+        left: 50%;
+        transform: translateX(-50%)
+    }
+
 </style>
 
 
@@ -42,15 +60,16 @@
     <div id="item-principal" class="row">
         <div class="col-sm-2"></div>
         <div class="col-sm-11">
-            @if (Model.mainFoto != "")
-            {
-                <img id="img-principal"  class="rounded-circle" src="@Model.mainFoto" />
-            }
-            else
-            {
-                <div style=" width:300px; height:300px; align-content:center; " id="img-principal" class="rounded-circle"> <div style="width:150px; margin: 123px 0px 0px 66px;">Nenhuma Imagem</div>  </div>
-            }
-            <div class="content">
+            <div class="content col-sm-10 col-lg-40 col-md-20">
+                @if (Model.mainFoto != "")
+                {
+                    <img  class="numberCircle" src="@Model.mainFoto" />
+                }
+                else
+                {
+                    <div class="numberCircle"> Nenhuma Imagem  </div>
+                }
+
                 <div style="display:none;" id="desc-principal" class="description-main">
                     @Html.Raw(Model.dadosPagina.conteudo_pagina.ToString());
                 </div>
@@ -86,6 +105,7 @@
             {
                 @Html.Raw(forms);
             }
+
         </form>
     }
 }
