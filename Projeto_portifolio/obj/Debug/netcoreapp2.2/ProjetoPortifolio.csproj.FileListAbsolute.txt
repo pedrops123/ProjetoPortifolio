@@ -94,3 +94,11 @@ C:\Projeto_portifolio\obj\Debug\netcoreapp2.2\ProjetoPortifolio.Views.pdb
 C:\Projeto_portifolio\obj\Debug\netcoreapp2.2\ProjetoPortifolio.dll
 C:\Projeto_portifolio\obj\Debug\netcoreapp2.2\ProjetoPortifolio.pdb
 C:\Projeto_portifolio\obj\Debug\netcoreapp2.2\ProjetoPortifolio.csproj.CopyComplete
+C:\Projeto_portifolio\obj\Debug\netcoreapp2.2\Razor\Views\Components\ApresentacaoLayout.g.cshtml.cs
+C:\Projeto_portifolio\obj\Debug\netcoreapp2.2\Razor\Views\Components\ExibicaoFotosPrincipais.g.cshtml.cs
+C:\Projeto_portifolio\obj\Debug\netcoreapp2.2\Razor\Views\Components\DetalhamentoFotosCadastradas.g.cshtml.cs
+C:\Projeto_portifolio\obj\Debug\netcoreapp2.2\Razor\Views\Components\MensagemAlerta.g.cshtml.cs
+C:\Projeto_portifolio\obj\Debug\netcoreapp2.2\Razor\Views\Components\PaginationImages.g.cshtml.cs
+C:\Projeto_portifolio\obj\Debug\netcoreapp2.2\Razor\Views\Components\FormulariosGeral.g.cshtml.cs
+C:\Projeto_portifolio\obj\Debug\netcoreapp2.2\Razor\Views\Errors\NotFoundTela.g.cshtml.cs
+C:\Projeto_portifolio\obj\Debug\netcoreapp2.2\Razor\Views\Components\ButtonExportCurriculum.g.cshtml.cs

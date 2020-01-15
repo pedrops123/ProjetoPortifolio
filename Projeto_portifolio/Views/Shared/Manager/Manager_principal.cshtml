@@ -4,6 +4,7 @@
 
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <style>
     .notify-badge {
         position: fixed;
@@ -26,13 +27,7 @@
 
 <h1> Modificação de Titulo Geral </h1>
 
-<div class="alert alert-warning alert-dismissible fade show" id="msg-alerta" role="alert" style="display:none;">
-    <div id="titulo_alerta"></div> <br /> <br />
-    <div id="texto-alerta"> </div>
-    <button type="button" id="close-alert" class="close" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
+<partial name="~/Views/Components/MensagemAlerta.cshtml">
 
 <br />
 

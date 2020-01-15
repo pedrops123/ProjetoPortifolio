@@ -44,7 +44,11 @@ namespace ProjetoPortifolio.Controllers
             var tela = contexto.getDadosTela(nomeTela);
 
             if (tela == null)
-                return NotFound();
+            {
+                ViewData["ViewDataContent"] = "";
+                item.botoes = contexto.getBotoesSite();
+                return View("~/Views/Errors/NotFoundTela.cshtml",item);
+            }
 
             item.dadosPagina = tela;
             item.botoes = contexto.getBotoesSite();
@@ -73,11 +77,28 @@ namespace ProjetoPortifolio.Controllers
                 List<ModelFormularios> listaFormulario = contexto.getFormulariosByTela(nomeTela);
                 item.formularios = contexto.MontaTemplateFormulario(listaFormulario, nomeTela);
             }
-            
-            if(nomeTela != "_main")
-            {
-                ViewData["BreadCrumbNode"] = new MvcBreadcrumbNode("ChamaViewDinamica","Portifolio",nomeTela);
-            }
+
+            var listaBreadCrumbs = contexto.getBreadCrumbPaginaAtual(nomeTela);
+
+            //if (nomeTela != "_main")
+            //{
+                // Prepara bradCrumb 
+                string breadCrumbRaw = "";
+                var telaFinal = listaBreadCrumbs.LastOrDefault().Key;
+                foreach (KeyValuePair<string , int> itemTela in listaBreadCrumbs.OrderBy(r=>r.Value))
+                {
+                    if(itemTela.Key.Trim() == telaFinal.Trim())
+                    {
+                        breadCrumbRaw = breadCrumbRaw + "<li class=\"breadcrumb-item active\" aria-current=\"page\">" + itemTela.Key.Trim().Replace("_"," ")+"</li>";
+                    }
+                    else
+                    {
+                        breadCrumbRaw = breadCrumbRaw + "<li class=\"breadcrumb-item\"><a href=\"/Portifolio/" + itemTela.Key.Trim() + "\">" + itemTela.Key.Trim().Replace("_", " ") + "</a></li>";
+                    }
+                }
+
+                ViewData["ViewDataContent"] = breadCrumbRaw;
+            //}
 
             return View("LayoutGeral", item);
         }
@@ -94,6 +115,7 @@ namespace ProjetoPortifolio.Controllers
             item.formularios = contexto.MontaTemplateFormulario(listaFormulario, "manager_principal");
             item.imagens = null;
             item.listaPaginasSistema = contexto.getAllPaginas();
+            ViewData["ViewDataContent"] = "";
             return View("Manager/Manager_principal", item);
         }
 
@@ -246,6 +268,7 @@ namespace ProjetoPortifolio.Controllers
             }
             List<ModelFormularios> formularios = contexto.getFormulariosByTela(nomeTelaAtual);
             itemModel.formularios = contexto.MontaTemplateFormulario(formularios, nomeTelaAtual);
+            ViewData["ViewDataContent"] = "";
             return View("Manager/Pagina_alteracao", itemModel);
         }
 

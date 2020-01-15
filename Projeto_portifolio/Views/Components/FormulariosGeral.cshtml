@@ -1,0 +1,25 @@
+﻿@{
+    Layout = null;
+}
+
+
+@if (Model.dadosPagina.nome_pagina == "_login" && User.Identity.IsAuthenticated == true)
+{
+        <h3><b> <i style="color:red;">Atenção</i> <br /><br /> Você já esta logado com o usuário  <i style="color:red;">@User.Identity.Name </i> caso queira acessar o login , favor deslogar e entrar com o usuario e senha novamente !</b> </h3>
+}
+else
+{
+    int contador = 1;
+    string IdFormulario = "formularioSubmit" + contador.ToString();
+
+<form id="@IdFormulario" action="">
+
+    @foreach (string forms in Model.formularios)
+    {
+    @Html.Raw(forms);
+    }
+
+</form>
+
+
+}

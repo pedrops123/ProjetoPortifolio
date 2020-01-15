@@ -1,0 +1,18 @@
+﻿@using X.PagedList;
+
+@model ProjetoPortifolio.ViewModel.ParametrosPaginacaoViewModel
+
+@{
+    Layout = null;
+    @using X.PagedList.Mvc.Core;
+}
+
+@if (Model.imagens != null)
+{
+    @Html.PagedListPager(Model.imagens, pagina => Url.Action("ChamaViewDinamica", new { Model.dadosPagina.nome_pagina, pagina }),
+    new X.PagedList.Mvc.Common.PagedListRenderOptionsBase
+    {
+        LiElementClasses = new string[] { "page-item" },
+        PageClasses = new string[] { "page-link" }
+    });
+}

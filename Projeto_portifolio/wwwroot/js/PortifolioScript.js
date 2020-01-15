@@ -170,59 +170,60 @@ $("#check_foto_principal").click(
 $(document).ready(function () {
     $("#img-principal").fadeIn(1000);
     $("#desc-principal").fadeIn(2000);
+
+    //Responsividade
+    var largura = $(window).width();
+    if (largura <= 880) {
+
+        $("#item-principal").css({
+            "margin-right": "5%"
+        });
+
+
+
+        $(".content").css({
+            "margin-top": "-19%",
+            "margin-left": "-1%",
+            "width": "110%",
+            "padding": "0%"
+        });
+
+        $("#footer-content").css({
+            "margin-left": "15%"
+        });
+
+    }
+
+    if (largura <= 360) {
+
+        $("#item-principal").css({
+            "margin-right": "5%"
+        });
+
+
+        $(".content").css({
+            "margin-top": "-19%",
+            "margin-left": "15%"
+        });
+
+        $("#footer-content").css({
+            "margin-left": "15%"
+        });
+
+    }
+
+    $("#img-principal").css({
+        "width": "300px",
+        "height": "300px"
+    });
+
+});
+
+
+
+$("#gototop").click(function () {
+    $('html, body').animate({ scrollTop: 0 }, 'slow');
 });
 
 
-//Responsividade
 
-$(document).ready(function () {
-    //var largura = $(window).width();
-    //if (largura <= 880) {
-
-    //    $("#item-principal").css({
-    //        "margin-right": "5%"
-    //    });
-
-
-
-    //    $(".content").css({
-    //        "margin-top": "-19%",
-    //        "margin-left": "-1%",
-    //        "width": "110%",
-    //        "padding":"0%"
-    //    });
-
-    //    $("#footer-content").css({
-    //        "margin-left": "15%"
-    //    });
-
-    //    return 1;
-    //}
-
-    //if (largura <= 360) {
-
-    //    $("#item-principal").css({
-    //        "margin-right": "5%"
-    //    });
-
-
-    //    $(".content").css({
-    //        "margin-top": "-19%",
-    //        "margin-left": "15%"
-    //    });
-
-    //    $("#footer-content").css({
-    //        "margin-left": "15%"
-    //    });
-
-    //    return 1;
-    //}
-
-    //$("#img-principal").css({
-    //    "width": "300px",
-    //    "height": "300px",
-    //    "margin":"0% 0% 6% 41%"
-    //});
-
-
-});

@@ -1,0 +1,10 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1> <p style="color:red;">Atenção !</p> <br /> Tela não encontrada ! <br /> Provavelmente não existe ou foi deletada ! </h1>
+<br />
+<br />
+<button onclick="location.href='@Url.Action("ChamaViewDinamica", "Portifolio",new { nomeTela = "_main"})'" type="button" class="btn btn-success">Clique para voltar</button>
+<br />
+<br />

@@ -407,7 +407,29 @@ namespace ProjetoPortifolio.ModelContext
         }
 
 
+        public List<KeyValuePair<string,int>> getBreadCrumbPaginaAtual(string nomePagina)
+        {
+            List<KeyValuePair<string, int>> breadcrumbs = new List<KeyValuePair<string, int>>();
+            
 
+            string nomePaginaPai = contexto.itemsPagina.Where(r => r.nome_pagina.Trim() == nomePagina.Trim()).First().pagina_pai;
+            while (nomePaginaPai != null)
+            {
+                try
+                {
+                    var testaNomePagina = contexto.itemsPagina.Where(r => r.nome_pagina.Trim() == nomePaginaPai).First();
+                    breadcrumbs.Add(new KeyValuePair<string, int>(testaNomePagina.nome_pagina,testaNomePagina.id_pagina)); 
+                     nomePaginaPai = testaNomePagina.pagina_pai;
+                }
+                catch (Exception e)
+                {
+                    nomePagina = null;
+                }
+            }
+
+            breadcrumbs.Add(new KeyValuePair<string, int>(nomePagina,9999));
+            return breadcrumbs;
+        }
 
 
 
