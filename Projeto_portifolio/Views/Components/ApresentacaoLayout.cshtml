@@ -36,7 +36,6 @@
         <div style="display:none;" id="desc-principal" class="description-main">
             @Html.Raw(Model.dadosPagina.conteudo_pagina.ToString());
             <partial name="~/Views/Components/ButtonExportCurriculum.cshtml" />
-            <button type="button" id="abrirGrafico" class="btn btn-success"> Minhas Capacidades </button>
         </div>
         </div>
     </div>
@@ -58,25 +57,56 @@
 <script src="https://code.highcharts.com/modules/accessibility.js" asp-append-version="true"></script>
 
 
-
 <script>
+
+  // Function retirado do framework lodash
+      debounce = function(func,wait,immediate){
+        var timeout;
+        return function(){
+            var context = this,args = arguments;
+            var later = function(){
+                timeout = null;
+                if(!immediate) func.apply(context,args);
+            };
+            var callNow = immediate && !timeout;
+            clearTimeout(timeout);
+            timeout = setTimeout(later,wait);
+            if(callNow) func.apply(context,args);
+        };
+    };
+
 
     $(document).ready(function () {
         $("#container").hide();
     });
 
-    $("#abrirGrafico").click(
-        function () {
-            var isVisible = $("#container").is(":visible");
+    //$("#abrirGrafico").click(
+    //    function () {
+    //        var isVisible = $("#container").is(":visible");
+    //        if (isVisible == false) {
+    //            $("#container").show("slow");
+    //        } else {
+    //             $("#container").hide("slow");
+    //        }
+       
+    //    }); 
+
+    $(document).scroll(debounce(function () {
+
+        var documentTop = $(document).scrollTop();
+        var graficoPosicao = $("#container").offset().top;
+        var offset = $(window).height() * 3 / 4;
+        var isVisible = $("#container").is(":visible");
+        if (documentTop > (graficoPosicao - offset)) {
             if (isVisible == false) {
                 $("#container").show("slow");
-            } else {
-                 $("#container").hide("slow");
             }
-       
         }
+        else {
+            $("#container").hide("slow");
+        }
+    }, 600));
 
-    ); 
 
     // Create the chart
     Highcharts.chart('container', {
@@ -84,10 +114,10 @@
             type: 'column'
         },
         title: {
-            text: 'Browser market shares. January, 2018'
+            text: 'Meus Conhecimentos Técnicos'
         },
         subtitle: {
-            text: 'Click the columns to view versions. Source: <a href="http://statcounter.com" target="_blank">statcounter.com</a>'
+            text: 'Minhas Experiencias gerais'
         },
         accessibility: {
             announceNewData: {
@@ -95,11 +125,11 @@
             }
         },
         xAxis: {
-            type: 'category'
+            type: 'Categoria'
         },
         yAxis: {
             title: {
-                text: 'Total percent market share'
+                text: 'Percentual Total '
             }
 
         },
@@ -135,32 +165,8 @@
                         name: "Firefox",
                         y: 10.57,
                         drilldown: "Firefox"
-                    },
-                    {
-                        name: "Internet Explorer",
-                        y: 7.23,
-                        drilldown: "Internet Explorer"
-                    },
-                    {
-                        name: "Safari",
-                        y: 5.58,
-                        drilldown: "Safari"
-                    },
-                    {
-                        name: "Edge",
-                        y: 4.02,
-                        drilldown: "Edge"
-                    },
-                    {
-                        name: "Opera",
-                        y: 1.92,
-                        drilldown: "Opera"
-                    },
-                    {
-                        name: "Other",
-                        y: 7.62,
-                        drilldown: null
                     }
+                   
                 ]
             }
         ],
@@ -287,98 +293,6 @@
                         [
                             "v47.0",
                             0.12
-                        ]
-                    ]
-                },
-                {
-                    name: "Internet Explorer",
-                    id: "Internet Explorer",
-                    data: [
-                        [
-                            "v11.0",
-                            6.2
-                        ],
-                        [
-                            "v10.0",
-                            0.29
-                        ],
-                        [
-                            "v9.0",
-                            0.27
-                        ],
-                        [
-                            "v8.0",
-                            0.47
-                        ]
-                    ]
-                },
-                {
-                    name: "Safari",
-                    id: "Safari",
-                    data: [
-                        [
-                            "v11.0",
-                            3.39
-                        ],
-                        [
-                            "v10.1",
-                            0.96
-                        ],
-                        [
-                            "v10.0",
-                            0.36
-                        ],
-                        [
-                            "v9.1",
-                            0.54
-                        ],
-                        [
-                            "v9.0",
-                            0.13
-                        ],
-                        [
-                            "v5.1",
-                            0.2
-                        ]
-                    ]
-                },
-                {
-                    name: "Edge",
-                    id: "Edge",
-                    data: [
-                        [
-                            "v16",
-                            2.6
-                        ],
-                        [
-                            "v15",
-                            0.92
-                        ],
-                        [
-                            "v14",
-                            0.4
-                        ],
-                        [
-                            "v13",
-                            0.1
-                        ]
-                    ]
-                },
-                {
-                    name: "Opera",
-                    id: "Opera",
-                    data: [
-                        [
-                            "v50.0",
-                            0.96
-                        ],
-                        [
-                            "v49.0",
-                            0.82
-                        ],
-                        [
-                            "v12.1",
-                            0.14
                         ]
                     ]
                 }

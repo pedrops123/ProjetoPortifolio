@@ -147,25 +147,7 @@ $(".overlay").hover(
     }
 );
 
-$("#check_foto_principal").click(
-    function () {
-        if ($("#check_foto_principal")[0].checked == true) {
 
-            $("#conteudo_pagina_id").attr('disabled', 'disabled');
-            $("#form_pagina_id").attr('disabled', 'disabled');
-            $("#foto_pagina_id").attr('disabled', 'disabled');
-            $("#foto_pagina_id").val("Não");
-            $("#form_pagina_id").val("Não");
-            $("#conteudo_pagina_id").val("")
-        } else {
-
-            $("#conteudo_pagina_id").attr('disabled', false);
-            $("#form_pagina_id").attr('disabled', false);
-            $("#foto_pagina_id").attr('disabled', false);
-        }
-
-    },
-);
 
 $(document).ready(function () {
     $("#img-principal").fadeIn(1000);

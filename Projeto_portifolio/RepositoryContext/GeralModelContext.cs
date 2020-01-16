@@ -84,7 +84,7 @@ namespace ProjetoPortifolio.ModelContext
                 }
                 else if (form.tipo_form.Trim() == "checkbox")
                 {
-                    string templateCheckBox = "<div class=" + aspasDuplas + "form-check" + aspasDuplas + "><input type=" + aspasDuplas + "checkbox" + aspasDuplas + " class=" + aspasDuplas + form.class_form + aspasDuplas + " id=" + aspasDuplas + form.id_item + aspasDuplas + "><label class=" + aspasDuplas + "form-check-label" + aspasDuplas + " for=" + aspasDuplas + form.id_item + aspasDuplas + ">" + "&nbsp &nbsp" + form.label_form + "</label></div>";
+                    string templateCheckBox = "<div class=" + aspasDuplas + "form-check" + aspasDuplas + " id=" + aspasDuplas + "area-" + form.id_item + aspasDuplas + "><input type=" + aspasDuplas + "checkbox" + aspasDuplas + " class=" + aspasDuplas + form.class_form + aspasDuplas + " id=" + aspasDuplas + form.id_item + aspasDuplas + "><label class=" + aspasDuplas + "form-check-label" + aspasDuplas + " for=" + aspasDuplas + form.id_item + aspasDuplas + ">" + "&nbsp &nbsp" + form.label_form + "</label></div>";
                     RetornoCamposFormulario.Add(templateCheckBox);
                 }
 

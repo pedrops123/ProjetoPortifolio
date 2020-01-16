@@ -89,11 +89,11 @@ namespace ProjetoPortifolio.Controllers
                 {
                     if(itemTela.Key.Trim() == telaFinal.Trim())
                     {
-                        breadCrumbRaw = breadCrumbRaw + "<li class=\"breadcrumb-item active\" aria-current=\"page\">" + itemTela.Key.Trim().Replace("_"," ")+"</li>";
+                        breadCrumbRaw = breadCrumbRaw + "<li class=\"breadcrumb-item active\" aria-current=\"page\">" + itemTela.Key.Trim().Replace("_"," ").Replace("main","Home")+"</li>";
                     }
                     else
                     {
-                        breadCrumbRaw = breadCrumbRaw + "<li class=\"breadcrumb-item\"><a href=\"/Portifolio/" + itemTela.Key.Trim() + "\">" + itemTela.Key.Trim().Replace("_", " ") + "</a></li>";
+                        breadCrumbRaw = breadCrumbRaw + "<li class=\"breadcrumb-item\"><a href=\"/Portifolio/" + itemTela.Key.Trim() + "\">" + itemTela.Key.Trim().Replace("_", " ").Replace("main", "Home") + "</a></li>";
                     }
                 }
 
@@ -345,7 +345,7 @@ namespace ProjetoPortifolio.Controllers
         }
         public object getDadosTela(string idTela)
         {
-            object[] retornoDados = new object[6];
+            object[] retornoDados = new object[7];
             var dadosTela = contexto.getDadosTela(idTela);
             retornoDados[0] = dadosTela.nome_pagina;
             retornoDados[1] = dadosTela.titulo_aba;
@@ -353,6 +353,7 @@ namespace ProjetoPortifolio.Controllers
             retornoDados[3] = dadosTela.conteudo_pagina;
             retornoDados[4] = dadosTela.hasFoto;
             retornoDados[5] = dadosTela.hasForm;
+            retornoDados[6] = dadosTela.isMainPhoto;
             return retornoDados;
         }
         public string MakeImages(string idTela)

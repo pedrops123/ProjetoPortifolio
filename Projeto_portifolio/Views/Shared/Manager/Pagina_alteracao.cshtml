@@ -7,30 +7,32 @@
 
 <div id="hdnPagina" style="display:none" value="@idPagina"></div>
 
-<div class="alert alert-warning alert-dismissible fade show" id="msg-alerta" role="alert" style="display:none;">
-    <div id="titulo_alerta"></div> <br /> <br />
-    <div id="texto-alerta"> </div>
-    <button type="button" id="close-alert" class="close" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
-
-@{
-    int contador = 1;
-    string IdFormulario = "formularioSubmit" + @contador.ToString();
-    <form class="form-group" id="@IdFormulario">
-        @foreach (string forms in Model.formularios)
-        {
-            @Html.Raw(forms);
-        }
-    </form>
+<partial name="~/Views/Components/MensagemAlerta.cshtml">
+    <div class="col-10"></div>
+    <button type="button" onclick="location.href='@Url.Action("chamaManagerPrincipal", "Portifolio")'" class="btn btn-info">Voltar para manager principal </button>
+    <div class="col-10"></div>
     <br />
     <br />
-}
 
-<script type="text/javascript">
-    window.onload = function () {
-        if ("@idPagina" != "") {
+    @{
+        int contador = 1;
+        string IdFormulario = "formularioSubmit" + @contador.ToString();
+        <form class="form-group" id="@IdFormulario">
+            @foreach (string forms in Model.formularios)
+            {
+                @Html.Raw(forms);
+            }
+        </form>
+        <br />
+        <br />
+    }
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script type="text/javascript">
+
+    $(document).ready(function () {
+
+      if ("@idPagina" != "") {
 
             $("#nome_pagina_id").removeClass("form-control").addClass("form-control-plaintext");
             $("#nome_pagina_id").attr('disabled', 'disabled');
@@ -39,34 +41,72 @@
                 type: "GET",
                 url: "getDadosTela",
                 data: {
-                    idTela:"@idPagina"
+                    idTela: "@idPagina"
                 },
                 success: function (response) {
-                    document.getElementById("nome_pagina_id").value = response[0];
-                    document.getElementById("titulo_aba_id").value = response[1];
-                    document.getElementById("titulo_pagina_id").value = response[2];
-                    document.getElementById("conteudo_pagina_id").value = response[3];
+                    $("#nome_pagina_id").val(response[0]);
+                    $("#titulo_aba_id").val(response[1]);
+                    $("#titulo_pagina_id").val(response[2]);
+                    $("#conteudo_pagina_id").val(response[3]);
+
                     if (response[4] == 1) {
-                        document.getElementById("foto_pagina_id").value = "Sim";
+                        $("#foto_pagina_id").val("Sim");
                     } else {
-                        document.getElementById("foto_pagina_id").value = "Não";
+                        $("#foto_pagina_id").val("Não");
                     }
+
                     if (response[5] == 1) {
-                        document.getElementById("form_pagina_id").value = "Sim";
+                        $("#form_pagina_id").val("Sim");
                     } else {
-                        document.getElementById("form_pagina_id").value = "Não";
+                        $("#form_pagina_id").val("Não");
                     }
+
+                    if (response[6] == 1) {
+
+                        $("#conteudo_pagina_id").attr('disabled', 'disabled');
+                        $("#form_pagina_id").attr('disabled', 'disabled');
+                        $("#foto_pagina_id").attr('disabled', 'disabled');
+                        $("#foto_pagina_id").val("Não");
+                        $("#form_pagina_id").val("Não");
+                        $("#conteudo_pagina_id").val("");
+                        $("#check_foto_principal").prop('checked', true);
+                    }
+
+                     $("#area-check_botao").hide();
                 },
                 failure: function () {
                     alert("Ocorreu um erro na captura dos dados");
                 }
             });
         }
-    }
+
+
+    });
+
+
+
+$("#check_foto_principal").click(
+    function () {
+        if ($("#check_foto_principal")[0].checked == true) {
+
+            $("#conteudo_pagina_id").attr('disabled', 'disabled');
+            $("#form_pagina_id").attr('disabled', 'disabled');
+            $("#foto_pagina_id").attr('disabled', 'disabled');
+            $("#foto_pagina_id").val("Não");
+            $("#form_pagina_id").val("Não");
+            $("#conteudo_pagina_id").val("");
+        } else {
+
+            $("#conteudo_pagina_id").attr('disabled', false);
+            $("#form_pagina_id").attr('disabled', false);
+            $("#foto_pagina_id").attr('disabled', false);
+        }
+
+    },
+);
 
 
 
 
 
-
-</script>
+    </script>
