@@ -16,12 +16,17 @@
               crossorigin="anonymous"
               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
     </environment>
+
     <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet" href="~/dist/css/lightbox.min.css">
+    <link rel="stylesheet" href="~/dist/css/lightbox.min.css"/>
+    <link rel="stylesheet" href="~/css/fontawesome.css" />
+    <link rel="stylesheet" href="~/css/solid.css" />
+    <link rel="stylesheet" href="~/css/brands.css" />
 
 </head>
 <body>
-    @Html.Partial("PartialViewMenu", Model.botoes)
+    <partial name="PartialViewMenu" model="Model.botoes"/>
+
     <br />
     <br />
     <div class="container body-content">
@@ -46,7 +51,6 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
     <script src="~/js/PortifolioScript.js" asp-append-version="true"></script>
     <script src="~/dist/js/lightbox.js" asp-append-version="true"></script>
-
 
 
 

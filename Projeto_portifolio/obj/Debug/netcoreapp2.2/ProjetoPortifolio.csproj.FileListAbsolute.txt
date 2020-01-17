@@ -102,3 +102,4 @@ C:\Projeto_portifolio\obj\Debug\netcoreapp2.2\Razor\Views\Components\PaginationI
 C:\Projeto_portifolio\obj\Debug\netcoreapp2.2\Razor\Views\Components\FormulariosGeral.g.cshtml.cs
 C:\Projeto_portifolio\obj\Debug\netcoreapp2.2\Razor\Views\Errors\NotFoundTela.g.cshtml.cs
 C:\Projeto_portifolio\obj\Debug\netcoreapp2.2\Razor\Views\Components\ButtonExportCurriculum.g.cshtml.cs
+C:\Projeto_portifolio\obj\Debug\netcoreapp2.2\Razor\Views\Shared\Manager\_ScriptsManagerPrincipal.g.cshtml.cs

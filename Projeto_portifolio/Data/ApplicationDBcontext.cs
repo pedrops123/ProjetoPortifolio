@@ -277,7 +277,7 @@ namespace ProjetoPortifolio.Data
             new ButtonSite
             {
                 id_button = 5,
-                descricao = "Gravar Alterações",
+                descricao = "<span class=\"fas fa-save\"></span> &nbsp Gravar Alterações",
                 caminhoUrl = "_titleGeral",
                 tagPagina = "manager_principal",
                 type = "submit"
@@ -286,7 +286,7 @@ namespace ProjetoPortifolio.Data
             new ButtonSite
             {
                 id_button = 6,
-                descricao = "Gravar Alterações",
+                descricao = "<span class=\"fas fa-save\"></span> &nbsp Gravar Alterações",
                 caminhoUrl = "manager_alteracao",
                 tagPagina = "manager_alteracao",
                 type = "submit"

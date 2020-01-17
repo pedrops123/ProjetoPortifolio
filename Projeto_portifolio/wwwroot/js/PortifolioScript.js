@@ -58,7 +58,7 @@ function submitGeral(tela) {
 
     if (camposValidacao != "") {
         $("#msg-alerta").removeClass("alert alert-danger alert-dismissible fade show").addClass("alert alert-warning alert-dismissible fade show");
-        $('#titulo_alerta').html("<b>Atenção</b>");
+        $('#titulo_alerta').html("<span class=\"fas fa-exclamation-circle\"></span> &nbsp <b>Atenção</b>");
         $('#texto-alerta').html(camposValidacao);
         $('#msg-alerta').fadeIn(100);
     }
@@ -109,7 +109,7 @@ function submitGeral(tela) {
                     window.location.href = retorno[1];
                 } else {
                     $("#msg-alerta").removeClass("alert alert-warning alert-dismissible fade show").addClass("alert alert-danger alert-dismissible fade show");
-                    $('#titulo_alerta').html("<b>Atenção</b>");
+                    $('#titulo_alerta').html("<span class=\"fas fa-exclamation-circle\"></span> &nbsp <b>Atenção</b>");
                     $('#texto-alerta').html(retorno[0]);
                     $('#msg-alerta').fadeIn(100);
                 }

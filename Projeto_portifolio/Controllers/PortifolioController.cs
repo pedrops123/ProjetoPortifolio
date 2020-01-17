@@ -107,7 +107,7 @@ namespace ProjetoPortifolio.Controllers
         public ActionResult chamaManagerPrincipal()
         {
             ViewBag.Title = "Manager Portifolio";
-            ViewBag.TituloConteudo = "Manager Geral";
+            ViewBag.TituloConteudo = "<span class=\"fas fa-clipboard-list\"></span> &nbsp Manager Geral";
             PortifolioViewModel item = new PortifolioViewModel();
             item.dadosPagina = null;
             item.botoes = null;
