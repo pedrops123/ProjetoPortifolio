@@ -22,8 +22,6 @@ using X.PagedList;
 
 
 
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace ProjetoPortifolio.Controllers
 {
     public class PortifolioController : Controller
@@ -107,7 +105,7 @@ namespace ProjetoPortifolio.Controllers
         public ActionResult chamaManagerPrincipal()
         {
             ViewBag.Title = "Manager Portifolio";
-            ViewBag.TituloConteudo = "<span class=\"fas fa-clipboard-list\"></span> &nbsp Manager Geral";
+            ViewBag.TituloConteudo = "<h1><span class=\"fas fa-clipboard-list\"></span> &nbsp Manager Geral </h1>";
             PortifolioViewModel item = new PortifolioViewModel();
             item.dadosPagina = null;
             item.botoes = null;

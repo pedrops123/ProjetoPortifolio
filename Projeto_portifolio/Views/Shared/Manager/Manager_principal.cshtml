@@ -24,8 +24,10 @@
 
 </style>
 
+<hr style="height:2px; border:thin; color:#000; background-color:#000; margin-top: 0px; margin-bottom: 0px;" />
+<br/>
 
-<h1> Modificação de Titulo Geral </h1>
+<h1><span class="fa fa-pen-alt"></span> Modificação de Titulo Geral </h1>
 
 <partial name="~/Views/Components/MensagemAlerta.cshtml">
 
@@ -83,7 +85,7 @@
 
 <br />
 
-<h1> Paginas Cadastradas </h1>
+<h1><span class="fa fa-book"></span> Paginas Cadastradas </h1>
 
 <button style="margin-left:920px; margin-top:-10px;" type="button" onclick="location.href='DadosTelaDinamicoManager'" class="btn btn-outline-success"> + Incluir nova pagina </button><br /><br />
 
@@ -116,8 +118,11 @@
                 <td> @isGaleria </td>
                 <td>
                     <div class="form-check-inline">
-                       <a style="margin:20px;" href="" onclick="deletaPagina(@dadosPagina.id_pagina)"  data-placement="top" title="Excluir Pagina" class="tip-top fas fa-trash fa-2x"></a>
-                        @if (dadosPagina.hasFoto == true )
+                        @if (dadosPagina.nome_pagina != "_main")
+                        {
+                            <a style="margin:20px;" href="" onclick="deletaPagina(@dadosPagina.id_pagina)" data-placement="top" title="Excluir Pagina" class="tip-top fas fa-trash fa-2x"></a>
+                        }
+                        @if (dadosPagina.hasFoto == true)
                         {
                             <a href="" data-placement="top" style="margin:20px;" class="tip-top" title="Incluir Fotos" data-toggle="modal" onclick="setDataModalFotos('@dadosPagina.nome_pagina')" data-target="#modalDinamico" shref=""><img width="30" height="30" src="~/icons/icon_photo.png" /></a>
                         }
@@ -125,7 +130,8 @@
                         {
                             <a href="" data-placement="top" style="margin:20px;" class="tip-top" data-toggle="tooltip" title="Incluir Formulário" shref=""><img width="30" height="30" src="~/icons/form_icon.png" /></a>
                         }
-                        <button type="button" style="width:110px;" onclick="location.href='DadosTelaDinamicoManager?tagPagina=@dadosPagina.nome_pagina'" class="tip-top btn btn-info" data-placement="top" data-toggle="tooltip" title="Alterar dados da tela"><span class="fas fa-pen"></span> Alterar </button>
+                        <button type="button" style="width:110px;" onclick="location.href='DadosTelaDinamicoManager?tagPagina=@dadosPagina.nome_pagina'" class="tip-top btn btn-info" data-placement="top" data-toggle="tooltip" title="Alterar dados da tela"><span class="fas fa-pen"></span> &nbsp; Alterar </button>
+
                     </div>
                 </td>
             </tr>

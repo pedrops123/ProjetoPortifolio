@@ -226,7 +226,19 @@
 
 
     function deletaPagina(idPagina) {
-        alert("Deletou pagina " + idPagina);
+        $.ajax({
+            type: 'POST',
+            url: 'deletePage',
+            data: {
+                idPage:idPagina
+            },
+            success: function (response) {
+                location.reload(true);
+            },
+            error: function (error) {
+                alert("Falha ao deletar pagina");
+            }
+        });
     }
 
 </script>
