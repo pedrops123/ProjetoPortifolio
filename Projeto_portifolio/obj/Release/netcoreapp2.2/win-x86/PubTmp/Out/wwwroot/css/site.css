@@ -238,7 +238,7 @@ a:link {
 }
 
 #item-principal {
-    margin-top: -6%;
+    margin-top: 7%;
 }
 
 .rounded-circle {
@@ -256,11 +256,13 @@ a:link {
 
 .content {
     border: solid;
+    border-color: white;
+    /*
     align-content: center;
     margin-left: 15%;
     margin-top: -184px;
-    border-color: white;
     position: relative;
+    */
     background-color: rgba(192,192,192,0.3);
     border-radius: 30px;
 }

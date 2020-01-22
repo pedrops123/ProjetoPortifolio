@@ -3,58 +3,41 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title> @ViewBag.Title </title>
-    <link rel="shortcut icon" href="#" />
-    <environment include="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-    </environment>
-    <environment exclude="Development">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
-              crossorigin="anonymous"
-              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
-    </environment>
 
-    <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet" href="~/dist/css/lightbox.min.css"/>
-    <link rel="stylesheet" href="~/css/fontawesome.css" />
-    <link rel="stylesheet" href="~/css/solid.css" />
-    <link rel="stylesheet" href="~/css/brands.css" />
+    <partial name="~/Views/Sections/styles.cshtml" />
+
 
 </head>
+
 <body>
-    <partial name="PartialViewMenu" model="Model.botoes"/>
+    <partial name="PartialViewMenu" model="Model.botoes" />
 
     <br />
     <br />
-    <div class="container body-content">
+    <div id="conteudoSite" class="container body-content">
 
         <h2> @Html.Raw(ViewBag.TituloConteudo) </h2>
         <br />
         <br />
 
         @RenderBody()
-        <a id="gototop" href="#">ir para o topo</a>
+
+        <a id="gototop" href="#"><span class="fa fa-arrow-alt-circle-up"></span> &nbsp; Ir para o topo</a>
         <hr />
         <footer>
             <div class="row">
                 <div class="col col-md-21"></div>
-                <p id="footer-content">&copy; COPYRIGHT @DateTime.Now.Year  -  Pedro Vinicius Rodrigues Furlan - TODOS OS DIREITOS RESERVADOS    </p> 
+                <p id="footer-content">&copy; COPYRIGHT @DateTime.Now.Year  -  Pedro Vinicius Rodrigues Furlan - TODOS OS DIREITOS RESERVADOS    </p>
                 <div class="col col-md-21"></div>
             </div>
         </footer>
     </div>
 
-    <script src="~/lib/jquery/dist/jquery.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
-    <script src="~/js/PortifolioScript.js" asp-append-version="true"></script>
-    <script src="~/dist/js/lightbox.js" asp-append-version="true"></script>
+    <partial name="~/Views/Sections/Scripts.cshtml" />
 
-
-
-    @RenderSection("Scripts", required: false)
 
 </body>
+
 </html>
