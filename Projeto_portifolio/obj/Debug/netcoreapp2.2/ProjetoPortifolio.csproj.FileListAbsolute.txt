@@ -105,3 +105,4 @@ C:\Projeto_portifolio\obj\Debug\netcoreapp2.2\Razor\Views\Components\ButtonExpor
 C:\Projeto_portifolio\obj\Debug\netcoreapp2.2\Razor\Views\Shared\Manager\_ScriptsManagerPrincipal.g.cshtml.cs
 C:\Projeto_portifolio\obj\Debug\netcoreapp2.2\Razor\Views\Sections\Scripts.g.cshtml.cs
 C:\Projeto_portifolio\obj\Debug\netcoreapp2.2\Razor\Views\Sections\styles.g.cshtml.cs
+C:\Projeto_portifolio\obj\Debug\netcoreapp2.2\Razor\Views\Components\PaginationImagesPrincipal.g.cshtml.cs

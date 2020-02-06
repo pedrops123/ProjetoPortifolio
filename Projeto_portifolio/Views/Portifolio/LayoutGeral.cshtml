@@ -5,46 +5,61 @@
 }
 
 
-
-<partial name="~/Views/Components/MensagemAlerta.cshtml"/>
+<partial name="~/Views/Components/MensagemAlerta.cshtml" />
 
 <div hidden="hidden" style="align-content:center;" id="spinnerLoading" class="spinner-grow text-dark"></div>
 
 
 @if (Model.dadosPagina.nome_pagina == "_main")
 {
-    <partial name="~/Views/Components/ApresentacaoLayout.cshtml"/>
+    <partial name="~/Views/Components/ApresentacaoLayout.cshtml" />
 }
-
-
 
 @if (Model.dadosPagina.conteudo_pagina != "" && Model.dadosPagina.nome_pagina != "_main")
 {
     <p> @Html.Raw(Model.dadosPagina.conteudo_pagina.ToString()) </p>
 }
 
-
 @if (Model.dadosPagina.hasForm == true)
 {
-    <partial name="~/Views/Components/FormulariosGeral.cshtml"/>
+    <partial name="~/Views/Components/FormulariosGeral.cshtml" />
 }
 
 @if (Model.dadosPagina.nome_pagina != "_main")
 {
     @if (Model.dadosPagina.hasFoto == true)
     {
-        <partial name="~/Views/Components/DetalhamentoFotosCadastradas.cshtml"/>
+
+        <partial name="~/Views/Components/DetalhamentoFotosCadastradas.cshtml" />
     }
 
     @if (Model.dadosPagina.isMainPhoto == true)
     {
-        <partial name="~/Views/Components/ExibicaoFotosPrincipais.cshtml"/>
+        <partial name="~/Views/Components/ExibicaoFotosPrincipais.cshtml" />
+
+        <partial name="~/Views/Sections/Scripts.cshtml" />
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#conteudoSite").css({ "width": "2060px", "margin": "0 auto" });
+            });
+
+        </script>
+
     }
 
     <br />
     <br />
     <br />
-    
-    <partial name="~/Views/Components/PaginationImages.cshtml" model="new ProjetoPortifolio.ViewModel.ParametrosPaginacaoViewModel(){ imagens = Model.imagens , dadosPagina = Model.dadosPagina }"/>
+
+
+    <partial name="~/Views/Components/PaginationImages.cshtml" model="new ProjetoPortifolio.ViewModel.ParametrosPaginacaoViewModel(){ imagens = Model.imagens , dadosPagina = Model.dadosPagina }" />
+
+
+
+    <partial name="~/Views/Components/PaginationImagesPrincipal.cshtml" model="new ProjetoPortifolio.ViewModel.ParametrosPaginacaoPrincipal(){ imagens = Model.imagensPrincipais , dadosPagina = Model.dadosPagina }" />
+
+
 
 }
+

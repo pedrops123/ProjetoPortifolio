@@ -134,9 +134,13 @@ $("#title_main").hover(
        $(this).css("color", "#F49E10");
     },
     function () {
-        $(this).css("color", "#F6F6F6");
+        $(this).css("color", "#000000");
     }
 );
+
+
+
+
 
 $(".overlay").hover(
     function () {

@@ -89,7 +89,7 @@
 
 <button style="margin-left:920px; margin-top:-10px; width: 200px;" type="button" onclick="location.href='DadosTelaDinamicoManager'" class="btn btn-outline-success"> <span class="fa fa-plus-circle"></span> &nbsp; Incluir nova pagina </button><br /><br />
 
-<table class="table" align="center">
+<table id="listagem_telas" class="table table-striped table-bordered table-sm" align="center">
     <thead>
         <tr>
             <th scope="col"> ID </th>
@@ -108,11 +108,20 @@
             var temFoto = dadosPagina.hasFoto == true ? "Sim" : "Não";
             var temForm = dadosPagina.hasForm == true ? "Sim" : "Não";
             var isGaleria = dadosPagina.isMainPhoto == true ? "Sim" : "Não";
+            var conteudoPagina = "";
+            if (dadosPagina.conteudo_pagina.Length > 105)
+            {
+                conteudoPagina = dadosPagina.conteudo_pagina.Trim().Substring(0, 60) + "...";
+            }
+            else
+            {
+                conteudoPagina = dadosPagina.conteudo_pagina.Trim();
+            }
             <tr>
                 <th scope="row"> @dadosPagina.id_pagina </th>
                 <td> @dadosPagina.nome_pagina.Trim() </td>
                 <td> @dadosPagina.titulo_aba.Trim() </td>
-                <td> @Html.Raw(dadosPagina.conteudo_pagina.Trim()) </td>
+                <td> @Html.Raw(conteudoPagina) </td>
                 <td> @temFoto </td>
                 <td> @temForm </td>
                 <td> @isGaleria </td>
@@ -142,6 +151,7 @@
 
 
  <partial name="~/Views/Shared/Manager/_ScriptsManagerPrincipal.cshtml">
+
 
 
 

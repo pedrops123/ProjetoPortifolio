@@ -61,7 +61,7 @@ namespace ProjetoPortifolio.Controllers
             if (item.dadosPagina.isMainPhoto)
             {                  
                var fotosCatalog = contexto.getFotosCatalog();
-                item.imagens = makePagination(pagina,fotosCatalog);
+                item.imagensPrincipais = makePaginationPrincipal(pagina,fotosCatalog);
             }
 
             if (item.dadosPagina.hasFoto == true)
@@ -318,9 +318,16 @@ namespace ProjetoPortifolio.Controllers
             return retorno;
         }
 
+        public IPagedList<itemFotoGaleriaPrincipal> makePaginationPrincipal(int pagina , List<itemFotoGaleriaPrincipal> projetos)
+        {
+            var imgFiltrada = projetos.OrderBy(r => r.idFoto).ToPagedList(pagina, 8);
+            return imgFiltrada;
+        }
+
+
         public IPagedList<ImagensPortifolio> makePagination(int pagina, List<ImagensPortifolio> imagens)
         {
-            var imgFiltrada = imagens.OrderBy(r => r.id_foto).ToPagedList(pagina,8);
+            var imgFiltrada = imagens.OrderBy(r => r.id_foto).ToPagedList(pagina,9);
             return imgFiltrada;
         }
 
@@ -377,34 +384,17 @@ namespace ProjetoPortifolio.Controllers
 
         #endregion
 
-        /*
-         Em desenvolvimento
 
-        public static Bitmap ResizeImage(Image image, int width, int height)
+        public object deletaPagina(int idTela)
         {
-            var destRect = new Rectangle(0, 0, width, height);
-            var destImage = new Bitmap(width, height);
+            object[] retornoFuncao = new object[2];
+            var retorno = contexto.deletaTelaByTag(idTela);
 
-            destImage.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+            retornoFuncao[0] = retorno.Key;
+            retornoFuncao[1] = retorno.Value;
 
-            using (var graphics = Graphics.FromImage(destImage))
-            {
-                graphics.CompositingMode = CompositingMode.SourceCopy;
-                graphics.CompositingQuality = CompositingQuality.HighQuality;
-                graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                graphics.SmoothingMode = SmoothingMode.HighQuality;
-                graphics.PixelOffsetMode = PixelOffsetMode.HighQuality;
-
-                using (var wrapMode = new ImageAttributes())
-                {
-                    wrapMode.SetWrapMode(WrapMode.TileFlipXY);
-                    graphics.DrawImage(image, destRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, wrapMode);
-                }
-            }
-            return destImage;
+            return retornoFuncao;
         }
-        */
-
 
 
 

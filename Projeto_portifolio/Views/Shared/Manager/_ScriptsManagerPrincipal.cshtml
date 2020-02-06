@@ -3,7 +3,7 @@
 }
 
 <script src="~/lib/jquery/dist/jquery.js"></script>
-
+<script src="js/addons/datatables.min.js"></script>
 <script type="text/javascript">
 
     var fotosAdicionadas = [];
@@ -24,6 +24,14 @@
                 alert("Ocorreu um erro na captura dos dados");
             }
         });
+
+        // Data Table para listagem de dados
+        $('#listagem_telas').DataTable({
+            "paging": true, // false to disable pagination (or any other option)
+             "pagingType": "full_numbers"
+          });
+          $('.dataTables_length').addClass('bs-select');
+
 
     });
 
@@ -227,13 +235,21 @@
 
     function deletaPagina(idPagina) {
         $.ajax({
-            type: 'POST',
-            url: 'deletePage',
+            type: 'GET',
+            url: 'deletaPagina',
             data: {
-                idPage:idPagina
+                idTela:idPagina
             },
             success: function (response) {
-                location.reload(true);
+                if (response[0] == true) {
+                    alert(response[1]);
+                    setTimeout(function () {
+                        location.reload(true);
+                    }, 2000);
+                 
+                } else {
+                    alert(response[1]);
+                }               
             },
             error: function (error) {
                 alert("Falha ao deletar pagina");

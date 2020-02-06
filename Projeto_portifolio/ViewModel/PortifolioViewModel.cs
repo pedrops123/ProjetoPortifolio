@@ -11,6 +11,7 @@ namespace ProjetoPortifolio.ViewModel
     {
         public ItemsPaginaGeral dadosPagina { get; set; }
         public IPagedList<ImagensPortifolio> imagens { get; set; }
+        public IPagedList<itemFotoGaleriaPrincipal> imagensPrincipais { get; set; }
         public List<ButtonSite> botoes { get; set; }
         public List<string> formularios { get; set; }
         public List<ItemsPaginaGeral> listaPaginasSistema { get; set; }

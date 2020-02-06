@@ -39,16 +39,37 @@ namespace ProjetoPortifolio.ModelContext
             return botoesMenu;
         }
 
-        public List<ImagensPortifolio> getFotosCatalog()
+        public List<itemFotoGaleriaPrincipal> getFotosCatalog()
         {
-            List<ImagensPortifolio> retornoListaCatalog = new List<ImagensPortifolio>();
-            var getTelas = contexto.Imagens.GroupBy(r => r.id_tela).Select(r => r.FirstOrDefault()).Where(r=>r.id_tela != "_main").ToList();
-            return getTelas;
+            List<itemFotoGaleriaPrincipal> retornoListaCatalog = new List<itemFotoGaleriaPrincipal>();
+            var getTelas = contexto.Imagens.GroupBy(r => r.id_tela).Select(r => r.FirstOrDefault()).Where(r => r.id_tela != "_main").ToList();
+            foreach (ImagensPortifolio imagensTela in getTelas)
+            {
+                itemFotoGaleriaPrincipal modeloGaleria = new itemFotoGaleriaPrincipal();
+                string descricaoTela = "";
+                modeloGaleria.idFoto = imagensTela.id_foto;
+                modeloGaleria.idTela = imagensTela.id_tela;
+                modeloGaleria.urlFoto = imagensTela.urlFoto;
+                try
+                {
+                    descricaoTela = contexto.itemsPagina.Where(r => r.nome_pagina == imagensTela.id_tela).First().conteudo_pagina;
+
+                }
+                catch (Exception)
+                {
+                    descricaoTela = "";
+                }
+
+                modeloGaleria.descricaoProjeto = descricaoTela;
+                retornoListaCatalog.Add(modeloGaleria);
+            }
+
+            return retornoListaCatalog;
         }
 
         public List<ImagensPortifolio> getFotosByTela(string idTela)
         {
-            List<ImagensPortifolio> FotosDaTela = contexto.Imagens.Where(r => r.id_tela == idTela.Trim() ).ToList();
+            List<ImagensPortifolio> FotosDaTela = contexto.Imagens.Where(r => r.id_tela == idTela.Trim()).ToList();
             return FotosDaTela;
         }
 
@@ -406,11 +427,10 @@ namespace ProjetoPortifolio.ModelContext
             return foto;
         }
 
-
-        public List<KeyValuePair<string,int>> getBreadCrumbPaginaAtual(string nomePagina)
+        public List<KeyValuePair<string, int>> getBreadCrumbPaginaAtual(string nomePagina)
         {
             List<KeyValuePair<string, int>> breadcrumbs = new List<KeyValuePair<string, int>>();
-            
+
 
             string nomePaginaPai = contexto.itemsPagina.Where(r => r.nome_pagina.Trim() == nomePagina.Trim()).First().pagina_pai;
             while (nomePaginaPai != null)
@@ -418,8 +438,8 @@ namespace ProjetoPortifolio.ModelContext
                 try
                 {
                     var testaNomePagina = contexto.itemsPagina.Where(r => r.nome_pagina.Trim() == nomePaginaPai).First();
-                    breadcrumbs.Add(new KeyValuePair<string, int>(testaNomePagina.nome_pagina,testaNomePagina.id_pagina)); 
-                     nomePaginaPai = testaNomePagina.pagina_pai;
+                    breadcrumbs.Add(new KeyValuePair<string, int>(testaNomePagina.nome_pagina, testaNomePagina.id_pagina));
+                    nomePaginaPai = testaNomePagina.pagina_pai;
                 }
                 catch (Exception e)
                 {
@@ -427,9 +447,78 @@ namespace ProjetoPortifolio.ModelContext
                 }
             }
 
-            breadcrumbs.Add(new KeyValuePair<string, int>(nomePagina,9999));
+            breadcrumbs.Add(new KeyValuePair<string, int>(nomePagina, 9999));
             return breadcrumbs;
         }
+
+
+        public KeyValuePair<bool, string> deletaTelaByTag(int idTela)
+        {
+            var Tela = contexto.itemsPagina.Where(r => r.id_pagina == idTela).First();
+            KeyValuePair<bool, string> retornoFuncao = new KeyValuePair<bool, string>();
+
+            // verifica se tela possui alguma imagem vinculada 
+            if (Tela.hasFoto == true)
+            {
+                List<ImagensPortifolio> imagens = contexto.Imagens.Where(r => r.id_tela.Trim() == Tela.nome_pagina.Trim()).ToList();
+
+                // tenta deletar todas as imagens vinculadas 
+                try
+                {
+                    foreach (ImagensPortifolio imagem in imagens)
+                    {
+                        File.Delete(imagem.caminhoFisico);
+                        contexto.Imagens.Remove(imagem);
+                    }
+                    // salva contexto
+                    contexto.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    retornoFuncao =  new KeyValuePair<bool, string>(false, "Ocorreu um erro ao tentar deletar as fotos da  tela " + Tela.nome_pagina.Trim() + " <br/> Segue detalhes do erro abaixo <br/> " + e.Message + " <br/> " + e.InnerException);
+                }
+
+            }
+
+            // Verifica se ha algum botão vinculado
+            ButtonSite botaoPagina = new ButtonSite();
+            try
+            {
+                botaoPagina = contexto.Botoes.Where(r => r.descricao == Tela.nome_pagina).First();
+            }
+            catch (Exception e)
+            {
+                botaoPagina = null;
+            }
+           
+            if(botaoPagina != null)
+            {
+                contexto.Botoes.Remove(botaoPagina);
+                contexto.SaveChanges();
+            }
+
+            // Apos a serie de validacoes , deleta a tela em si 
+
+            try
+            {
+                contexto.itemsPagina.Remove(Tela);
+                // salva contexto
+                contexto.SaveChanges();
+
+            }
+            catch (Exception e)
+            {
+                retornoFuncao = new KeyValuePair<bool, string>(false, "Ocorreu um erro ao tentar a  tela " + Tela.nome_pagina.Trim() + " <br/> Segue detalhes do erro abaixo <br/> " + e.Message + " <br/> " + e.InnerException);
+            }
+            finally
+            {
+                retornoFuncao = new KeyValuePair<bool, string>(true, "Tela deletada com sucesso !");
+
+            }
+
+            return retornoFuncao;
+        }
+
 
 
 

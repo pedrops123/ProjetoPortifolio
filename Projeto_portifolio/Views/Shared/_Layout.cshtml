@@ -5,9 +5,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title> @ViewBag.Title </title>
-
+    @*@RenderSection("~/Views/Sections/styles.cshtml")*@
     <partial name="~/Views/Sections/styles.cshtml" />
-
 
 </head>
 
@@ -36,6 +35,7 @@
     </div>
 
     <partial name="~/Views/Sections/Scripts.cshtml" />
+    @*@RenderSection("~/Views/Sections/Scripts.cshtml")*@
 
 
 </body>

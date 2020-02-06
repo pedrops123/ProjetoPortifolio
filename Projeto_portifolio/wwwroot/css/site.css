@@ -202,14 +202,14 @@ a:link {
 
 
 .img-project {
-    width: 253px;
+    width: 285px;
     height: 253px;
 }
 
-    .img-project:hover {
+    /*.img-project:hover {
         width: 253px;
         height: 273px;
-    }
+    }*/
 
 .imagens-portifolio-item img {
     transition: transform .5s, filter 1.5s ease-in-out;
@@ -280,4 +280,9 @@ a:link {
     position: relative;
     padding: 10%;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+
+.nav-item:hover a {
+    color:gray;
 }
