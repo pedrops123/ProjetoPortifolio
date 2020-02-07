@@ -1,4 +1,11 @@
-﻿function ClickRedirectGeral(tela) {
+﻿
+@{
+    Layout = null;
+}
+
+<script type="text/javascript">
+
+ function ClickRedirectGeral(tela) {
        window.location.href = tela
 }
 
@@ -98,7 +105,7 @@ function submitGeral(tela) {
         }
 
         $.ajax({
-            url: 'SubmitGeralValidador',
+            url: '@Url.Action("SubmitGeralValidador", "Portifolio")',//'Portifolio/SubmitGeralValidador',
             type: "POST",
             data: {
                 nomeTela: tela,
@@ -106,7 +113,10 @@ function submitGeral(tela) {
             },
             success: function (retorno) {
                 if (retorno[0] == "") {
-                    window.location.href = retorno[1];
+                    if (retorno[1] == "chamaManagerPrincipal") {
+                        window.location.href = 'chamaManagerPrincipal';
+                    }
+                   
                 } else {
                     $("#msg-alerta").removeClass("alert alert-warning alert-dismissible fade show").addClass("alert alert-danger alert-dismissible fade show");
                     $('#titulo_alerta').html("<span class=\"fas fa-exclamation-circle\"></span> &nbsp <b>Atenção</b>");
@@ -211,5 +221,6 @@ $("#gototop").click(function () {
     $('html, body').animate({ scrollTop: 0 }, 'slow');
 });
 
-
+          
+</script>
 

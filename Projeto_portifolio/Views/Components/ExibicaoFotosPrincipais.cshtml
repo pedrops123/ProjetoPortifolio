@@ -27,7 +27,7 @@
         <div class="card-body">
             <h5 class="card-title">@foto.idTela.Replace("_", " ")</h5>
             <p class="card-text">@Html.Raw(foto.descricaoProjeto)</p>
-            <a id="btn_visit" data-placement="top" data-toggle="tooltip" title="Abrir Galeria de Fotos" class="tip-top btn btn-primary" href="@("/Portifolio/"+foto.idTela)"><span class="fas fa-camera"></span> &nbsp; Galeria de Fotos</a>
+            <a id="btn_visit" data-placement="top" data-toggle="tooltip" title="Abrir Galeria de Fotos" class="tip-top btn btn-primary" href="@("/Portifolio/pagina/1/"+foto.idTela)"><span class="fas fa-camera"></span> &nbsp; Galeria de Fotos</a>
         </div>
     </div>
 

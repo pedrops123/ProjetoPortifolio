@@ -24,7 +24,7 @@
                         @foreach (var botoes in Model.Where(r => r.type == "link"))
                         {
 
-                            <li class="nav-item" style="margin:0px 42px 0px 0px;"> <a href="@("/Portifolio/"+botoes.caminhoUrl)" style="color:black;">@botoes.descricao.Replace("_", " ")</a> </li> 
+                            <li class="nav-item" style="margin:0px 42px 0px 0px;"> <a href="@("/Portifolio/pagina/1/"+botoes.caminhoUrl)" style="color:black;">@botoes.descricao.Replace("_", " ")</a> </li> 
                         }
                     </ul>
                 </div>

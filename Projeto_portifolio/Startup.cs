@@ -46,11 +46,11 @@ namespace ProjetoPortifolio
             });
 
             services.ConfigureApplicationCookie(options => {
-                options.AccessDeniedPath = new PathString("Portifolio/_login");
+                options.AccessDeniedPath = new PathString("/Portifolio/pagina/1/_login");
                 options.Cookie.Name = "Cookie_port";
                 options.Cookie.HttpOnly = true;
               //  options.ExpireTimeSpan = TimeSpan.FromMinutes(720);
-                options.LoginPath = "/Portifolio/Login";
+                options.LoginPath = "/Portifolio/pagina/1/_login";
                 options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
                 options.SlidingExpiration = true;
                 
@@ -59,8 +59,8 @@ namespace ProjetoPortifolio
             services.AddAuthentication("FiverSecurityScheme")
              .AddCookie("FiverSecurityScheme", options =>
              {
-                 options.AccessDeniedPath = new PathString(@"/Portifolio/_login");
-                 options.LoginPath = new PathString(@"/Portifolio/_login");
+                 options.AccessDeniedPath = new PathString(@"/Portifolio/pagina/1/_login");
+                 options.LoginPath = new PathString(@"/Portifolio/pagina/1/_login");
              });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
@@ -90,18 +90,35 @@ namespace ProjetoPortifolio
             app.UseCookiePolicy();
             app.UseMvc(routes =>
             {
-                routes.MapRoute("Portifolio", "Portifolio/{*nomeTela}",
+
+                // Rota Paginas gerais Criadas 
+                routes.MapRoute(
+                    name: "Portifolio" ,
+                    template : "{controller}/pagina/{pagina}/{*nomeTela}",
                     defaults: new { controller = "Portifolio", action = "ChamaViewDinamica" });
 
-                routes.MapRoute("Portifolio", "Portifolio/manager_principal",
-                   defaults: new { controller = "Portifolio", action = "chamaManagerPrincipal" });
+                // Rota Login
+                routes.MapRoute(
+                        name:"login",
+                        template: "{controller}/_login",
+                        defaults: new { controller="Portifolio" , nomeTela="_login" , action = "ChamaViewDinamica" });
 
-                routes.MapRoute("Portifolio", "Portifolio/ConfiguracaoPagina/{*id}",
-                  defaults: new { controller = "Portifolio", action = "DadosTelaDinamicoManager" });
+                // Rota Manager Principal
+                routes.MapRoute(
+                    name:"managerPrincipal", 
+                    template: "{controller}/manager_principal",
+                    defaults: new { controller = "Portifolio", action = "chamaManagerPrincipal" });
+
+                // Rota cadastro paginas
+                routes.MapRoute(
+                   name:"cadastroPaginas",
+                   template: "{controller}/ConfiguracaoPagina/{*tagPagina}",                  
+                   defaults: new { controller = "Portifolio",  action = "DadosTelaDinamicoManager" });
 
                 //routes.MapRoute("PortifolioPedro", "{controller=Portifolio}/{action=PortifolioPedro}/{id?}");
                 //routes.MapRoute("Login", "{controller=Portifolio}/{action=Login}/{id?}");
 
+                // Rota padrão default
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Portifolio}/{action=ChamaViewDinamica}/{id?}"

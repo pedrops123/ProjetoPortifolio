@@ -35,7 +35,6 @@ namespace ProjetoPortifolio.Controllers
         //[Route("")]
         //[Route("Portifolio")]
         //[Route("Portifolio/PortifolioPedro")]
-        [DefaultBreadcrumb("_main")]
         public ActionResult ChamaViewDinamica(string nomeTela = "_main" , int pagina = 1)
         {
             PortifolioViewModel item = new PortifolioViewModel();
@@ -91,7 +90,7 @@ namespace ProjetoPortifolio.Controllers
                     }
                     else
                     {
-                        breadCrumbRaw = breadCrumbRaw + "<li class=\"breadcrumb-item\"><a href=\"/Portifolio/" + itemTela.Key.Trim() + "\">" + itemTela.Key.Trim().Replace("_", " ").Replace("main", "Home") + "</a></li>";
+                        breadCrumbRaw = breadCrumbRaw + "<li class=\"breadcrumb-item\"><a href=\"/Portifolio/pagina/1/" + itemTela.Key.Trim() + "\">" + itemTela.Key.Trim().Replace("_", " ").Replace("main", "Home") + "</a></li>";
                     }
                 }
 
@@ -181,7 +180,7 @@ namespace ProjetoPortifolio.Controllers
                             );
 
                         retorno[0] = "";
-                        retorno[1] = "Manager_principal";
+                        retorno[1] = "chamaManagerPrincipal";
                     }
 
                     break;
@@ -193,7 +192,7 @@ namespace ProjetoPortifolio.Controllers
                     if (retornoGravacaoTitle)
                     {
                         retorno[0] = "";
-                        retorno[1] = "Manager_principal";
+                        retorno[1] = "chamaManagerPrincipal";
                     }
                     else
                     {
@@ -215,7 +214,7 @@ namespace ProjetoPortifolio.Controllers
                     else
                     {
                         retorno[0] = "";
-                        retorno[1] = "Manager_principal";
+                        retorno[1] = "chamaManagerPrincipal";
                     }
 
                     break;
@@ -233,7 +232,7 @@ namespace ProjetoPortifolio.Controllers
             {
                 await HttpContext.SignOutAsync("FiverSecurityScheme");
             }
-            return Redirect("_main");
+            return Redirect("_login");
         }
 
         [Authorize]
@@ -320,7 +319,7 @@ namespace ProjetoPortifolio.Controllers
 
         public IPagedList<itemFotoGaleriaPrincipal> makePaginationPrincipal(int pagina , List<itemFotoGaleriaPrincipal> projetos)
         {
-            var imgFiltrada = projetos.OrderBy(r => r.idFoto).ToPagedList(pagina, 8);
+            var imgFiltrada = projetos.OrderBy(r => r.idFoto).ToPagedList(pagina, 9);
             return imgFiltrada;
         }
 

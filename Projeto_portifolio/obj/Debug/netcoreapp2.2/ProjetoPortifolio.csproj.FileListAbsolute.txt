@@ -106,3 +106,4 @@ C:\Projeto_portifolio\obj\Debug\netcoreapp2.2\Razor\Views\Shared\Manager\_Script
 C:\Projeto_portifolio\obj\Debug\netcoreapp2.2\Razor\Views\Sections\Scripts.g.cshtml.cs
 C:\Projeto_portifolio\obj\Debug\netcoreapp2.2\Razor\Views\Sections\styles.g.cshtml.cs
 C:\Projeto_portifolio\obj\Debug\netcoreapp2.2\Razor\Views\Components\PaginationImagesPrincipal.g.cshtml.cs
+C:\Projeto_portifolio\obj\Debug\netcoreapp2.2\Razor\Views\Shared\PortifolioScript.g.cshtml.cs

@@ -7,7 +7,7 @@
 
 @if (Model.imagens != null)
 {
-    @Html.PagedListPager(Model.imagens, pagina => Url.Action("ChamaViewDinamica", new { Model.dadosPagina.nome_pagina, pagina }),
+    @Html.PagedListPager(Model.imagens, pagina => Url.Action("ChamaViewDinamica", new {nomeTela = Model.dadosPagina.nome_pagina, pagina = pagina }),
     new X.PagedList.Mvc.Common.PagedListRenderOptionsBase
     {
         UlElementClasses = new string[] { "pagination pagination-lg" },
