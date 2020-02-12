@@ -7,7 +7,7 @@ namespace ProjetoPortifolio.Models
 {
     public class ValidaUser
     {
-        public string Login { get; set; }
+        public string usuario { get; set; }
         public string senha { get; set; }
     }
 }

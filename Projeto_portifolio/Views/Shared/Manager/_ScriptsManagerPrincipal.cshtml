@@ -3,7 +3,7 @@
 }
 
 <script src="~/lib/jquery/dist/jquery.js"></script>
-<script src="js/addons/datatables.min.js"></script>
+<script src="~/js/addons/datatables.min.js"></script>
 <script type="text/javascript">
 
     var fotosAdicionadas = [];
@@ -29,16 +29,13 @@
         $('#listagem_telas').DataTable({
             "paging": true, // false to disable pagination (or any other option)
              "pagingType": "full_numbers"
-          });
-        $('.dataTables_length').addClass('bs-select');
+        });
 
+        $('.dataTables_length').addClass('bs-select');
 
         $("#conteudoSite").css({ "width": "2165px" });
 
-
     });
-
-
 
     /* functions modal foto */
     function setDataModalFotos(nome) {
@@ -259,5 +256,28 @@
             }
         });
     }
+
+    $(".btn_toggle").click(function () {
+        var isExpanded = $(this).attr("aria-expanded");
+        if (isExpanded == null) {
+            $(this).removeClass("btn_toggle fa fa-arrow-circle-down fa-pull-right");
+            $(this).addClass('btn_toggle fa fa-arrow-circle-up fa-pull-right');
+        }
+        else {
+
+            if (isExpanded == "true") {
+
+                $(this).removeClass("btn_toggle fa fa-arrow-circle-up fa-pull-right");
+                $(this).addClass('btn_toggle fa fa-arrow-circle-down fa-pull-right');
+
+
+            } else {
+                $(this).removeClass("btn_toggle fa fa-arrow-circle-down fa-pull-right");
+                $(this).addClass('btn_toggle fa fa-arrow-circle-up fa-pull-right');
+            }
+        }
+
+
+    });
 
 </script>

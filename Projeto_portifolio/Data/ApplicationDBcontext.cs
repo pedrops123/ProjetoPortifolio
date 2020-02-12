@@ -43,48 +43,48 @@ namespace ProjetoPortifolio.Data
                 });
 
 
-            modelBuilder.Entity<ItemsPaginaGeral>().HasData(
-              new ItemsPaginaGeral
-              {
-                  id_pagina = 2,
-                  nome_pagina = "_login",
-                  titulo_aba = "Login Manager",
-                  titulo_pagina = "Manager Administrador",
-                  conteudo_pagina = "",
-                  hasForm = true,
-                  hasFoto = false,
-                  pagina_pai = "_main"
-              });
+            //modelBuilder.Entity<ItemsPaginaGeral>().HasData(
+            //  new ItemsPaginaGeral
+            //  {
+            //      id_pagina = 2,
+            //      nome_pagina = "_login",
+            //      titulo_aba = "Login Manager",
+            //      titulo_pagina = "Manager Administrador",
+            //      conteudo_pagina = "",
+            //      hasForm = true,
+            //      hasFoto = false,
+            //      pagina_pai = "_main"
+            //  });
 
-            modelBuilder.Entity<ModelFormularios>().HasData(
-                new ModelFormularios
-                {
-                    id_form = 1,
-                    class_form = "form-control",
-                    id_item = "login_cmp",
-                    estilo_dado = "text",
-                    isRequired = true,
-                    label_form = "Login",
-                    order = 1,
-                    tipo_form = "input",
-                    tag_pagina = "_login"
+            //modelBuilder.Entity<ModelFormularios>().HasData(
+            //    new ModelFormularios
+            //    {
+            //        id_form = 1,
+            //        class_form = "form-control",
+            //        id_item = "login_cmp",
+            //        estilo_dado = "text",
+            //        isRequired = true,
+            //        label_form = "Login",
+            //        order = 1,
+            //        tipo_form = "input",
+            //        tag_pagina = "_login"
 
-                });
+            //    });
 
-            modelBuilder.Entity<ModelFormularios>().HasData(
-            new ModelFormularios
-            {
-                id_form = 2,
-                class_form = "form-control",
-                id_item = "senha_cmp",
-                estilo_dado = "password",
-                isRequired = true,
-                label_form = "Senha",
-                order = 2,
-                tipo_form = "input",
-                tag_pagina = "_login"
+            //modelBuilder.Entity<ModelFormularios>().HasData(
+            //new ModelFormularios
+            //{
+            //    id_form = 2,
+            //    class_form = "form-control",
+            //    id_item = "senha_cmp",
+            //    estilo_dado = "password",
+            //    isRequired = true,
+            //    label_form = "Senha",
+            //    order = 2,
+            //    tipo_form = "input",
+            //    tag_pagina = "_login"
 
-            });
+            //});
 
 
             modelBuilder.Entity<ModelFormularios>().HasData(
@@ -242,26 +242,26 @@ namespace ProjetoPortifolio.Data
                     type = "link"
                 });
 
-            modelBuilder.Entity<ButtonSite>().HasData(
-            new ButtonSite
-            {
-                id_button = 2,
-                descricao = "Voltar",
-                caminhoUrl = "_main",
-                tagPagina = "_login",
-                type = "redirect"
-            });
+            //modelBuilder.Entity<ButtonSite>().HasData(
+            //new ButtonSite
+            //{
+            //    id_button = 2,
+            //    descricao = "Voltar",
+            //    caminhoUrl = "_main",
+            //    tagPagina = "_login",
+            //    type = "redirect"
+            //});
 
 
-            modelBuilder.Entity<ButtonSite>().HasData(
-            new ButtonSite
-            {
-                id_button = 3,
-                descricao = "Entrar",
-                caminhoUrl = "_manager-index",
-                tagPagina = "_login",
-                type = "submit"
-            });
+            //modelBuilder.Entity<ButtonSite>().HasData(
+            //new ButtonSite
+            //{
+            //    id_button = 3,
+            //    descricao = "Entrar",
+            //    caminhoUrl = "_manager-index",
+            //    tagPagina = "_login",
+            //    type = "submit"
+            //});
 
             modelBuilder.Entity<ButtonSite>().HasData(
             new ButtonSite

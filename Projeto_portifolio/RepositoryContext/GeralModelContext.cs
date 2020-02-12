@@ -114,21 +114,7 @@ namespace ProjetoPortifolio.ModelContext
             return RetornoCamposFormulario;
         }
 
-        internal bool verificaUser(ValidaUser dadosUser)
-        {
-            bool verificaUser = false;
-            try
-            {
-                var testeUser = contexto.usuarios.Where(r => r.username.Trim() == dadosUser.Login.Trim() && r.senha == dadosUser.senha.Trim()).First();
-            }
-            catch (Exception)
-            {
-                return verificaUser;
-            }
-
-            verificaUser = true;
-            return verificaUser;
-        }
+     
 
         public List<string> MontaBotoesForm(List<string> listaFormulario, string id_tela)
         {

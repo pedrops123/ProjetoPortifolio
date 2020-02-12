@@ -107,3 +107,5 @@ C:\Projeto_portifolio\obj\Debug\netcoreapp2.2\Razor\Views\Sections\Scripts.g.csh
 C:\Projeto_portifolio\obj\Debug\netcoreapp2.2\Razor\Views\Sections\styles.g.cshtml.cs
 C:\Projeto_portifolio\obj\Debug\netcoreapp2.2\Razor\Views\Components\PaginationImagesPrincipal.g.cshtml.cs
 C:\Projeto_portifolio\obj\Debug\netcoreapp2.2\Razor\Views\Shared\PortifolioScript.g.cshtml.cs
+C:\Projeto_portifolio\obj\Debug\netcoreapp2.2\Razor\Views\Shared\Login\Login.g.cshtml.cs
+C:\Projeto_portifolio\obj\Debug\netcoreapp2.2\Razor\Views\Shared\Login\_JsLogin.g.cshtml.cs

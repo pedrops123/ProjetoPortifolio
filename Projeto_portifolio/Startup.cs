@@ -45,28 +45,29 @@ namespace ProjetoPortifolio
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.ConfigureApplicationCookie(options => {
-                options.AccessDeniedPath = new PathString("/Portifolio/pagina/1/_login");
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.AccessDeniedPath = new PathString("/managerlogin/login");
                 options.Cookie.Name = "Cookie_port";
                 options.Cookie.HttpOnly = true;
-              //  options.ExpireTimeSpan = TimeSpan.FromMinutes(720);
-                options.LoginPath = "/Portifolio/pagina/1/_login";
+                //  options.ExpireTimeSpan = TimeSpan.FromMinutes(720);
+                options.LoginPath = "/managerlogin/login";
                 options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
                 options.SlidingExpiration = true;
-                
+
             });
 
             services.AddAuthentication("FiverSecurityScheme")
              .AddCookie("FiverSecurityScheme", options =>
              {
-                 options.AccessDeniedPath = new PathString(@"/Portifolio/pagina/1/_login");
-                 options.LoginPath = new PathString(@"/Portifolio/pagina/1/_login");
+                 options.AccessDeniedPath = new PathString(@"/managerlogin/login");
+                 options.LoginPath = new PathString(@"/managerlogin/login");
              });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            
-            
+
+
 
         }
 
@@ -93,27 +94,41 @@ namespace ProjetoPortifolio
 
                 // Rota Paginas gerais Criadas 
                 routes.MapRoute(
-                    name: "Portifolio" ,
-                    template : "{controller}/pagina/{pagina}/{*nomeTela}",
+                    name: "Portifolio",
+                    template: "{controller}/pagina/{pagina}/{*nomeTela}",
                     defaults: new { controller = "Portifolio", action = "ChamaViewDinamica" });
 
                 // Rota Login
                 routes.MapRoute(
-                        name:"login",
-                        template: "{controller}/_login",
-                        defaults: new { controller="Portifolio" , nomeTela="_login" , action = "ChamaViewDinamica" });
+                        name: "login",
+                        template: "managerlogin/login",
+                        defaults: new { controller = "LoginLogout", action = "Index" });
+
+
+                // Rota Valida Login
+                routes.MapRoute(
+                    name: "validaUser",
+                    template: "managerlogin/validaUser",
+                    defaults: new { controller = "LoginLogout", action = "loginManager" });
+
+
+                // Rota Logout 
+                routes.MapRoute(
+                    name: "logout",
+                    template: "managerlogin/logout",
+                    defaults: new { controller = "LoginLogout", action = "logout" });
 
                 // Rota Manager Principal
                 routes.MapRoute(
-                    name:"managerPrincipal", 
+                    name: "managerPrincipal",
                     template: "{controller}/manager_principal",
                     defaults: new { controller = "Portifolio", action = "chamaManagerPrincipal" });
 
                 // Rota cadastro paginas
                 routes.MapRoute(
-                   name:"cadastroPaginas",
-                   template: "{controller}/ConfiguracaoPagina/{*tagPagina}",                  
-                   defaults: new { controller = "Portifolio",  action = "DadosTelaDinamicoManager" });
+                   name: "cadastroPaginas",
+                   template: "{controller}/ConfiguracaoPagina/{*tagPagina}",
+                   defaults: new { controller = "Portifolio", action = "DadosTelaDinamicoManager" });
 
                 //routes.MapRoute("PortifolioPedro", "{controller=Portifolio}/{action=PortifolioPedro}/{id?}");
                 //routes.MapRoute("Login", "{controller=Portifolio}/{action=Login}/{id?}");
@@ -122,7 +137,7 @@ namespace ProjetoPortifolio
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Portifolio}/{action=ChamaViewDinamica}/{id?}"
-                    );               
+                    );
             });
         }
     }

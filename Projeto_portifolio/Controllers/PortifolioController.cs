@@ -126,62 +126,7 @@ namespace ProjetoPortifolio.Controllers
             {
                 case "_manager-index":
 
-                    var dadosUser = JsonConvert.DeserializeObject<ValidaUser>(object_form);
-                    var validaUser = contexto.verificaUser(dadosUser);
-                    if (validaUser != true)
-                    {
-                        retorno[0] = "Usuario ou senha incorretos , favor verificar os dados e tentar novamente !";
-                        retorno[1] = "";
-                    }
-                    else
-                    {
-                        var claims = new List<Claim>
-                            {
-                                new Claim(ClaimTypes.Name, dadosUser.Login),
-                            };
-
-                        var claimsIdentity = new ClaimsIdentity(
-                            claims, CookieAuthenticationDefaults.AuthenticationScheme);
-
-                        ClaimsPrincipal principal = new ClaimsPrincipal(claimsIdentity);
-
-                        var authProperties = new AuthenticationProperties
-                        {
-                            AllowRefresh = true,
-                            IsPersistent = false,
-                            ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(30)
-                            //RedirectUri = "_manager"
-
-                            //AllowRefresh = <bool>,
-                            // Refreshing the authentication session should be allowed.
-
-                            //ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(10),
-                            // The time at which the authentication ticket expires. A 
-                            // value set here overrides the ExpireTimeSpan option of 
-                            // CookieAuthenticationOptions set with AddCookie.
-
-                            //IsPersistent = true,
-                            // Whether the authentication session is persisted across 
-                            // multiple requests. When used with cookies, controls
-                            // whether the cookie's lifetime is absolute (matching the
-                            // lifetime of the authentication ticket) or session-based.
-
-                            //IssuedUtc = <DateTimeOffset>,
-                            // The time at which the authentication ticket was issued.
-
-                            //RedirectUri = <string>
-                            // The full path or absolute URI to be used as an http 
-                            // redirect response value.
-                        };
-
-                        await HttpContext.SignInAsync(
-                            scheme: "FiverSecurityScheme",
-                            principal: principal
-                            );
-
-                        retorno[0] = "";
-                        retorno[1] = "chamaManagerPrincipal";
-                    }
+                 
 
                     break;
 
@@ -226,14 +171,7 @@ namespace ProjetoPortifolio.Controllers
             return retorno;
         }
 
-        public async Task<IActionResult> logout()
-        {
-            if (User.Identity.IsAuthenticated)
-            {
-                await HttpContext.SignOutAsync("FiverSecurityScheme");
-            }
-            return Redirect("_login");
-        }
+  
 
         [Authorize]
         public ActionResult DadosTelaDinamicoManager(string tagPagina = "")

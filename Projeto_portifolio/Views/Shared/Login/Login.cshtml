@@ -1,0 +1,35 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+
+    .form-signin {
+        width: 100%;
+        max-width: 478px;
+        padding: 15px;
+        margin: auto;
+    }
+
+
+    .cmp_form {
+        width: 330px;
+    }
+</style>
+
+
+<partial name="~/Views/Components/MensagemAlerta.cshtml" />
+
+
+<form action="validaUser" method="post" class="form-signin">
+    <h1 style="font-size: 23px; margin: 0px 0px 36px 40px;" class="h1 mb-6 font-weight-normal"> Fazer login no Manager </h1>
+
+    @Html.AntiForgeryToken()
+    <input type="text" id="username" name="usuario" class="cmp_form form-control" placeholder="Usuario" required autofocus />
+    <input type="password"  id="senha" name="senha" class="cmp_form form-control" placeholder="Senha" required autofocus />
+    <br />
+    <button type="submit"style="width:330px;"  class="btn btn-lg btn-primary btn-block"> Entrar </button>
+</form>
+
+
+<partial name="~/Views/Shared/Login/_JsLogin.cshtml"/>
