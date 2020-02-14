@@ -57,8 +57,8 @@ namespace ProjetoPortifolio
 
             });
 
-            services.AddAuthentication("FiverSecurityScheme")
-             .AddCookie("FiverSecurityScheme", options =>
+            services.AddAuthentication("Auth_manager")
+             .AddCookie("Auth_manager", options =>
              {
                  options.AccessDeniedPath = new PathString(@"/managerlogin/login");
                  options.LoginPath = new PathString(@"/managerlogin/login");
@@ -100,9 +100,9 @@ namespace ProjetoPortifolio
 
                 // Rota Login
                 routes.MapRoute(
-                        name: "login",
-                        template: "managerlogin/login",
-                        defaults: new { controller = "LoginLogout", action = "Index" });
+                    name: "login",
+                    template: "managerlogin/login",
+                    defaults: new { controller = "LoginLogout", action = "Index" });
 
 
                 // Rota Valida Login
@@ -110,6 +110,12 @@ namespace ProjetoPortifolio
                     name: "validaUser",
                     template: "managerlogin/validaUser",
                     defaults: new { controller = "LoginLogout", action = "loginManager" });
+
+                routes.MapRoute(
+                    name: "loginWithErrrors",
+                    template: "managerlogin/loginRedirect",
+                    defaults: new { controller = "LoginLogout", action = "LoginWithModelErrors" });
+
 
 
                 // Rota Logout 

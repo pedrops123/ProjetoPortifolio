@@ -1,5 +1,8 @@
-﻿@{
+﻿@model ProjetoPortifolio.ViewModel.PortifolioViewModel
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var msgErro = ViewBag.msgErro.ToString();
+  
 }
 
 <style>
@@ -15,21 +18,44 @@
     .cmp_form {
         width: 330px;
     }
+
+    .body{
+        background-color:gray;
+    }
+
+
 </style>
 
 
-<partial name="~/Views/Components/MensagemAlerta.cshtml" />
 
 
-<form action="validaUser" method="post" class="form-signin">
+
+@if (ViewBag.msgErro != "")
+{
+    <div class="alert alert-warning alert-dismissible fade show" id="msg-alerta" role="alert">
+        <div id="title-alert"> <span class="fas fa-exclamation-circle"></span> &nbsp <b>Atenção</b> </div> <br /> <br />
+        <div id="text-alert">@Html.Raw(msgErro)</div>
+        <button type="button" id="close-alert" class="close" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
+
+
+@using (Html.BeginForm("loginManager", "LoginLogout", FormMethod.Post, new { @class = "form-signin" }))
+{
+    @Html.AntiForgeryToken()
     <h1 style="font-size: 23px; margin: 0px 0px 36px 40px;" class="h1 mb-6 font-weight-normal"> Fazer login no Manager </h1>
 
-    @Html.AntiForgeryToken()
-    <input type="text" id="username" name="usuario" class="cmp_form form-control" placeholder="Usuario" required autofocus />
-    <input type="password"  id="senha" name="senha" class="cmp_form form-control" placeholder="Senha" required autofocus />
+    @Html.ValidationMessageFor(r => r.login.usuario, "", new { @style = "color:red;!important" })
+    @Html.TextBoxFor(r => r.login.usuario, new { @class = "cmp_form form-control", placeholder = "Usuario" })
+
+    @Html.ValidationMessageFor(r => r.login.senha, "", new { @style = "color:red;!important" })
+    @Html.PasswordFor(r => r.login.senha, new { @class = "cmp_form form-control", placeholder = "Senha" })
     <br />
-    <button type="submit"style="width:330px;"  class="btn btn-lg btn-primary btn-block"> Entrar </button>
-</form>
+    <button type="submit" style="width:330px;" class="btn btn-lg btn-primary btn-block"> Entrar </button>
+}
 
 
-<partial name="~/Views/Shared/Login/_JsLogin.cshtml"/>
+
+<partial name="~/Views/Shared/Login/_JsLogin.cshtml" />

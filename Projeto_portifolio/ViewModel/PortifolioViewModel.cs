@@ -16,6 +16,6 @@ namespace ProjetoPortifolio.ViewModel
         public List<string> formularios { get; set; }
         public List<ItemsPaginaGeral> listaPaginasSistema { get; set; }
         public string mainFoto { get; set; }
-
+        public ValidaUser login { get; set; }
     }
 }
