@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SmartBreadcrumbs.Extensions;
+using ProjetoPortifolio.ViewModel;
 
 namespace ProjetoPortifolio
 {
@@ -111,10 +112,17 @@ namespace ProjetoPortifolio
                     template: "managerlogin/validaUser",
                     defaults: new { controller = "LoginLogout", action = "loginManager" });
 
+                // Rota de redirect com usuario
+                routes.MapRoute(
+                    name: "loginWithErrrors",
+                    template: "managerlogin/loginRedirect/{login}",
+                    defaults: new { controller = "LoginLogout", action = "LoginWithModelErrors"});
+
+              // Rota de redirect em branco
                 routes.MapRoute(
                     name: "loginWithErrrors",
                     template: "managerlogin/loginRedirect",
-                    defaults: new { controller = "LoginLogout", action = "LoginWithModelErrors" });
+                    defaults: new { controller = "LoginLogout", action = "LoginWithModelErrors"});
 
 
 

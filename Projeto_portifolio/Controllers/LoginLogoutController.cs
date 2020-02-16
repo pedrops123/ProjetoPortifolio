@@ -38,19 +38,22 @@ namespace ProjetoPortifolio.Controllers
             return View("~/Views/Shared/Login/Login.cshtml", dadosModel);
         }
 
-/*
-        public IActionResult LoginWithModelErrors(string data)
-        {
-            PortifolioViewModel dadosModel = JsonConvert.DeserializeObject<PortifolioViewModel>(data);
+
+        public IActionResult LoginWithModelErrors(string login="")
+        {          
             // Preeche view data do breadCrumb
             ViewData["ViewDataContent"] = "<li class=\"breadcrumb-item\"><a href=\"/Portifolio/pagina/1/_main\">Home</a></li><li class=\"breadcrumb-item active\" aria-current=\"page\">Login Manager</li>";
+            PortifolioViewModel dadosModel = new PortifolioViewModel();
+            dadosModel.login = new ValidaUser(login,"");
             dadosModel.botoes = contexto.getBotoesSite();
+            //data.botoes = contexto.getBotoesSite();
             ModelState.AddModelError("login.usuario", "Usuario Incorreto");
             ModelState.AddModelError("login.senha", "Senha Incorreta");
             ViewBag.msgErro = "Usuario ou senha incorretas , favor tentar novamente !";
             return View("~/Views/Shared/Login/Login.cshtml", dadosModel);
         }
-*/
+
+
 
      
         [HttpPost]
@@ -68,15 +71,12 @@ namespace ProjetoPortifolio.Controllers
                 var validaUser = contextoLoginLogout.verificaUser(dadosUser);
                 if (validaUser != true)
                 {
-                    ViewData["ViewDataContent"] = "<li class=\"breadcrumb-item\"><a href=\"/Portifolio/pagina/1/_main\">Home</a></li><li class=\"breadcrumb-item active\" aria-current=\"page\">Login Manager</li>";
-                    PortifolioViewModel dadosModel = new PortifolioViewModel();
-                    dadosModel.botoes = contexto.getBotoesSite();
-                    ViewBag.msgErro = "Usuario ou senha incorretas !";
-                    ModelState.AddModelError("login.usuario", "Usuario Incorreto");
-                    ModelState.AddModelError("login.senha", "Senha Incorreta");
-                    dadosModel.login = new ValidaUser(dadosUser.usuario, dadosUser.senha);
-                    string data = JsonConvert.SerializeObject(dadosModel);
-                    return View("~/Views/Shared/Login/Login.cshtml",dadosModel);
+
+                    ValidaUser loginIncluido = new ValidaUser(dadosUser.usuario, dadosUser.senha);
+                    
+                    return RedirectToAction("LoginWithModelErrors","LoginLogout",new {
+                        login = loginIncluido.usuario 
+                        });
                 }
                 else
                 {
