@@ -7,7 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ProjetoPortifolio.ModelContext
+namespace ProjetoPortifolio.RepositoryContext
 {
     public class GeralModelContext
     {

@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Pedro\\Desktop\\projeto_portifolio\\Projeto_portifolio\\ProjetoPortifolio.csproj": {}
+    "C:\\Projeto_portifolio\\ProjetoPortifolio.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Pedro\\Desktop\\projeto_portifolio\\Projeto_portifolio\\ProjetoPortifolio.csproj": {
+    "C:\\Projeto_portifolio\\ProjetoPortifolio.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Pedro\\Desktop\\projeto_portifolio\\Projeto_portifolio\\ProjetoPortifolio.csproj",
+        "projectUniqueName": "C:\\Projeto_portifolio\\ProjetoPortifolio.csproj",
         "projectName": "ProjetoPortifolio",
-        "projectPath": "C:\\Users\\Pedro\\Desktop\\projeto_portifolio\\Projeto_portifolio\\ProjetoPortifolio.csproj",
-        "packagesPath": "C:\\Users\\Pedro\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Pedro\\Desktop\\projeto_portifolio\\Projeto_portifolio\\obj\\",
+        "projectPath": "C:\\Projeto_portifolio\\ProjetoPortifolio.csproj",
+        "packagesPath": "C:\\Users\\tap.ti\\.nuget\\packages\\",
+        "outputPath": "C:\\Projeto_portifolio\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Pedro\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\tap.ti\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

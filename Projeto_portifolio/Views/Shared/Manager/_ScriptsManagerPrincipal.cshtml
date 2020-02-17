@@ -13,12 +13,12 @@
     $(document).ready(function () {
         $.ajax({
             type: "GET",
-            url: "getDadosTituloGeral",
+            url: "@Url.Action("getDadosTituloGeral","managerAlteracao")",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (response) {
-                document.getElementById("link_id").value = response[0];
-                document.getElementById("desc_title_id").value = response[1];
+                $("#cadastroLink_linkUrl").val(response[0]);
+                $("#cadastroLink_linkDescricao").val(response[1]);
             },
             failure: function () {
                 alert("Ocorreu um erro na captura dos dados");

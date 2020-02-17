@@ -8,9 +8,8 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using ProjetoPortifolio.ModelContext;
-using ProjetoPortifolio.Models;
 using ProjetoPortifolio.RepositoryContext;
+using ProjetoPortifolio.Models;
 using ProjetoPortifolio.ViewModel;
 
 namespace ProjetoPortifolio.Controllers
@@ -127,7 +126,7 @@ namespace ProjetoPortifolio.Controllers
                 }
             }
 
-            return Redirect("/Portifolio/manager_principal");
+            return Redirect("/managerSistema/manager_principal");
         }
 
         // Logout do sistema

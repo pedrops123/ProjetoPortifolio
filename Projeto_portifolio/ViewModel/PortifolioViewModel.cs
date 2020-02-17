@@ -17,5 +17,6 @@ namespace ProjetoPortifolio.ViewModel
         public List<ItemsPaginaGeral> listaPaginasSistema { get; set; }
         public string mainFoto { get; set; }
         public ValidaUser login { get; set; }
+        public ModelCadastroLink cadastroLink { get; set; }
     }
 }

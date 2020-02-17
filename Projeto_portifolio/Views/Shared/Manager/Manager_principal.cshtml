@@ -27,8 +27,6 @@
 <br />
 
 
-
-
 <div class="modal fade" id="modalDinamico" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -73,6 +71,25 @@
                 </div>
                 <div id="tabTituloGeral" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                     <div class="card-body">
+
+                        @using(@Html.BeginForm("","managerPrincipal",FormMethod.Post))
+                        {
+                            <div class="form-group">
+                                @Html.LabelFor(r=>r.cadastroLink.linkUrl)
+                                @Html.TextBoxFor(r=>r.cadastroLink.linkUrl , new { @class="form-control input", placeholder="Url do site" })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(r=>r.cadastroLink.linkDescricao)
+                                @Html.TextBoxFor(r=>r.cadastroLink.linkDescricao, new { @class="form-control input", placeholder="Descrição da URL" })
+                            </div>                          
+                        }
+                        <div class="row">
+                            <div class="col col-md"></div>
+                            <div class="col col-md"><button type="submit" class="btn btn-lg btn-primary btn-block"> Salvar </button></div>
+                            <div class="col col-md"></div>
+                        </div>
+                    @*
+               
                         <fieldset id="area_Titulo_geral">
                             @{
                                 int contador = 1;
@@ -84,9 +101,9 @@
                                         @Html.Raw(forms + "&nbsp&nbsp&nbsp");
                                     }
                                 </form>
-
                             }
-                       </fieldset>
+                      </fieldset>
+                *@
                     </div>
                 </div>
             </div>

@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using ProjetoPortifolio.ModelContext;
+using ProjetoPortifolio.RepositoryContext;
 using ProjetoPortifolio.Models;
 using ProjetoPortifolio.ViewModel;
 using SmartBreadcrumbs.Attributes;
@@ -100,6 +100,7 @@ namespace ProjetoPortifolio.Controllers
             return View("LayoutGeral", item);
         }
 
+/*
         [Authorize]
         public ActionResult chamaManagerPrincipal()
         {
@@ -115,7 +116,10 @@ namespace ProjetoPortifolio.Controllers
             ViewData["ViewDataContent"] = "";
             return View("Manager/Manager_principal", item);
         }
+*/
 
+
+/*
         [HttpPost]
         public async Task<object[]> SubmitGeralValidador(string nomeTela, string object_form)
         {
@@ -171,6 +175,8 @@ namespace ProjetoPortifolio.Controllers
             return retorno;
         }
 
+        */
+
   
 
         [Authorize]
@@ -207,54 +213,7 @@ namespace ProjetoPortifolio.Controllers
             return View("Manager/Pagina_alteracao", itemModel);
         }
 
-        [HttpPost]
-        public bool uploadImages()
-        {
-            bool retorno = false;
-            List<string> listaCaminhoArquivo = new List<string>();
-            var dadosRecebidos = HttpContext.Request.Form.Files;
-            if (dadosRecebidos.Count == 0)
-            {
-                return retorno;
-            }
-            var nome_tela = dadosRecebidos[0].ContentDisposition.Split("*")[1];
-            foreach (var item in dadosRecebidos)
-            {
-                if (!item.ContentType.ToLower().Contains("image"))
-                {
-                    return retorno;
-                }
-            }
-            var path = Directory.GetCurrentDirectory();
-
-            // Se nao existir pasta Fotos , cria uma automaticamente
-
-            if (!Directory.Exists(path + @"\wwwroot\Fotos\"))
-            {
-                Directory.CreateDirectory(path + @"\wwwroot\Fotos\");
-            }
-            
-            foreach (var item in dadosRecebidos)
-            {
-                var caminhoImg = path + @"\wwwroot\Fotos\" + Guid.NewGuid() + "." + item.FileName.Split('.')[item.FileName.Split('.').Length - 1];
-                using (var fileCreate = new FileStream(caminhoImg, FileMode.Create))
-                {
-                    item.CopyTo(fileCreate);
-                    Dispose();
-                }
-
-                // Redimensiona imagem 
-                //Image imgPhoto = Image.FromFile(caminhoImg);
-                //Bitmap image = ResizeImage(imgPhoto, 300, 300);
-                //image.Save(caminhoImg);
-                listaCaminhoArquivo.Add(caminhoImg);
-            }
-
-            contexto.GravaCaminhoArquivos(listaCaminhoArquivo, nome_tela);
-            retorno = true;
-            return retorno;
-        }
-
+       
         public IPagedList<itemFotoGaleriaPrincipal> makePaginationPrincipal(int pagina , List<itemFotoGaleriaPrincipal> projetos)
         {
             var imgFiltrada = projetos.OrderBy(r => r.idFoto).ToPagedList(pagina, 9);
@@ -268,71 +227,7 @@ namespace ProjetoPortifolio.Controllers
             return imgFiltrada;
         }
 
-        public bool gravaDescricaoImagem(int idImagem , string descricao)
-        {
-            var validacao = contexto.gravaDescricaoImagem(idImagem,descricao);
-            return validacao;
-        }
-
-
-
-
-        #region chamadas_de_dados
-
-        public object getDadosTituloGeral()
-        {
-            object[] retorno = new object[2];
-            retorno = contexto.getDadosTitulo();
-            return retorno;
-        }
-        public object getDadosTela(string idTela)
-        {
-            object[] retornoDados = new object[7];
-            var dadosTela = contexto.getDadosTela(idTela);
-            retornoDados[0] = dadosTela.nome_pagina;
-            retornoDados[1] = dadosTela.titulo_aba;
-            retornoDados[2] = dadosTela.titulo_pagina;
-            retornoDados[3] = dadosTela.conteudo_pagina;
-            retornoDados[4] = dadosTela.hasFoto;
-            retornoDados[5] = dadosTela.hasForm;
-            retornoDados[6] = dadosTela.isMainPhoto;
-            return retornoDados;
-        }
-        public string MakeImages(string idTela)
-        {
-            var imagens = contexto.montaImagensTela(idTela);
-            string imagensRetorno = "";
-            foreach (string img in imagens)
-            {
-                imagensRetorno = imagensRetorno + img;
-            }
-            return imagensRetorno;
-        }
-        public bool DeletaImagemBD(int idFoto)
-        {
-            var retorno = contexto.deletaImagem(idFoto);
-            return retorno;
-        }
-        public string getDescImg(int idImg)
-        {
-           var dado = contexto.getDescricImagem(idImg);           
-           return dado;
-        }
-
-        #endregion
-
-
-        public object deletaPagina(int idTela)
-        {
-            object[] retornoFuncao = new object[2];
-            var retorno = contexto.deletaTelaByTag(idTela);
-
-            retornoFuncao[0] = retorno.Key;
-            retornoFuncao[1] = retorno.Value;
-
-            return retornoFuncao;
-        }
-
+ 
 
 
 

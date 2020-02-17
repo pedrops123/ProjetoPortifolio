@@ -41,20 +41,33 @@
     </div>
 }
 
-
-@using (Html.BeginForm("loginManager", "LoginLogout", FormMethod.Post, new { @class = "form-signin" }))
+@if(User.Identity.IsAuthenticated)
 {
-    @Html.AntiForgeryToken()
-    <h1 style="font-size: 23px; margin: 0px 0px 36px 40px;" class="h1 mb-6 font-weight-normal"> Fazer login no Manager </h1>
+        <h3><b>
+             <i style="color:red;">Atenção</i> <br /><br /> Você já esta logado com o usuário  <i style="color:red;">@User.Identity.Name </i> caso queira acessar o login , favor deslogar e entrar com o usuario e senha novamente !
+             </b> 
+    </h3>
 
-    @Html.ValidationMessageFor(r => r.login.usuario, "", new { @style = "color:red;!important" })
-    @Html.TextBoxFor(r => r.login.usuario, new { @class = "cmp_form form-control", placeholder = "Usuario" })
 
-    @Html.ValidationMessageFor(r => r.login.senha, "", new { @style = "color:red;!important" })
-    @Html.PasswordFor(r => r.login.senha, new { @class = "cmp_form form-control", placeholder = "Senha" })
-    <br />
-    <button type="submit" style="width:330px;" class="btn btn-lg btn-primary btn-block"> Entrar </button>
 }
+else
+{
+    @using (Html.BeginForm("loginManager", "LoginLogout", FormMethod.Post, new { @class = "form-signin" }))
+    {
+        @Html.AntiForgeryToken()
+        <h1 style="font-size: 23px; margin: 0px 0px 36px 40px;" class="h1 mb-6 font-weight-normal"> Fazer login no Manager </h1>
+
+        @Html.ValidationMessageFor(r => r.login.usuario, "", new { @style = "color:red;!important" })
+        @Html.TextBoxFor(r => r.login.usuario, new { @class = "cmp_form form-control", placeholder = "Usuario" })
+
+        @Html.ValidationMessageFor(r => r.login.senha, "", new { @style = "color:red;!important" })
+        @Html.PasswordFor(r => r.login.senha, new { @class = "cmp_form form-control", placeholder = "Senha" })
+        <br />
+        <button type="submit" style="width:330px;" class="btn btn-lg btn-primary btn-block"> Entrar </button>
+    }
+}
+
+
 
 
 

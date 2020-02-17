@@ -105,7 +105,6 @@ namespace ProjetoPortifolio
                     template: "managerlogin/login",
                     defaults: new { controller = "LoginLogout", action = "Index" });
 
-
                 // Rota Valida Login
                 routes.MapRoute(
                     name: "validaUser",
@@ -124,8 +123,6 @@ namespace ProjetoPortifolio
                     template: "managerlogin/loginRedirect",
                     defaults: new { controller = "LoginLogout", action = "LoginWithModelErrors"});
 
-
-
                 // Rota Logout 
                 routes.MapRoute(
                     name: "logout",
@@ -135,8 +132,8 @@ namespace ProjetoPortifolio
                 // Rota Manager Principal
                 routes.MapRoute(
                     name: "managerPrincipal",
-                    template: "{controller}/manager_principal",
-                    defaults: new { controller = "Portifolio", action = "chamaManagerPrincipal" });
+                    template: "managerSistema/manager_principal",
+                    defaults: new { controller = "managerAlteracao", action = "Index" });
 
                 // Rota cadastro paginas
                 routes.MapRoute(
