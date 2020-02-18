@@ -11,6 +11,7 @@
     /* Carrega dados titulo geral */
 
     $(document).ready(function () {
+
         $.ajax({
             type: "GET",
             url: "@Url.Action("getDadosTituloGeral","managerAlteracao")",
@@ -37,6 +38,7 @@
 
     });
 
+
     /* functions modal foto */
     function setDataModalFotos(nome) {
         limpaImagens();
@@ -48,7 +50,7 @@
 
         $.ajax({
             type: 'GET',
-            url: 'MakeImages',
+            url: "@Url.Action("MakeImages","managerAlteracao")",
             data: {
                 idTela: nome
             },
@@ -114,7 +116,7 @@
 
         $.ajax({
             type: 'post',
-            url: 'uploadImages',
+            url: "@Url.Action("uploadImages","managerAlteracao")",
             data: formdata,
             dataType: 'json',
             contentType: false,
@@ -142,7 +144,7 @@
 
         $.ajax({
             type: 'POST',
-            url: 'DeletaImagemBD',
+            url: "@Url.Action("DeletaImagemBD","managerAlteracao")",
             data: {
                 idFoto: idimg
             },
@@ -186,7 +188,7 @@
         var idimg = parseInt($("#hdnIdFoto").text());
         $.ajax({
             type: 'GET',
-            url: 'getDescImg',
+            url: "@Url.Action("getDescImg","managerAlteracao")",
             data: {
                 idImg: idimg
             },
@@ -205,7 +207,7 @@
         var desc = $("#cmpDesc").val();
 
         $.ajax({
-            url: 'gravaDescricaoImagem',
+            url: "@Url.Action("gravaDescricaoImagem","managerAlteracao")",
             type: "POST",
             data: {
                 idImagem: idimg,
@@ -236,7 +238,7 @@
     function deletaPagina(idPagina) {
         $.ajax({
             type: 'GET',
-            url: 'deletaPagina',
+            url: "@Url.Action("deletaPagina","managerAlteracao")",
             data: {
                 idTela:idPagina
             },

@@ -27,9 +27,12 @@ namespace ProjetoPortifolio.Controllers
     public class PortifolioController : Controller
     {
         GeralModelContext contexto;
+        managerPrincipalRepository contextoManager;
         public PortifolioController()
         {
             contexto = new GeralModelContext();
+            contextoManager = new managerPrincipalRepository();
+
         }
         // GET: Portifolio
         //[Route("")]
@@ -38,7 +41,7 @@ namespace ProjetoPortifolio.Controllers
         public ActionResult ChamaViewDinamica(string nomeTela = "_main" , int pagina = 1)
         {
             PortifolioViewModel item = new PortifolioViewModel();
-            var tela = contexto.getDadosTela(nomeTela);
+            var tela = contextoManager.getDadosTela(nomeTela);
 
             if (tela == null)
             {
@@ -179,39 +182,39 @@ namespace ProjetoPortifolio.Controllers
 
   
 
-        [Authorize]
-        public ActionResult DadosTelaDinamicoManager(string tagPagina = "")
-        {
-            string nomeTelaAtual = "manager_alteracao";
-            string idPagina = "";
-            PortifolioViewModel itemModel = new PortifolioViewModel();
-            if (tagPagina != "")
-            {
-                var dadosPagina = contexto.getDadosTela(tagPagina);
-                if (dadosPagina == null)
-                {
-                    return RedirectToAction("chamaManagerPrincipal");
-                }
+        //[Authorize]
+        //public ActionResult DadosTelaDinamicoManager(string tagPagina = "")
+        //{
+        //    string nomeTelaAtual = "manager_alteracao";
+        //    string idPagina = "";
+        //    PortifolioViewModel itemModel = new PortifolioViewModel();
+        //    if (tagPagina != "")
+        //    {
+        //        var dadosPagina = contexto.getDadosTela(tagPagina);
+        //        if (dadosPagina == null)
+        //        {
+        //            return RedirectToAction("chamaManagerPrincipal");
+        //        }
 
-                idPagina = dadosPagina.nome_pagina;
-            }
-            if (tagPagina == "")
-            {
-                ViewBag.Title = "Inclusão de Tela";
-                ViewBag.TituloConteudo = "Inclusao de nova tela";
-                ViewData["idPagina"] = idPagina;
-            }
-            else
-            {
-                ViewBag.Title = "Alteração de tela - Pagina " + tagPagina;
-                ViewBag.TituloConteudo = "Alteração  Tela  " + tagPagina;
-                ViewData["idPagina"] = idPagina;
-            }
-            List<ModelFormularios> formularios = contexto.getFormulariosByTela(nomeTelaAtual);
-            itemModel.formularios = contexto.MontaTemplateFormulario(formularios, nomeTelaAtual);
-            ViewData["ViewDataContent"] = "";
-            return View("Manager/Pagina_alteracao", itemModel);
-        }
+        //        idPagina = dadosPagina.nome_pagina;
+        //    }
+        //    if (tagPagina == "")
+        //    {
+        //        ViewBag.Title = "Inclusão de Tela";
+        //        ViewBag.TituloConteudo = "Inclusao de nova tela";
+        //        ViewData["idPagina"] = idPagina;
+        //    }
+        //    else
+        //    {
+        //        ViewBag.Title = "Alteração de tela - Pagina " + tagPagina;
+        //        ViewBag.TituloConteudo = "Alteração  Tela  " + tagPagina;
+        //        ViewData["idPagina"] = idPagina;
+        //    }
+        //    List<ModelFormularios> formularios = contexto.getFormulariosByTela(nomeTelaAtual);
+        //    itemModel.formularios = contexto.MontaTemplateFormulario(formularios, nomeTelaAtual);
+        //    ViewData["ViewDataContent"] = "";
+        //    return View("Manager/Pagina_alteracao", itemModel);
+        //}
 
        
         public IPagedList<itemFotoGaleriaPrincipal> makePaginationPrincipal(int pagina , List<itemFotoGaleriaPrincipal> projetos)

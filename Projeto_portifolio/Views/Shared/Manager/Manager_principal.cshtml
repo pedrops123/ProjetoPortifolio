@@ -69,25 +69,41 @@
                         <a class="btn_toggle fa fa-arrow-circle-down fa-pull-right"  data-toggle="collapse" data-target="#tabTituloGeral"></a>
                     </h2>
                 </div>
-                <div id="tabTituloGeral" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div id="tabTituloGeral" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                     <div class="card-body">
 
-                        @using(@Html.BeginForm("","managerPrincipal",FormMethod.Post))
+                        @using(@Html.BeginForm("gravaLinkUrlPrincipal","managerAlteracao",FormMethod.Post))
                         {
-                            <div class="form-group">
-                                @Html.LabelFor(r=>r.cadastroLink.linkUrl)
-                                @Html.TextBoxFor(r=>r.cadastroLink.linkUrl , new { @class="form-control input", placeholder="Url do site" })
+                            @Html.AntiForgeryToken()
+                            <div class="row">
+                                <div class="col col-md"></div>
+                                <div class="col col-sm-6 col-md-5 col-lg-8">
+                                    @Html.LabelFor(r=>r.cadastroLink.linkUrl)<br/>
+                                    @Html.ValidationMessageFor(r => r.cadastroLink.linkUrl, "", new { @style = "color:red;!important" })
+                                    @Html.TextBoxFor(r=>r.cadastroLink.linkUrl , new { @class="form-control input", placeholder="Url do site" })
+                                </div>
+                                <div class="col col-md"></div>
                             </div>
-                            <div class="form-group">
-                                @Html.LabelFor(r=>r.cadastroLink.linkDescricao)
-                                @Html.TextBoxFor(r=>r.cadastroLink.linkDescricao, new { @class="form-control input", placeholder="Descrição da URL" })
-                            </div>                          
-                        }
+                            
+                            <hr/>
+                            
+                            <div class="row">
+                                 <div class="col col-md"></div>
+                                    <div class="col col-sm-6 col-md-5 col-lg-8">    
+                                        @Html.LabelFor(r=>r.cadastroLink.linkDescricao)<br/>
+                                         @Html.ValidationMessageFor(r => r.cadastroLink.linkDescricao, "", new { @style = "color:red;!important" })
+                                        @Html.TextBoxFor(r=>r.cadastroLink.linkDescricao, new { @class="form-control input", placeholder="Descrição da URL" })
+                                    </div>  
+                                <div class="col col-md"></div>
+                            </div>
+                        <br/>
                         <div class="row">
                             <div class="col col-md"></div>
                             <div class="col col-md"><button type="submit" class="btn btn-lg btn-primary btn-block"> Salvar </button></div>
                             <div class="col col-md"></div>
                         </div>
+                        }
+
                     @*
                
                         <fieldset id="area_Titulo_geral">

@@ -13,11 +13,14 @@ namespace ProjetoPortifolio.Controllers
     {
         #region repositorios
         GeralModelContext contextoGeral;
+        managerPrincipalRepository repositorioPrincipal;
         #endregion
 
         #region construtor 
-        public managerAlteracaoController(){
+        public managerAlteracaoController()
+        {
             contextoGeral = new GeralModelContext();
+            repositorioPrincipal = new managerPrincipalRepository();
         }
 
         #endregion
@@ -29,7 +32,7 @@ namespace ProjetoPortifolio.Controllers
             ViewBag.TituloConteudo = "<h1><span class=\"fas fa-clipboard-list\"></span> &nbsp Manager Geral </h1>";
             dados.listaPaginasSistema = contextoGeral.getAllPaginas();
             dados.botoes = contextoGeral.getBotoesSite();
-            ViewData["ViewDataContent"] = "<li class=\"breadcrumb-item\"><a href=\"/Portifolio/pagina/1/_main\"> Manager Geral </a></li>";
+            ViewData["ViewDataContent"] = "<li class=\"breadcrumb-item\"><a href=\"/managerSistema/manager_principal\"> Manager Geral </a></li>";
             return View("~/Views/Shared/Manager/Manager_principal.cshtml",dados);
         }
 
@@ -39,13 +42,14 @@ namespace ProjetoPortifolio.Controllers
         public object getDadosTituloGeral()
         {
             object[] retorno = new object[2];
-            retorno = contextoGeral.getDadosTitulo();
+            retorno = repositorioPrincipal.getDadosTitulo();
             return retorno;
         }
+
         public object getDadosTela(string idTela)
         {
             object[] retornoDados = new object[7];
-            var dadosTela = contextoGeral.getDadosTela(idTela);
+            var dadosTela = repositorioPrincipal.getDadosTela(idTela);
             retornoDados[0] = dadosTela.nome_pagina;
             retornoDados[1] = dadosTela.titulo_aba;
             retornoDados[2] = dadosTela.titulo_pagina;
@@ -55,9 +59,10 @@ namespace ProjetoPortifolio.Controllers
             retornoDados[6] = dadosTela.isMainPhoto;
             return retornoDados;
         }
+
         public string MakeImages(string idTela)
         {
-            var imagens = contextoGeral.montaImagensTela(idTela);
+            var imagens = repositorioPrincipal.montaImagensTela(idTela);
             string imagensRetorno = "";
             foreach (string img in imagens)
             {
@@ -65,31 +70,36 @@ namespace ProjetoPortifolio.Controllers
             }
             return imagensRetorno;
         }
+
         public bool DeletaImagemBD(int idFoto)
         {
-            var retorno = contextoGeral.deletaImagem(idFoto);
+            var retorno = repositorioPrincipal.deletaImagem(idFoto);
             return retorno;
         }
+
         public string getDescImg(int idImg)
         {
-           var dado = contextoGeral.getDescricImagem(idImg);           
+           var dado = repositorioPrincipal.getDescricImagem(idImg);           
            return dado;
         }
+
         public bool gravaDescricaoImagem(int idImagem , string descricao)
         {
-            var validacao = contextoGeral.gravaDescricaoImagem(idImagem,descricao);
+            var validacao = repositorioPrincipal.gravaDescricaoImagem(idImagem,descricao);
             return validacao;
         }
+
         public object deletaPagina(int idTela)
         {
             object[] retornoFuncao = new object[2];
-            var retorno = contextoGeral.deletaTelaByTag(idTela);
+            var retorno = repositorioPrincipal.deletaTelaByTag(idTela);
 
             retornoFuncao[0] = retorno.Key;
             retornoFuncao[1] = retorno.Value;
 
             return retornoFuncao;
         }
+        
         [HttpPost]
         public bool uploadImages()
         {
@@ -133,12 +143,45 @@ namespace ProjetoPortifolio.Controllers
                 listaCaminhoArquivo.Add(caminhoImg);
             }
 
-            contextoGeral.GravaCaminhoArquivos(listaCaminhoArquivo, nome_tela);
+            repositorioPrincipal.GravaCaminhoArquivos(listaCaminhoArquivo, nome_tela);
             retorno = true;
             return retorno;
         }
 
         #endregion
+
+     [HttpPost]
+     [ValidateAntiForgeryToken]
+     public IActionResult gravaLinkUrlPrincipal(){
+         bool retorno = false;
+
+         if (ModelState.IsValid)
+            {
+              var urlSite = HttpContext.Request.Form["cadastroLink.linkUrl"];
+              var descricaoLink = HttpContext.Request.Form["cadastroLink.linkDescricao"];
+              if (urlSite == ""){
+                   ModelState.AddModelError("cadastroLink.linkUrl", "Campo url não pode ficar em branco !");
+              }
+
+              if (descricaoLink == ""){
+                   ModelState.AddModelError("cadastroLink.linkDescricao", "Campo Descrição não pode ficar em branco !");
+              }
+
+              if(urlSite != "" && descricaoLink != ""){
+                    retorno = repositorioPrincipal.gravaDadosTituloGeral(urlSite,descricaoLink);
+              }
+            }
+
+            PortifolioViewModel dados = new PortifolioViewModel();
+            ViewBag.Title = "Manager Portifolio";
+            ViewBag.TituloConteudo = "<h1><span class=\"fas fa-clipboard-list\"></span> &nbsp Manager Geral </h1>";
+            dados.listaPaginasSistema = contextoGeral.getAllPaginas();
+            dados.botoes = contextoGeral.getBotoesSite();
+            ViewData["ViewDataContent"] = "<li class=\"breadcrumb-item\"><a href=\"/managerSistema/manager_principal\"> Manager Geral </a></li>";
+            return RedirectToAction("Index");
+     }
+
+
 
 
         

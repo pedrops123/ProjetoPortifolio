@@ -18,20 +18,6 @@ namespace ProjetoPortifolio.RepositoryContext
             contexto = new ApplicationDBcontext();
         }
 
-        public ItemsPaginaGeral getDadosTela(string id_tela)
-        {
-            ItemsPaginaGeral conteudoTela;
-            try
-            {
-                conteudoTela = contexto.itemsPagina.Where(r => r.nome_pagina.Trim() == id_tela.Trim()).FirstOrDefault();
-            }
-            catch (Exception)
-            {
-                conteudoTela = null;
-            }
-
-            return conteudoTela;
-        }
 
         public List<ButtonSite> getBotoesSite()
         {
@@ -114,9 +100,7 @@ namespace ProjetoPortifolio.RepositoryContext
             return RetornoCamposFormulario;
         }
 
-     
-
-        public List<string> MontaBotoesForm(List<string> listaFormulario, string id_tela)
+       public List<string> MontaBotoesForm(List<string> listaFormulario, string id_tela)
         {
             string linhaBotao = "";
             var listaBotoesForm = contexto.Botoes.Where(r => r.type != "link" && r.tagPagina.Trim() == id_tela.Trim()).ToList().OrderBy(r => r.id_button);
@@ -144,34 +128,6 @@ namespace ProjetoPortifolio.RepositoryContext
             return contexto.itemsPagina.Where(r => r.nome_pagina.Trim() != "_login").ToList();
         }
 
-        public object[] getDadosTitulo()
-        {
-            object[] retornoDados = new object[2];
-            var dados = contexto.Botoes.Where(r => r.type == "linkMaster").FirstOrDefault();
-            retornoDados[0] = dados.caminhoUrl;
-            retornoDados[1] = dados.descricao;
-
-            return retornoDados;
-        }
-
-        public bool gravaDadosTituloGeral(string link, string descricao)
-        {
-            bool retorno = false;
-            var dadoTitulo = contexto.Botoes.Where(r => r.type == "linkMaster").FirstOrDefault();
-            dadoTitulo.caminhoUrl = link;
-            dadoTitulo.descricao = descricao;
-            contexto.Update(dadoTitulo);
-            try
-            {
-                contexto.SaveChanges();
-                retorno = true;
-            }
-            catch (Exception)
-            {
-                return retorno;
-            }
-            return retorno;
-        }
 
         public string montaOptions(ModelFormularios form)
         {
@@ -297,108 +253,6 @@ namespace ProjetoPortifolio.RepositoryContext
             return retornoGravacao;
         }
 
-        public bool GravaCaminhoArquivos(List<string> listaCaminhos, string nomeTela)
-        {
-            bool retorno = false;
-            List<ImagensPortifolio> ImagensPort = new List<ImagensPortifolio>();
-            foreach (string imagem in listaCaminhos)
-            {
-                try
-                {
-                    ImagensPortifolio imagemUnitaria = new ImagensPortifolio();
-                    imagemUnitaria.id_tela = nomeTela;
-                    imagemUnitaria.caminhoFisico = imagem;
-                    var posicaoPasta = imagem.IndexOf("wwwroot");
-                    var pastaTeste = imagem.Substring(posicaoPasta);
-                    imagemUnitaria.urlFoto = pastaTeste.Replace("wwwroot", "");
-                    imagemUnitaria.descricao_foto = "";
-                    ImagensPort.Add(imagemUnitaria);
-                }
-                catch (Exception e)
-                {
-                    return retorno;
-                }
-
-            }
-            foreach (ImagensPortifolio img in ImagensPort)
-            {
-                contexto.Imagens.Add(img);
-            }
-            try
-            {
-                contexto.SaveChanges();
-            }
-            catch (Exception)
-            {
-                return retorno;
-            }
-            retorno = true;
-            return retorno;
-        }
-
-        public List<string> montaImagensTela(string nomeTela)
-        {
-            var fotos = getFotosByTela(nomeTela);
-            List<string> listaImagens = new List<string>();
-            foreach (ImagensPortifolio fotosUrl in fotos)
-            {
-                listaImagens.Add("<div onclick=" + aspasDuplas + "chamaPopOver(" + fotosUrl.id_foto + ")" + aspasDuplas + " data-toggle='popover' data-trigger='click' data-placement='right' data-content='data' class='img-salva' style='border:solid; margin:10px; display: -webkit-flex; -webkit-flex-wrap:wrap; display:inline-flex;flex-wrap:wrap;'><img id='img-salva' width='80px' height='80px' src='" + fotosUrl.urlFoto + "'><a style='cursor:pointer;'><span onclick='deleteImageBD(" + fotosUrl.id_foto + ")' class='notify-badge'>x</span></a></img></div>");
-            }
-            return listaImagens;
-        }
-
-        public bool deletaImagem(int idImagem)
-        {
-            bool retorno = false;
-            try
-            {
-                ImagensPortifolio data = contexto.Imagens.Where(r => r.id_foto == idImagem).FirstOrDefault();
-                File.Delete(data.caminhoFisico);
-                contexto.Imagens.Remove(data);
-                contexto.SaveChanges();
-            }
-            catch (Exception e)
-            {
-                return retorno;
-            }
-            retorno = true;
-            return retorno;
-        }
-
-        public string getDescricImagem(int id)
-        {
-            string descricao = "";
-            try
-            {
-                descricao = contexto.Imagens.Where(r => r.id_foto == id).FirstOrDefault().descricao_foto;
-            }
-            catch (Exception)
-            {
-                return descricao;
-            }
-            return descricao;
-
-        }
-
-        public bool gravaDescricaoImagem(int id, string descricao)
-        {
-            bool retorno = false;
-            try
-            {
-                ImagensPortifolio imagem = contexto.Imagens.Where(r => r.id_foto == id).FirstOrDefault();
-                imagem.descricao_foto = descricao;
-                contexto.Update(imagem);
-                contexto.SaveChanges();
-
-            }
-            catch (Exception)
-            {
-                return retorno;
-            }
-            retorno = true;
-            return retorno;
-        }
-
         public string getMainFoto()
         {
             string foto = "";
@@ -438,72 +292,7 @@ namespace ProjetoPortifolio.RepositoryContext
         }
 
 
-        public KeyValuePair<bool, string> deletaTelaByTag(int idTela)
-        {
-            var Tela = contexto.itemsPagina.Where(r => r.id_pagina == idTela).First();
-            KeyValuePair<bool, string> retornoFuncao = new KeyValuePair<bool, string>();
 
-            // verifica se tela possui alguma imagem vinculada 
-            if (Tela.hasFoto == true)
-            {
-                List<ImagensPortifolio> imagens = contexto.Imagens.Where(r => r.id_tela.Trim() == Tela.nome_pagina.Trim()).ToList();
-
-                // tenta deletar todas as imagens vinculadas 
-                try
-                {
-                    foreach (ImagensPortifolio imagem in imagens)
-                    {
-                        File.Delete(imagem.caminhoFisico);
-                        contexto.Imagens.Remove(imagem);
-                    }
-                    // salva contexto
-                    contexto.SaveChanges();
-                }
-                catch (Exception e)
-                {
-                    retornoFuncao =  new KeyValuePair<bool, string>(false, "Ocorreu um erro ao tentar deletar as fotos da  tela " + Tela.nome_pagina.Trim() + " <br/> Segue detalhes do erro abaixo <br/> " + e.Message + " <br/> " + e.InnerException);
-                }
-
-            }
-
-            // Verifica se ha algum botão vinculado
-            ButtonSite botaoPagina = new ButtonSite();
-            try
-            {
-                botaoPagina = contexto.Botoes.Where(r => r.descricao == Tela.nome_pagina).First();
-            }
-            catch (Exception e)
-            {
-                botaoPagina = null;
-            }
-           
-            if(botaoPagina != null)
-            {
-                contexto.Botoes.Remove(botaoPagina);
-                contexto.SaveChanges();
-            }
-
-            // Apos a serie de validacoes , deleta a tela em si 
-
-            try
-            {
-                contexto.itemsPagina.Remove(Tela);
-                // salva contexto
-                contexto.SaveChanges();
-
-            }
-            catch (Exception e)
-            {
-                retornoFuncao = new KeyValuePair<bool, string>(false, "Ocorreu um erro ao tentar a  tela " + Tela.nome_pagina.Trim() + " <br/> Segue detalhes do erro abaixo <br/> " + e.Message + " <br/> " + e.InnerException);
-            }
-            finally
-            {
-                retornoFuncao = new KeyValuePair<bool, string>(true, "Tela deletada com sucesso !");
-
-            }
-
-            return retornoFuncao;
-        }
 
 
 

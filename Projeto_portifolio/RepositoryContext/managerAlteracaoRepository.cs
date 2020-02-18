@@ -5,6 +5,7 @@ namespace ProjetoPortifolio.RepositoryContext
     public class managerAlteracao 
     {
         ApplicationDBcontext contextoBase;
+        
 
         // Construtor da classe
         public managerAlteracao()
