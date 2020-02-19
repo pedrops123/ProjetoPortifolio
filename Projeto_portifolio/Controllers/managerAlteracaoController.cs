@@ -36,6 +36,31 @@ namespace ProjetoPortifolio.Controllers
             return View("~/Views/Shared/Manager/Manager_principal.cshtml",dados);
         }
 
+        [Authorize]
+        public IActionResult redirectManager(string erroUrl = "" , string erroDescLink = "" ){
+            PortifolioViewModel dados = new PortifolioViewModel();
+            ViewBag.Title = "Manager Portifolio";
+            ViewBag.TituloConteudo = "<h1><span class=\"fas fa-clipboard-list\"></span> &nbsp Manager Geral </h1>";
+            dados.listaPaginasSistema = contextoGeral.getAllPaginas();
+            dados.botoes = contextoGeral.getBotoesSite();
+            ViewData["ViewDataContent"] = "<li class=\"breadcrumb-item\"><a href=\"/managerSistema/manager_principal\"> Manager Geral </a></li>";
+
+            if(erroUrl != "")
+            {
+                 ModelState.AddModelError("cadastroLink.linkUrl", erroUrl);
+            }
+            if(erroDescLink != "")
+            {
+                ModelState.AddModelError("cadastroLink.linkDescricao", erroDescLink);
+            }
+
+            return View("~/Views/Shared/Manager/Manager_principal.cshtml",dados);
+
+        }
+
+
+    
+
        
         #region chamadas_de_dados
 
@@ -154,31 +179,31 @@ namespace ProjetoPortifolio.Controllers
      [ValidateAntiForgeryToken]
      public IActionResult gravaLinkUrlPrincipal(){
          bool retorno = false;
+         string erroUrl = "";
+         string erroDescLink ="";
 
          if (ModelState.IsValid)
             {
               var urlSite = HttpContext.Request.Form["cadastroLink.linkUrl"];
               var descricaoLink = HttpContext.Request.Form["cadastroLink.linkDescricao"];
-              if (urlSite == ""){
-                   ModelState.AddModelError("cadastroLink.linkUrl", "Campo url não pode ficar em branco !");
+              if (urlSite == "")
+              {
+                  erroUrl = "Campo url não pode ficar em branco !";
               }
 
-              if (descricaoLink == ""){
-                   ModelState.AddModelError("cadastroLink.linkDescricao", "Campo Descrição não pode ficar em branco !");
+              if (descricaoLink == "")
+              {
+                  erroDescLink = "Campo Descrição não pode ficar em branco !";
               }
 
               if(urlSite != "" && descricaoLink != ""){
                     retorno = repositorioPrincipal.gravaDadosTituloGeral(urlSite,descricaoLink);
               }
             }
-
-            PortifolioViewModel dados = new PortifolioViewModel();
-            ViewBag.Title = "Manager Portifolio";
-            ViewBag.TituloConteudo = "<h1><span class=\"fas fa-clipboard-list\"></span> &nbsp Manager Geral </h1>";
-            dados.listaPaginasSistema = contextoGeral.getAllPaginas();
-            dados.botoes = contextoGeral.getBotoesSite();
-            ViewData["ViewDataContent"] = "<li class=\"breadcrumb-item\"><a href=\"/managerSistema/manager_principal\"> Manager Geral </a></li>";
-            return RedirectToAction("Index");
+            RouteData.Values.Remove("erroUrl");
+            RouteData.Values.Remove("erroDescLink");
+            return RedirectToAction("redirectManager" , new { erroUrl = erroUrl ,erroDescLink = erroDescLink });
+            
      }
 
 

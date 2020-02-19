@@ -135,6 +135,11 @@ namespace ProjetoPortifolio
                     template: "managerSistema/manager_principal",
                     defaults: new { controller = "managerAlteracao", action = "Index" });
 
+                routes.MapRoute(
+                    name:"managerRedirect",
+                    template:"managerSistema/manager_principal_redirect",
+                    defaults:new {controller = "managerAlteracao", action = "redirectManager"});
+
                 // Rota cadastro paginas
                 routes.MapRoute(
                    name: "cadastroPaginas",
