@@ -13,7 +13,24 @@
     <div class="col-10"></div>
     <br />
     <br />
+    
 
+@using(Html.BeginForm("","",FormMethod.Post))
+{
+    <div class="row">
+      @Html.LabelFor(r=>r.cadastroTela.nome_pagina)
+      @Html.TextBoxFor(r=>r.cadastroTela.nome_pagina)
+
+    </div>
+    
+
+}
+
+
+
+
+
+@*
     @{
         int contador = 1;
         string IdFormulario = "formularioSubmit" + @contador.ToString();
@@ -26,7 +43,7 @@
         <br />
         <br />
     }
-
+*@
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <script type="text/javascript">
 

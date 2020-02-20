@@ -19,11 +19,12 @@
     }
 </style>
 
-
 <div id="item-principal" class="row justify-content-center">
 
-    <div class="col-sm-10 col-lg-40 col-md-20">
-        <div class="content col-sm-10 col-lg-40 col-md-20">
+    <div class="col-sm-10 col-lg-40 col-md-20"></div>
+
+     <div class="content col-sm-10 col-md-20 col-lg-40 ">
+
             @if (Model.mainFoto != "")
             {
                 <img class="numberCircle" src="@Model.mainFoto" />
@@ -36,11 +37,15 @@
         <div style="display:none;" id="desc-principal" class="description-main">
             @Html.Raw(Model.dadosPagina.conteudo_pagina.ToString());
             <partial name="~/Views/Components/ButtonExportCurriculum.cshtml" />
+
         </div>
-        </div>
-    </div>
+     </div>
     <div class="col-sm-10 col-lg-40 col-md-20"></div>
+
 </div>
+
+
+
 <br />
 <br />
 <br />

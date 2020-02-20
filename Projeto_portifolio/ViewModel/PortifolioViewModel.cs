@@ -18,5 +18,7 @@ namespace ProjetoPortifolio.ViewModel
         public string mainFoto { get; set; }
         public ValidaUser login { get; set; }
         public ModelCadastroLink cadastroLink { get; set; }
+        public ItemsPaginaGeral cadastroTela { get;set; }
+
     }
 }

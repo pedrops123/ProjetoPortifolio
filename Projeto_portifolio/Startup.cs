@@ -146,14 +146,29 @@ namespace ProjetoPortifolio
                    template: "{controller}/ConfiguracaoPagina/{*tagPagina}",
                    defaults: new { controller = "Portifolio", action = "DadosTelaDinamicoManager" });
 
-                //routes.MapRoute("PortifolioPedro", "{controller=Portifolio}/{action=PortifolioPedro}/{id?}");
-                //routes.MapRoute("Login", "{controller=Portifolio}/{action=Login}/{id?}");
+
+
+                // Rota Manager Alteracao pagina 
+                routes.MapRoute(
+                    name:"AlteracaoPagina",
+                    template:"ManagerAlteracao/{*idPagina}",
+                    defaults: new { controller = "managerAlteracaoPaginas" , action = "Index" , idPagina = "" });
+
+                
+
+
+                // Rota Manager Alteracao pagina errors 
+                /*
+                routes.MapRoute(
+                    name:"AlteracaoPaginaErrors",
+                    template:"ManagerAlteracaoRedirect/{*idPagina}",
+                    defaults: new { controller = "" , action = "" });
+                */
 
                 // Rota padrão default
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Portifolio}/{action=ChamaViewDinamica}/{id?}"
-                    );
+                    template: "{controller=Portifolio}/{action=ChamaViewDinamica}/{id?}");
             });
         }
     }

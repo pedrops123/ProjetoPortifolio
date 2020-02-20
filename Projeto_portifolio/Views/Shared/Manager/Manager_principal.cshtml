@@ -136,7 +136,7 @@
                 <div id="tabPaginasCadastradas" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                     <div class="card-body">
 
-                        <button style="margin-left:920px; margin-top:-10px; width: 200px;" type="button" onclick="location.href='DadosTelaDinamicoManager'" class="btn btn-outline-success"> <span class="fa fa-plus-circle"></span> &nbsp; Incluir nova pagina </button>
+                        <button style="margin-left:920px; margin-top:-10px; width: 200px;" type="button" onclick="location.href='@Url.Action("Index","managerAlteracaoPaginas",new { idPagina = "newPage" })'" class="btn btn-outline-success"> <span class="fa fa-plus-circle"></span> &nbsp; Incluir nova pagina </button>
                         <br />
                         <br />
 
@@ -190,7 +190,7 @@
                                                 {
                                                     <a href="" data-placement="top" style="margin:20px;" class="tip-top" data-toggle="tooltip" title="Incluir Formulário" shref=""><img width="30" height="30" src="~/icons/form_icon.png" /></a>
                                                 }
-                                                <button type="button" style="width:110px;" onclick="location.href='/Portifolio/ConfiguracaoPagina/@dadosPagina.nome_pagina'" class="tip-top btn btn-info" data-placement="top" data-toggle="tooltip" title="Alterar dados da tela"><span class="fas fa-pen"></span> &nbsp; Alterar </button>
+                                                <button type="button" style="width:110px;" onclick="location.href='@Url.Action("Index","managerAlteracaoPaginas",new {idPagina = @dadosPagina.nome_pagina.ToString()})'" class="tip-top btn btn-info" data-placement="top" data-toggle="tooltip" title="Alterar dados da tela"><span class="fas fa-pen"></span> &nbsp; Alterar </button>
 
                                             </div>
                                         </td>

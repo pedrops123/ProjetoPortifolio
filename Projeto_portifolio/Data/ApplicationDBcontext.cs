@@ -34,17 +34,16 @@ namespace ProjetoPortifolio.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ItemsPaginaGeral>().HasData(
-                new ItemsPaginaGeral
-                {
-                    id_pagina = 1,
-                    nome_pagina = "_main",
-                    titulo_aba = "Pagina Principal",
-                    titulo_pagina = "Minha pagina principal",
-                    conteudo_pagina = "Meu site Portifolio , isto é o conteudo inicializado na pagina , para alterar ou incluir alguma tela  favor entrar no manager incluindo o parametro _Login",
-                    hasForm = false,
-                    hasFoto = false,
-                });
 
+                new ItemsPaginaGeral(
+                    1,
+                    "_main",
+                    "Pagina Principal",
+                    "Minha Página Principal",
+                    "Meu site Portifolio , isto é o conteudo inicializado na pagina , para alterar ou incluir alguma tela  favor entrar no manager incluindo o parametro _Login",
+                    false ,false,false
+                    )                   
+                );
 
             //modelBuilder.Entity<ItemsPaginaGeral>().HasData(
             //  new ItemsPaginaGeral
