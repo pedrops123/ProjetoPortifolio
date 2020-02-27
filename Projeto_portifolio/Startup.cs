@@ -28,6 +28,7 @@ namespace ProjetoPortifolio
         public void ConfigureServices(IServiceCollection services)
         {
 
+            /*
             services.AddBreadcrumbs(GetType().Assembly, options =>
             {
                 options.TagName = "div";
@@ -38,7 +39,8 @@ namespace ProjetoPortifolio
                 options.ActiveLiClasses = "breadcrumb-item active";
                 options.SeparatorElement = "<li class=\"separator\">&nbsp/&nbsp</li>";
             });
-
+            
+            */
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -154,16 +156,13 @@ namespace ProjetoPortifolio
                     template:"ManagerAlteracao/{*idPagina}",
                     defaults: new { controller = "managerAlteracaoPaginas" , action = "Index" , idPagina = "" });
 
-                
-
-
                 // Rota Manager Alteracao pagina errors 
-                /*
+                
                 routes.MapRoute(
                     name:"AlteracaoPaginaErrors",
-                    template:"ManagerAlteracaoRedirect/{*idPagina}",
-                    defaults: new { controller = "" , action = "" });
-                */
+                    template:"ManagerAlteracaoRedirect",
+                    defaults: new { controller = "managerAlteracaoPaginas" , action = "validaCadastro" });
+                
 
                 // Rota padrão default
                 routes.MapRoute(

@@ -2,10 +2,18 @@
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    string idPagina = ViewData["idPagina"].ToString();
 }
 
-<div id="hdnPagina" style="display:none" value="@idPagina"></div>
+<style>
+    #container-checkbox
+    {
+        border:none; 
+        /*border-radius:8px 8px 8px 8px; */
+        /*border-color:gray;*/
+        width:220px;
+    }
+</style>
+
 
 <partial name="~/Views/Components/MensagemAlerta.cshtml">
     <div class="col-10"></div>
@@ -14,20 +22,112 @@
     <br />
     <br />
     
+<div class="card bg-light">
+    <article class="card-body">
 
-@using(Html.BeginForm("","",FormMethod.Post))
-{
-    <div class="row">
-      @Html.LabelFor(r=>r.cadastroTela.nome_pagina)
-      @Html.TextBoxFor(r=>r.cadastroTela.nome_pagina)
+            @using(Html.BeginForm("validaCadastro","managerAlteracaoPaginas",FormMethod.Post))
+            {
+                @Html.HiddenFor(r=>r.cadastroTela.id_pagina)
 
-    </div>
-    
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                
+                <div class="row">
+                    <div class="col col-2">
+                        <div class="form-group">
+                            @Html.Label("nome_pagina", "Nome da Página")
+                            <br/>
+                            @Html.ValidationMessageFor(r=>r.cadastroTela.nome_pagina , "" , new { @style = "color:red;!important" })
 
-}
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                                </div>
+                                @Html.TextBoxFor(r=>r.cadastroTela.nome_pagina , new { @class= "form-control" , @id = "nome_pagina"})
+                            </div>
 
+                        </div>
+                    </div> 
+                    <div class="col col-4">
+                        <div class="form-group">
+                            @Html.LabelFor(r=>r.cadastroTela.titulo_aba) 
+                            <br/>
+                            @Html.ValidationMessageFor(r=>r.cadastroTela.titulo_aba,"",new { @style = "color:red;!important" })
 
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                        <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                                </div>
+                                @Html.TextBoxFor(r=>r.cadastroTela.titulo_aba , new { @class= "form-control" , @id = "titulo_aba"})
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col col-4">
+                        <div class="form-group">
+                            @Html.LabelFor(r=>r.cadastroTela.titulo_pagina) 
+                            <br/>
+                            @Html.ValidationMessageFor(r=>r.cadastroTela.titulo_pagina,"",new { @style = "color:red;!important" })
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                                </div>
+                                @Html.TextBoxFor(r=>r.cadastroTela.titulo_pagina , new { @class= "form-control" , @id = "titulo_pagina"})
+                            </div>
+                        </div>
+                    </div>
 
+                </div>           
+
+                <div class="row">
+
+                    <div class="col col-9">
+                        <div class="form-group">
+                             @Html.LabelFor(r=>r.cadastroTela.conteudo_pagina) 
+                             <br/>
+                             @Html.ValidationMessageFor(r=>r.cadastroTela.conteudo_pagina , "" , new { @style = "color:red;!important" })   
+                             @Html.TextAreaFor(r=>r.cadastroTela.conteudo_pagina , new { @class= "form-control",  @id = "conteudo_pagina" })
+                        </div>
+                    </div>
+
+                   <div id="container-checkbox" class="col col-sm-4 col-md-4 col-lg-3">
+                       <div class="row">
+                            <div class="col col-md-2 col-sm-2 col-lg-2"></div>
+                            <div class="col col-md-8" ><span class="col"> <b> Opções </b> </span> <br /> </div><br/>
+                            <div class="col col-md-2 col-sm-2 col-lg-2"></div>
+                       </div>
+                        
+                        <hr/>
+                        <div>
+                            <div class="col">
+                                  @Html.CheckBoxFor(r=>r.cadastroTela.hasFoto , new { @class="form-check-input" ,  @id = "hasFoto" })
+                                  @Html.LabelFor(r=>r.cadastroTela.hasFoto , new {@class="checkbox-inline"}) 
+                            </div>
+
+                            <div class="col">
+                                  @Html.CheckBoxFor(r=>r.cadastroTela.hasForm , new { @class="form-check-input" ,  @id = "hasForm" })
+                                  @Html.LabelFor(r=>r.cadastroTela.hasForm , new {@class="checkbox-inline"}) 
+                            </div>
+
+                            <div class="col">
+                                  @Html.CheckBoxFor(r=>r.cadastroTela.isMainPhoto , new { @class="form-check-input" ,  @id = "isMainFoto" })
+                                  @Html.LabelFor(r=>r.cadastroTela.isMainPhoto, new {@class="checkbox-inline"}) 
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <br/>
+                <div class="row float-right">
+                        <div class="col">
+                            <button type="button" class="btn btn-danger" id="clear_form"><span class="fas fa-eraser"></span> &nbsp; Limpar</button>
+                            <button class="btn btn-primary" type="submit"><span class="fas fa-save"></span> &nbsp; Salvar </button>
+                        </div>
+
+                </div>
+            }
+    </article>
+
+</div>
 
 
 @*
@@ -48,11 +148,17 @@
     <script type="text/javascript">
 
     $(document).ready(function () {
+        var idPagina = $("#cadastroTela_id_pagina").val();
+        if (idPagina != 0){
+           // $("#cadastroTela_nome_pagina").removeClass("form-control").addClass("form-control-plaintext");
+            $("#cadastroTela_nome_pagina").attr('readonly', 'readonly');
+        }      
 
+@*
       if ("@idPagina" != "") {
 
-            $("#nome_pagina_id").removeClass("form-control").addClass("form-control-plaintext");
-            $("#nome_pagina_id").attr('disabled', 'disabled');
+            $("#cadastroTela_nome_pagina").removeClass("form-control").addClass("form-control-plaintext");
+            $("#cadastroTela_nome_pagina").attr('disabled', 'disabled');
 
             $.ajax({
                 type: "GET",
@@ -97,6 +203,7 @@
             });
         }
 
+*@
 
     });
 
@@ -124,6 +231,20 @@ $("#check_foto_principal").click(
 
 
 
+$("#clear_form").click(function(){
+    var idPagina = $("#cadastroTela_id_pagina").val();
+
+    // So limpa nome da pagina caso seja um novo registro
+    if (idPagina == 0){
+        $("#nome_pagina").val("");
+    } 
+    $("#titulo_aba").val("");
+    $("#titulo_pagina").val("");
+    $("#conteudo_pagina").val("");
+    $("#hasFoto").prop('checked',false);
+    $("#hasForm").prop('checked',false);
+    $("#isMainFoto").prop('checked',false);
+});
 
 
-    </script>
+ </script>

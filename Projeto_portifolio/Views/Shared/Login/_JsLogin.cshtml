@@ -11,7 +11,19 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
-    $("body").css({'background-image':'url( ' + @Url.Content("~/Fotos_sistema/fundo_manager_portifolio.jpg") +')'});
+    $("body").css({
+            'background-image':'url("@Url.Content("~/Fotos_sistema/fundo_manager_portifolio.jpg")")',
+            'background-repeat':'no-repeat',
+            'background-size':'cover'
+        });
+
+
+
+    $("#footer-content").css({
+        'color':'white'
+    });
+
+
 });
 
 
@@ -71,11 +83,6 @@ $(document).ready(function(){
 
 
     //});
-
-
-
-
-
 
 </script>
 

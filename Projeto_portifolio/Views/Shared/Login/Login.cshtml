@@ -9,7 +9,7 @@
 
     .form-signin {
         width: 100%;
-        max-width: 478px;
+        max-width: 358px;
         padding: 15px;
         margin: auto;
     }
@@ -18,8 +18,7 @@
     .cmp_form {
         width: 330px;
     }
-
-
+    
 </style>
 
 
@@ -36,7 +35,7 @@
 
 @if(User.Identity.IsAuthenticated)
 {
-        <h3><b>
+        <h3><b style="color:white;">
              <i style="color:red;">Atenção</i> <br /><br /> Você já esta logado com o usuário  <i style="color:red;">@User.Identity.Name </i> caso queira acessar o login , favor deslogar e entrar com o usuario e senha novamente !
              </b> 
     </h3>
@@ -48,13 +47,23 @@ else
     @using (Html.BeginForm("loginManager", "LoginLogout", FormMethod.Post, new { @class = "form-signin" }))
     {
         @Html.AntiForgeryToken()
-        <h1 style="font-size: 23px; margin: 0px 0px 36px 40px;" class="h1 mb-6 font-weight-normal"> Fazer login no Manager </h1>
+        <h1 style="font-size: 23px; margin: 0px 0px 36px 40px; color:white;" class="h1 mb-6 font-weight-normal"> Fazer login no Manager </h1>
 
         @Html.ValidationMessageFor(r => r.login.usuario, "", new { @style = "color:red;!important" })
-        @Html.TextBoxFor(r => r.login.usuario, new { @class = "cmp_form form-control", placeholder = "Usuario" })
+         <div class="input-group">
+             <div class="input-group-prepend">
+                <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+            </div>
+            @Html.TextBoxFor(r => r.login.usuario, new { @class = "cmp_form form-control", placeholder = "Usuario" })
+        </div>
 
         @Html.ValidationMessageFor(r => r.login.senha, "", new { @style = "color:red;!important" })
-        @Html.PasswordFor(r => r.login.senha, new { @class = "cmp_form form-control", placeholder = "Senha" })
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text"> <i class="fa fa-key"></i> </span>
+            </div>
+            @Html.PasswordFor(r => r.login.senha, new { @class = "cmp_form form-control", placeholder = "Senha" })
+        </div>
         <br />
         <button type="submit" style="width:330px;" class="btn btn-lg btn-primary btn-block"> Entrar </button>
     }

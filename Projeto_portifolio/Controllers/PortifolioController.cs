@@ -1,23 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
-using System.IO;
 using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using ProjetoPortifolio.RepositoryContext;
 using ProjetoPortifolio.Models;
 using ProjetoPortifolio.ViewModel;
-using SmartBreadcrumbs.Attributes;
-using SmartBreadcrumbs.Nodes;
 using X.PagedList;
 
 

@@ -11,6 +11,13 @@ namespace ProjetoPortifolio.Models
     public class ItemsPaginaGeral
     {
         // Construtor da classe
+
+        // Sobrecarga de construtor para poder incializar dados no code First
+        public ItemsPaginaGeral(){
+
+        }
+
+        
         public ItemsPaginaGeral(int idpagina, string nome_pagina , string tituloAba , string tituloPagina, string conteudoPagina, bool TemFoto , bool temFormulario , bool isMainFoto )
         {
             this.id_pagina = idpagina;
@@ -26,19 +33,18 @@ namespace ProjetoPortifolio.Models
 
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 
-        [Required, StringLength(10), Display(Name = "Tag Da Página")]
         public int id_pagina { get; set; }
         
-        [Required, StringLength(40), Display(Name = "Nome Da Página")]
+        [Required(AllowEmptyStrings = false , ErrorMessage = "Nome da Página não pode ficar em branco !"), StringLength(40), Display(Name = "Tag Da Página")]
         public string nome_pagina { get; set; }
 
-        [Required, StringLength(100), Display(Name = "Titulo da Aba")]
+        [Required(AllowEmptyStrings = false , ErrorMessage="Titula da Aba não pode ficar em branco !"), StringLength(100), Display(Name = "Titulo da Aba")]
         public string titulo_aba { get; set; }
 
-        [Required, StringLength(100), Display(Name = "Titulo da Página")]
+        [Required(AllowEmptyStrings = false , ErrorMessage = "Titulo da Página não pode ficar em branco !") , StringLength(100), Display(Name = "Titulo da Página")]
         public string titulo_pagina { get; set; }
 
-        [Required, StringLength(100), Display(Name = "Conteudo da Página")]
+        [StringLength(900), Display(Name = "Conteudo da Página")]
         public string conteudo_pagina { get; set; }
 
         [Required,  Display(Name = "Possui Foto ?")]
