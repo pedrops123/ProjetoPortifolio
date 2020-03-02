@@ -40,10 +40,11 @@ namespace ProjetoPortifolio.Data
                     nome_pagina = "_main",
                     titulo_aba = "Pagina Principal",
                     titulo_pagina = "Minha Página Principal",
-                    conteudo_pagina = "Meu site Portifolio , isto é o conteudo inicializado na pagina , para alterar ou incluir alguma tela  favor entrar no manager incluindo o parametro _Login",
+                    conteudo_pagina = "Site Portifolio criado com sucesso ! <br/> para abrir o login digite na url o seguinte endereço \"/managerlogin/login \" <br/> Obrigado : ) !",
                     hasFoto = false,
                     hasForm = false,
-                    isMainPhoto = false
+                    isMainPhoto = false,
+                    cria_botao = true
                 });
 
             //modelBuilder.Entity<ItemsPaginaGeral>().HasData(
@@ -89,7 +90,7 @@ namespace ProjetoPortifolio.Data
 
             //});
 
-
+        /*
             modelBuilder.Entity<ModelFormularios>().HasData(
             new ModelFormularios
             {
@@ -104,7 +105,9 @@ namespace ProjetoPortifolio.Data
                 tag_pagina = "manager_principal"
 
             });
+        */
 
+        /*
             modelBuilder.Entity<ModelFormularios>().HasData(
              new ModelFormularios
              {
@@ -119,7 +122,8 @@ namespace ProjetoPortifolio.Data
                  tag_pagina = "manager_principal"
 
              });
-
+        */
+        /*
             modelBuilder.Entity<ModelFormularios>().HasData(
              new ModelFormularios
              {
@@ -134,7 +138,9 @@ namespace ProjetoPortifolio.Data
                  tag_pagina = "manager_alteracao"
 
              });
+    */
 
+/*
             modelBuilder.Entity<ModelFormularios>().HasData(
             new ModelFormularios
             {
@@ -148,7 +154,9 @@ namespace ProjetoPortifolio.Data
                 tipo_form = "input",
                 tag_pagina = "manager_alteracao"
             });
+*/
 
+/*
             modelBuilder.Entity<ModelFormularios>().HasData(
             new ModelFormularios
             {
@@ -162,7 +170,9 @@ namespace ProjetoPortifolio.Data
                 tipo_form = "input",
                 tag_pagina = "manager_alteracao"
             });
+*/
 
+/*
             modelBuilder.Entity<ModelFormularios>().HasData(
             new ModelFormularios
             {
@@ -176,7 +186,8 @@ namespace ProjetoPortifolio.Data
                 tipo_form = "textarea",
                 tag_pagina = "manager_alteracao"
             });
-
+*/
+/*
             modelBuilder.Entity<ModelFormularios>().HasData(
             new ModelFormularios
             {
@@ -190,7 +201,8 @@ namespace ProjetoPortifolio.Data
                 tipo_form = "select",
                 tag_pagina = "manager_alteracao"
             });
-
+*/
+/*
             modelBuilder.Entity<ModelFormularios>().HasData(
             new ModelFormularios
             {
@@ -206,6 +218,9 @@ namespace ProjetoPortifolio.Data
             });
 
 
+*/
+/*
+
             modelBuilder.Entity<ModelFormularios>().HasData(
             new ModelFormularios
             {
@@ -220,7 +235,9 @@ namespace ProjetoPortifolio.Data
                 tag_pagina = "manager_alteracao"
             });
 
+*/
 
+/*
             modelBuilder.Entity<ModelFormularios>().HasData(
             new ModelFormularios
             {
@@ -234,7 +251,7 @@ namespace ProjetoPortifolio.Data
                 tipo_form = "checkbox",
                 tag_pagina = "manager_alteracao"
             });
-
+*/
             modelBuilder.Entity<ButtonSite>().HasData(
                 new ButtonSite
                 {
@@ -276,6 +293,7 @@ namespace ProjetoPortifolio.Data
                 type = "linkMaster"
             });
 
+/*
             modelBuilder.Entity<ButtonSite>().HasData(
             new ButtonSite
             {
@@ -285,6 +303,9 @@ namespace ProjetoPortifolio.Data
                 tagPagina = "manager_principal",
                 type = "submit"
             });
+*/
+
+/*
             modelBuilder.Entity<ButtonSite>().HasData(
             new ButtonSite
             {
@@ -295,7 +316,7 @@ namespace ProjetoPortifolio.Data
                 type = "submit"
             });
 
-
+*/
             modelBuilder.Entity<UsersAdmin>().HasData(
                 new UsersAdmin
                 {
@@ -304,6 +325,7 @@ namespace ProjetoPortifolio.Data
                     nome_completo = "Pedro Vinicius Rodrigues Furlan",
                     senha = "97083252"
                 });
+                /*
 
             modelBuilder.Entity<OptionsForm>().HasData(
                 new OptionsForm
@@ -338,6 +360,8 @@ namespace ProjetoPortifolio.Data
                 cmp_form = 10,
                 IsDeletado = false
             });
+
+            */
         }
 
     }

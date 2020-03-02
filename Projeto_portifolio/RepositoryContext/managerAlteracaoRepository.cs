@@ -1,16 +1,102 @@
 using System;
 using ProjetoPortifolio.Data;
+using ProjetoPortifolio.Models;
+using System.Linq;
+
 namespace ProjetoPortifolio.RepositoryContext
 {
-    public class managerAlteracao 
+    public class managerAlteracaoRepository
     {
         ApplicationDBcontext contextoBase;
         
 
         // Construtor da classe
-        public managerAlteracao()
+        public managerAlteracaoRepository()
         {
             contextoBase = new ApplicationDBcontext();
+        }
+
+        public object[] gravaDadosTela(ItemsPaginaGeral dados)
+        {
+            object[] retorno = new object[2];
+           
+            try
+            {
+               // Faz insert de dados
+               if(dados.id_pagina == 0)
+               {
+                   // Faz verificação de nome da tela 
+                   var telaCadastrada = contextoBase.itemsPagina.Where( r => r.nome_pagina.Trim() == dados.nome_pagina).FirstOrDefault();
+
+                    if(telaCadastrada.id_pagina != 0)
+                    {
+                      retorno[0] = "Já Existe uma tela cadastrada com o mesmo nome inserido , favor verificar o nome da tela novamente.";
+                      retorno[1] = false;
+                      return retorno;
+                    }
+
+                    if (dados.hasFoto == true)
+                    {
+                            try
+                            {
+                                // Procura o pai de has foto que é isMainFoto
+                                string nomeIsMainFoto = contextoBase.itemsPagina.Where(r => r.isMainPhoto == true).First().nome_pagina;
+                                dados.pagina_pai = nomeIsMainFoto;
+                            }
+                            catch (Exception e)
+                            {
+                                retorno[0] = "Erro !<br/> Talvez ainda não tenha cadastrado uma pagina com a categoria de  foto principal ! <br/> Favor verificar se a página com a categoria existe e tente novamente !";
+                                retorno[1] = false;
+                                return retorno;
+                            }
+                        }
+                        else if (dados.isMainPhoto == true)
+                        {
+                            // Condição para isMainPhoto , pagina main sera o pai 
+                            dados.pagina_pai = "_main";
+                        }
+                        else if (dados.hasForm == true)
+                        {
+                            // Condição para has Form , pagina main sera o pai 
+                            dados.pagina_pai = "_main";
+                        }
+
+
+
+
+
+
+
+
+
+
+
+
+                    
+                    contextoBase.itemsPagina.Add(dados);
+               }
+               // Faz update  de dados
+               else
+               {
+                   contextoBase.itemsPagina.Update(dados);
+               }
+
+               contextoBase.SaveChanges();
+            }
+            catch(Exception e)
+            {
+
+            }
+
+
+
+    
+
+
+
+
+
+            return retorno;
         }
 
 

@@ -97,6 +97,10 @@
                         
                         <hr/>
                         <div>
+                            <div class="col" >
+                                @Html.CheckBoxFor(r=>r.cadastroTela.cria_botao , new { @class="form-check-input" ,  @id = "criaBotao" })
+                                @Html.LabelFor(r=>r.cadastroTela.cria_botao , new {@class="checkbox-inline"}) 
+                            </div>
                             <div class="col">
                                   @Html.CheckBoxFor(r=>r.cadastroTela.hasFoto , new { @class="form-check-input" ,  @id = "hasFoto" })
                                   @Html.LabelFor(r=>r.cadastroTela.hasFoto , new {@class="checkbox-inline"}) 
@@ -107,7 +111,7 @@
                                   @Html.LabelFor(r=>r.cadastroTela.hasForm , new {@class="checkbox-inline"}) 
                             </div>
 
-                            <div class="col">
+                            <div class="col" id="mainFotoGrp">
                                   @Html.CheckBoxFor(r=>r.cadastroTela.isMainPhoto , new { @class="form-check-input" ,  @id = "isMainFoto" })
                                   @Html.LabelFor(r=>r.cadastroTela.isMainPhoto, new {@class="checkbox-inline"}) 
                             </div>
@@ -148,87 +152,55 @@
     <script type="text/javascript">
 
     $(document).ready(function () {
-        var idPagina = $("#cadastroTela_id_pagina").val();
-        if (idPagina != 0){
-           // $("#cadastroTela_nome_pagina").removeClass("form-control").addClass("form-control-plaintext");
-            $("#cadastroTela_nome_pagina").attr('readonly', 'readonly');
-        }      
+        var idPagina = parseInt($("#cadastroTela_id_pagina").val());
 
-@*
-      if ("@idPagina" != "") {
-
-            $("#cadastroTela_nome_pagina").removeClass("form-control").addClass("form-control-plaintext");
-            $("#cadastroTela_nome_pagina").attr('disabled', 'disabled');
-
-            $.ajax({
-                type: "GET",
-                url: "@Url.Action("getDadosTela","Portifolio")",
-                data: {
-                    idTela: "@idPagina"
-                },
-                success: function (response) {
-                    $("#nome_pagina_id").val(response[0]);
-                    $("#titulo_aba_id").val(response[1]);
-                    $("#titulo_pagina_id").val(response[2]);
-                    $("#conteudo_pagina_id").val(response[3]);
-
-                    if (response[4] == 1) {
-                        $("#foto_pagina_id").val("Sim");
-                    } else {
-                        $("#foto_pagina_id").val("Não");
-                    }
-
-                    if (response[5] == 1) {
-                        $("#form_pagina_id").val("Sim");
-                    } else {
-                        $("#form_pagina_id").val("Não");
-                    }
-
-                    if (response[6] == 1) {
-
-                        $("#conteudo_pagina_id").attr('disabled', 'disabled');
-                        $("#form_pagina_id").attr('disabled', 'disabled');
-                        $("#foto_pagina_id").attr('disabled', 'disabled');
-                        $("#foto_pagina_id").val("Não");
-                        $("#form_pagina_id").val("Não");
-                        $("#conteudo_pagina_id").val("");
-                        $("#check_foto_principal").prop('checked', true);
-                    }
-
-                     $("#area-check_botao").hide();
-                },
-                failure: function () {
-                    alert("Ocorreu um erro na captura dos dados");
-                }
-            });
+        // Valida se for pagina principal 
+        var nomePagina = $("#nome_pagina").val();
+        if (nomePagina == "_main"){
+            $("#mainFotoGrp").hide();
         }
 
-*@
+        if (idPagina != 0){
+           // $("#cadastroTela_nome_pagina").removeClass("form-control").addClass("form-control-plaintext");
+            $("#nome_pagina").attr('readonly', 'readonly');
+            $("#criaBotao").prop('disabled',true);
+        } 
 
+        if ($("#isMainFoto")[0].checked == true) {
+
+            $("#conteudo_pagina").attr('disabled', 'disabled');
+            $("#conteudo_pagina").val("");
+
+            $("#hasFoto").prop('disabled',true);
+            $("#hasFoto").prop('checked',false);
+
+            $("#hasForm").prop('disabled',true);
+            $("#hasForm").prop('checked',false);
+        }   
     });
 
 
 
-$("#check_foto_principal").click(
+$("#isMainFoto").click(
     function () {
-        if ($("#check_foto_principal")[0].checked == true) {
+        if ($("#isMainFoto")[0].checked == true) {
 
-            $("#conteudo_pagina_id").attr('disabled', 'disabled');
-            $("#form_pagina_id").attr('disabled', 'disabled');
-            $("#foto_pagina_id").attr('disabled', 'disabled');
-            $("#foto_pagina_id").val("Não");
-            $("#form_pagina_id").val("Não");
-            $("#conteudo_pagina_id").val("");
+            $("#conteudo_pagina").attr('disabled', 'disabled');
+            $("#conteudo_pagina").val("");
+
+            $("#hasFoto").prop('disabled',true);
+            $("#hasFoto").prop('checked',false);
+
+            $("#hasForm").prop('disabled',true);
+            $("#hasForm").prop('checked',false);
         } else {
-
-            $("#conteudo_pagina_id").attr('disabled', false);
-            $("#form_pagina_id").attr('disabled', false);
-            $("#foto_pagina_id").attr('disabled', false);
+            $("#conteudo_pagina").attr('disabled', false);
+            $("#hasFoto").attr('disabled', false);
+            $("#hasForm").attr('disabled', false);
         }
 
-    },
+    }
 );
-
 
 
 $("#clear_form").click(function(){
@@ -237,7 +209,9 @@ $("#clear_form").click(function(){
     // So limpa nome da pagina caso seja um novo registro
     if (idPagina == 0){
         $("#nome_pagina").val("");
+        $("#criaBotao").prop('checked',false);
     } 
+
     $("#titulo_aba").val("");
     $("#titulo_pagina").val("");
     $("#conteudo_pagina").val("");

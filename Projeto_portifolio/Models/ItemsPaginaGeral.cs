@@ -16,9 +16,8 @@ namespace ProjetoPortifolio.Models
         public ItemsPaginaGeral(){
 
         }
-
-        
-        public ItemsPaginaGeral(int idpagina, string nome_pagina , string tituloAba , string tituloPagina, string conteudoPagina, bool TemFoto , bool temFormulario , bool isMainFoto )
+       
+        public ItemsPaginaGeral(int idpagina, string nome_pagina , string tituloAba , string tituloPagina, string conteudoPagina, bool TemFoto , bool temFormulario , bool isMainFoto , bool criaBotao)
         {
             this.id_pagina = idpagina;
             this.nome_pagina = nome_pagina;
@@ -29,6 +28,7 @@ namespace ProjetoPortifolio.Models
             this.hasForm = temFormulario;
             this.isMainPhoto = isMainFoto;
             this.pagina_pai = "";
+            this.cria_botao = criaBotao;
         }
 
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -56,6 +56,8 @@ namespace ProjetoPortifolio.Models
         [Required,  Display(Name = "É Galeria de Fotos ?")]
         public bool isMainPhoto { get; set; }
         public string pagina_pai { get; set; }
-
+        
+        [Required , Display(Name="Cria Botão ?")]
+        public bool cria_botao {get;set;}    
     }
 }

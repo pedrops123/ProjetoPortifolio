@@ -11,6 +11,7 @@ namespace ProjetoPortifolio.Controllers
     {
         ApplicationDBcontext context;
         managerPrincipalRepository contextoRepositoryPrincipal;
+        managerAlteracaoRepository contextoAlteracao;
         // Construtor
         public managerAlteracaoPaginasController(){
             context = new ApplicationDBcontext();
@@ -20,7 +21,7 @@ namespace ProjetoPortifolio.Controllers
         public IActionResult Index(string idPagina)
         {
             PortifolioViewModel itemModel = new PortifolioViewModel();
-            ItemsPaginaGeral dadosPagina = new ItemsPaginaGeral(0,"","","","",false,false,false);;
+            ItemsPaginaGeral dadosPagina = new ItemsPaginaGeral(0,"","","","",false,false,false,false);
             if (idPagina.Trim() != "newPage")
             {
                dadosPagina = contextoRepositoryPrincipal.getDadosTela(idPagina);
@@ -33,16 +34,16 @@ namespace ProjetoPortifolio.Controllers
                if (idPagina.Trim() == "newPage")
                {
                     // Popula BreadCrumb
-                    ViewData["ViewDataContent"] = "<li class=\"breadcrumb-item\"><a href=\"/Portifolio/pagina/1/_main\">Manager Principal </a></li><li class=\"breadcrumb-item active\" aria-current=\"page\"> " + idPagina + "</li>";
-                    itemModel.cadastroTela = new ItemsPaginaGeral(0,"","","","",false,false,false);
+                    ViewData["ViewDataContent"] = "<li class=\"breadcrumb-item\"><a href=\"/managerSistema/manager_principal\">Manager Principal </a></li><li class=\"breadcrumb-item active\" aria-current=\"page\"> " + idPagina + "</li>";
+                    itemModel.cadastroTela = new ItemsPaginaGeral(0,"","","","",false,false,false,false);
                     ViewBag.Title = "Inclusão de Tela";
                     ViewBag.TituloConteudo = "Inclusao de nova tela";
          
                }
                else
                {
-                  ViewData["ViewDataContent"] = "<li class=\"breadcrumb-item\"><a href=\"/Portifolio/pagina/1/_main\">Manager Principal </a></li><li class=\"breadcrumb-item active\" aria-current=\"page\"> Alteração página " + idPagina + "</li>";
-                  itemModel.cadastroTela = new ItemsPaginaGeral(dadosPagina.id_pagina,dadosPagina.nome_pagina,dadosPagina.titulo_aba,dadosPagina.titulo_pagina,dadosPagina.conteudo_pagina,dadosPagina.hasFoto,dadosPagina.hasForm,dadosPagina.isMainPhoto);
+                  ViewData["ViewDataContent"] = "<li class=\"breadcrumb-item\"><a href=\"/managerSistema/manager_principal\">Manager Principal </a></li><li class=\"breadcrumb-item active\" aria-current=\"page\"> Alteração página " + idPagina + "</li>";
+                  itemModel.cadastroTela = new ItemsPaginaGeral(dadosPagina.id_pagina,dadosPagina.nome_pagina,dadosPagina.titulo_aba,dadosPagina.titulo_pagina,dadosPagina.conteudo_pagina,dadosPagina.hasFoto,dadosPagina.hasForm,dadosPagina.isMainPhoto,dadosPagina.cria_botao);
                   ViewBag.Title = "Alteração de tela - Pagina " + idPagina;
                   ViewBag.TituloConteudo = "Alteração  Tela  " + idPagina;
                }
@@ -68,7 +69,7 @@ namespace ProjetoPortifolio.Controllers
 
             if(ModelState.IsValid)
             {
-
+                var cadastro = dados.cadastroTela;
                return RedirectToAction("Index","managerAlteracao");
             }
        
