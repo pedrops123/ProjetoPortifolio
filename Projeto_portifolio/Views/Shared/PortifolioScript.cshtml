@@ -5,6 +5,25 @@
 
 <script type="text/javascript">
 
+$(document).ready(function(){
+
+    $("#fundoTela").css(
+            {"background-color":"rgba(173,127,0,0.2)"},
+            {"img":"opacity : 0.5"}
+        );
+
+    $(".tip-top").tooltip({
+        placement: 'top'
+    });
+
+    $("#img-principal").fadeIn(1000);
+    $("#desc-principal").fadeIn(2000);
+
+});
+
+
+
+/*
  function ClickRedirectGeral(tela) {
        window.location.href = tela
 }
@@ -128,16 +147,13 @@ function submitGeral(tela) {
         });
     }
 }
+*/
 
 $("#close-alert").click(function () {
     $("#msg-alerta").css("display", "none");
 })
 
-$(document).ready(function () {
-    $(".tip-top").tooltip({
-        placement: 'top'
-    });
-});
+
 
 $("#title_main").hover(
    function () {
@@ -160,17 +176,6 @@ $(".overlay").hover(
         });
     }
 );
-
-
-
-$(document).ready(function () {
-    $("#img-principal").fadeIn(1000);
-    $("#desc-principal").fadeIn(2000);
-
-    
-
-});
-
 
 
 $("#gototop").click(function () {

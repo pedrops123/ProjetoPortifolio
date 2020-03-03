@@ -19,7 +19,13 @@ namespace ProjetoPortifolio.RepositoryContext
         public object[] gravaDadosTela(ItemsPaginaGeral dados)
         {
             object[] retorno = new object[2];
-           
+
+            // Validações antes de gravar 
+
+            dados.titulo_aba = dados.titulo_aba == null ? "" : dados.titulo_aba;
+            dados.titulo_pagina = dados.titulo_pagina == null ? "" : dados.titulo_pagina;
+            dados.conteudo_pagina = dados.conteudo_pagina  == null ? "" : dados.conteudo_pagina;
+
             try
             {
                // Faz insert de dados
@@ -28,7 +34,7 @@ namespace ProjetoPortifolio.RepositoryContext
                    // Faz verificação de nome da tela 
                    var telaCadastrada = contextoBase.itemsPagina.Where( r => r.nome_pagina.Trim() == dados.nome_pagina).FirstOrDefault();
 
-                    if(telaCadastrada.id_pagina != 0)
+                    if(telaCadastrada != null)
                     {
                       retorno[0] = "Já Existe uma tela cadastrada com o mesmo nome inserido , favor verificar o nome da tela novamente.";
                       retorno[1] = false;
@@ -40,7 +46,7 @@ namespace ProjetoPortifolio.RepositoryContext
                             try
                             {
                                 // Procura o pai de has foto que é isMainFoto
-                                string nomeIsMainFoto = contextoBase.itemsPagina.Where(r => r.isMainPhoto == true).First().nome_pagina;
+                                string nomeIsMainFoto = contextoBase.itemsPagina.Where(r => r.isMainPhoto == true).First().nome_pagina.Trim();
                                 dados.pagina_pai = nomeIsMainFoto;
                             }
                             catch (Exception e)
@@ -61,23 +67,35 @@ namespace ProjetoPortifolio.RepositoryContext
                             dados.pagina_pai = "_main";
                         }
 
-
-
-
-
-
-
-
-
-
-
-
-                    
+                    // Grava pagina no banco 
                     contextoBase.itemsPagina.Add(dados);
+
+                    // Valida se cria botão / caso for uma galeria de fotos ou 
+                    // ou cria botão for verdadeiro 
+                    if(dados.isMainPhoto == true || dados.cria_botao == true){
+                        try
+                        {
+                            ButtonSite botao = new ButtonSite();
+                            botao.descricao = dados.nome_pagina;
+                            botao.caminhoUrl = dados.nome_pagina;
+                            botao.type = "link";
+                            botao.tagPagina = "";
+                            contextoBase.Botoes.Add(botao);
+                        }
+                        catch(Exception e )
+                        {
+                            retorno[0] = "Erro !<br/> Houve um erro ao tentar gravar o botão da tela , <br/> favor tentar novamente ! <br/> Detalhes do erro : " + e.InnerException;
+                            retorno[1] = false;
+                            return retorno;
+
+                        }
+                    }
+
                }
-               // Faz update  de dados
+               
                else
                {
+                   // Faz update  de dados
                    contextoBase.itemsPagina.Update(dados);
                }
 
@@ -85,16 +103,14 @@ namespace ProjetoPortifolio.RepositoryContext
             }
             catch(Exception e)
             {
-
+                retorno[0] = "Houve um erro no cadastro da tela  segue detalhes abaixo <br/> detalhes do erro : " + e.InnerException;
+                retorno[1] = false;
             }
-
-
-
-    
-
-
-
-
+            finally
+            {
+                retorno[0] = "";
+                retorno[1] = true;
+            }
 
             return retorno;
         }

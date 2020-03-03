@@ -15,10 +15,13 @@
     <partial name="~/Views/Components/ApresentacaoLayout.cshtml" />
 }
 
-@if (Model.dadosPagina.conteudo_pagina != "" && Model.dadosPagina.nome_pagina != "_main")
-{
-    <p> @Html.Raw(Model.dadosPagina.conteudo_pagina.ToString()) </p>
+@if(Model.dadosPagina.conteudo_pagina != null){
+    @if (Model.dadosPagina.conteudo_pagina != "" && Model.dadosPagina.nome_pagina != "_main")
+    {
+        <p> @Html.Raw(Model.dadosPagina.conteudo_pagina.ToString()) </p>
+    }
 }
+
 
 @if (Model.dadosPagina.hasForm == true)
 {

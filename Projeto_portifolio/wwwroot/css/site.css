@@ -2,11 +2,16 @@
 for details on configuring this project to bundle and minify static web assets. */
 
 /* Conteudo geral do site */
-#conteudoSite {
-    width: 960px;
-    margin: 0 auto;
+
+#fundoTela {
+    margin: 0;
+    height: 100%;
 }
 
+#imagemFundo {
+    margin: 0;
+    height: 100%;
+}
 
 
 a.navbar-brand {
@@ -48,15 +53,7 @@ button.accept-policy {
 
 /* Sticky footer styles
 -------------------------------------------------- */
-html {
-    position: relative;
-    min-height: 100%;
-}
 
-body {
-    /* Margin bottom by footer height */
-    margin-bottom: 60px;
-}
 
 .footer {
     position: absolute;

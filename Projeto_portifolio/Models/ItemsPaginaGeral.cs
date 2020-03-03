@@ -41,7 +41,7 @@ namespace ProjetoPortifolio.Models
         [Required(AllowEmptyStrings = false , ErrorMessage="Titula da Aba não pode ficar em branco !"), StringLength(100), Display(Name = "Titulo da Aba")]
         public string titulo_aba { get; set; }
 
-        [Required(AllowEmptyStrings = false , ErrorMessage = "Titulo da Página não pode ficar em branco !") , StringLength(100), Display(Name = "Titulo da Página")]
+        [StringLength(100), Display(Name = "Titulo da Página")]
         public string titulo_pagina { get; set; }
 
         [StringLength(900), Display(Name = "Conteudo da Página")]

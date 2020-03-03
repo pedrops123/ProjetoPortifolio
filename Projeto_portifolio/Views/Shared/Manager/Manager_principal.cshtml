@@ -1,7 +1,6 @@
 ﻿@model ProjetoPortifolio.ViewModel.PortifolioViewModel
 
 @{
-
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -21,9 +20,11 @@
     #preview_fotos {
         margin-left: 21px;
     }
+
 </style>
 
 @*<hr style="height:2px; border:thin; color:#000; background-color:#000; margin-top: 0px; margin-bottom: 0px;" />*@
+
 <br />
 
 
@@ -71,7 +72,6 @@
                 </div>
                 <div id="tabTituloGeral" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                     <div class="card-body">
-
                         @using(@Html.BeginForm("gravaLinkUrlPrincipal","managerAlteracao",FormMethod.Post))
                         {
                             @Html.AntiForgeryToken()
@@ -91,7 +91,7 @@
                                  <div class="col col-md"></div>
                                     <div class="col col-sm-6 col-md-5 col-lg-8">    
                                         @Html.LabelFor(r=>r.cadastroLink.linkDescricao)<br/>
-                                         @Html.ValidationMessageFor(r => r.cadastroLink.linkDescricao, "", new { @style = "color:red;!important" })
+                                        @Html.ValidationMessageFor(r => r.cadastroLink.linkDescricao, "", new { @style = "color:red;!important" })
                                         @Html.TextBoxFor(r=>r.cadastroLink.linkDescricao, new { @class="form-control input", placeholder="Descrição da URL" })
                                     </div>  
                                 <div class="col col-md"></div>
@@ -160,14 +160,18 @@
                                     var temForm = dadosPagina.hasForm == true ? "Sim" : "Não";
                                     var isGaleria = dadosPagina.isMainPhoto == true ? "Sim" : "Não";
                                     var conteudoPagina = "";
-                                    if (dadosPagina.conteudo_pagina.Length > 105)
-                                    {
-                                        conteudoPagina = dadosPagina.conteudo_pagina.Trim().Substring(0, 60) + "...";
+                                    if (dadosPagina.conteudo_pagina != null){
+
+                                        if (dadosPagina.conteudo_pagina.Length > 105)
+                                        {
+                                            conteudoPagina = dadosPagina.conteudo_pagina.Trim().Substring(0, 60) + "...";
+                                        }
+                                        else
+                                        {
+                                            conteudoPagina = dadosPagina.conteudo_pagina.Trim();
+                                        }
                                     }
-                                    else
-                                    {
-                                        conteudoPagina = dadosPagina.conteudo_pagina.Trim();
-                                    }
+
                                     <tr>
                                         <th scope="row"> @dadosPagina.id_pagina </th>
                                         <td> @dadosPagina.nome_pagina.Trim() </td>

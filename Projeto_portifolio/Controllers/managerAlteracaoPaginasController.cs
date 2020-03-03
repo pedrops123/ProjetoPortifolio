@@ -16,6 +16,7 @@ namespace ProjetoPortifolio.Controllers
         public managerAlteracaoPaginasController(){
             context = new ApplicationDBcontext();
             contextoRepositoryPrincipal = new managerPrincipalRepository();
+            contextoAlteracao = new managerAlteracaoRepository();
         }
 
         public IActionResult Index(string idPagina)
@@ -69,7 +70,14 @@ namespace ProjetoPortifolio.Controllers
 
             if(ModelState.IsValid)
             {
-                var cadastro = dados.cadastroTela;
+                var cadastro = dados.cadastroTela;              
+                var retorno = contextoAlteracao.gravaDadosTela(cadastro);
+                if ((bool)retorno[1] == false)
+                {
+                    ModelState.AddModelError("",(string)retorno[0]);
+                    view =  View("~/Views/Shared/Manager/Pagina_alteracao.cshtml",itemModel);   
+                    return view;
+                }
                return RedirectToAction("Index","managerAlteracao");
             }
        

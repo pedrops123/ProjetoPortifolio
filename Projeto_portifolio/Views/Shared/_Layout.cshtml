@@ -1,6 +1,5 @@
 ﻿@model ProjetoPortifolio.ViewModel.PortifolioViewModel
 <!DOCTYPE html>
-<html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -11,6 +10,9 @@
 </head>
 
 <body id="fundoTela">
+
+    <div id="imagemFundo">
+
     <partial name="PartialViewMenu" model="Model.botoes" />
     <br />
     <br />
@@ -31,11 +33,15 @@
                 <div class="col col-md-21"></div>
             </div>
         </footer>
+        
     </div>
 
     <partial name="~/Views/Sections/Scripts.cshtml" />
 
     <partial name="~/Views/Shared/PortifolioScript.cshtml"/>
+
+</div>
+
 </body>
 
 </html>

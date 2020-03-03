@@ -16,6 +16,7 @@
 
 
 <partial name="~/Views/Components/MensagemAlerta.cshtml">
+
     <div class="col-10"></div>
     <button type="button" onclick="location.href='@Url.Action("Index","managerAlteracao")'" class="btn btn-info"><span class="fa fa-arrow-left"></span>&nbsp; Voltar para manager principal </button>
     <div class="col-10"></div>
@@ -25,8 +26,9 @@
 <div class="card bg-light">
     <article class="card-body">
 
-            @using(Html.BeginForm("validaCadastro","managerAlteracaoPaginas",FormMethod.Post))
+            @using(Html.BeginForm("validaCadastro","managerAlteracaoPaginas",FormMethod.Post , new { @id = "formulario_alteracao" }))
             {
+                <br/>
                 @Html.HiddenFor(r=>r.cadastroTela.id_pagina)
 
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -163,12 +165,12 @@
         if (idPagina != 0){
            // $("#cadastroTela_nome_pagina").removeClass("form-control").addClass("form-control-plaintext");
             $("#nome_pagina").attr('readonly', 'readonly');
-            $("#criaBotao").prop('disabled',true);
+            $("#criaBotao").attr('onClick', 'return false;');
         } 
 
         if ($("#isMainFoto")[0].checked == true) {
 
-            $("#conteudo_pagina").attr('disabled', 'disabled');
+            $("#conteudo_pagina").attr('readonly', 'readonly');
             $("#conteudo_pagina").val("");
 
             $("#hasFoto").prop('disabled',true);
@@ -185,7 +187,7 @@ $("#isMainFoto").click(
     function () {
         if ($("#isMainFoto")[0].checked == true) {
 
-            $("#conteudo_pagina").attr('disabled', 'disabled');
+            $("#conteudo_pagina").attr("readonly", true); 
             $("#conteudo_pagina").val("");
 
             $("#hasFoto").prop('disabled',true);
@@ -194,7 +196,7 @@ $("#isMainFoto").click(
             $("#hasForm").prop('disabled',true);
             $("#hasForm").prop('checked',false);
         } else {
-            $("#conteudo_pagina").attr('disabled', false);
+            $("#conteudo_pagina").attr("readonly", false); 
             $("#hasFoto").attr('disabled', false);
             $("#hasForm").attr('disabled', false);
         }
