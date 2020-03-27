@@ -17,19 +17,26 @@ namespace ProjetoPortifolio.RepositoryContext
         }
 
 
-        internal bool verificaUser(ValidaUser dadosUser)
+        public bool verificaUser(ValidaUser dadosUser)
         {
-            bool verificaUser = false;
+            bool verificaUser;
             try
             {
-                var testeUser = contexto.usuarios.Where(r => r.username.Trim() == dadosUser.usuario.Trim() && r.senha == dadosUser.senha.Trim()).First();
+                var testeUser = contexto.usuarios.Where(r => r.username.Trim() == dadosUser.usuario.Trim() && r.senha == dadosUser.senha.Trim()).FirstOrDefault();
+                if(testeUser != null)
+                {
+                    verificaUser = true;
+                }
+                else
+                {
+                    verificaUser = false;
+                }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return verificaUser;
+                throw e;
             }
 
-            verificaUser = true;
             return verificaUser;
         }
 

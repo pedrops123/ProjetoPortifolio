@@ -52,7 +52,10 @@ namespace ProjetoPortifolio.RepositoryContext
             List<string> listaImagens = new List<string>();
             foreach (ImagensPortifolio fotosUrl in fotos)
             {
-                listaImagens.Add("<div onclick=" + aspasDuplas + "chamaPopOver(" + fotosUrl.id_foto + ")" + aspasDuplas + " data-toggle='popover' data-trigger='click' data-placement='right' data-content='data' class='img-salva' style='border:solid; margin:10px; display: -webkit-flex; -webkit-flex-wrap:wrap; display:inline-flex;flex-wrap:wrap;'><img id='img-salva' width='80px' height='80px' src='" + fotosUrl.urlFoto + "'><a style='cursor:pointer;'><span onclick='deleteImageBD(" + fotosUrl.id_foto + ")' class='notify-badge'>x</span></a></img></div>");
+                var pathCompleto = @Path.GetFullPath(fotosUrl.urlFoto).Replace("\\","/");
+                var posicaoFotos = pathCompleto.IndexOf("/Fotos/");
+                var caminhoVirtualCompleto = pathCompleto.Substring(posicaoFotos);
+                listaImagens.Add("<div onclick='chamaPopOver(\" " + fotosUrl.id_foto  + " \" , \" " + caminhoVirtualCompleto  + " \" )' data-toggle='popover' data-trigger='click' data-placement='right' data-content=' ' class='img-salva' style='border:solid; margin:10px; display: -webkit-flex; -webkit-flex-wrap:wrap; display:inline-flex;flex-wrap:wrap;'><img id='img-salva' width='80px' height='80px' src='" + fotosUrl.urlFoto + "'><a style='cursor:pointer;'><span onclick='deleteImageBD(" + fotosUrl.id_foto + ")' class='notify-badge'>x</span></a></img></div>");
             }
             return listaImagens;
         }

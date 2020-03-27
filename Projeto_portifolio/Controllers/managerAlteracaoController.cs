@@ -47,19 +47,16 @@ namespace ProjetoPortifolio.Controllers
 
             if(erroUrl != "")
             {
-                 ModelState.AddModelError("cadastroLink.linkUrl", erroUrl);
+                 ModelState.AddModelError("linkUrl", erroUrl);
             }
             if(erroDescLink != "")
             {
-                ModelState.AddModelError("cadastroLink.linkDescricao", erroDescLink);
+                ModelState.AddModelError("linkDescricao", erroDescLink);
             }
 
             return View("~/Views/Shared/Manager/Manager_principal.cshtml",dados);
 
         }
-
-
-    
 
        
         #region chamadas_de_dados
@@ -131,6 +128,7 @@ namespace ProjetoPortifolio.Controllers
             bool retorno = false;
             List<string> listaCaminhoArquivo = new List<string>();
             var dadosRecebidos = HttpContext.Request.Form.Files;
+            
             if (dadosRecebidos.Count == 0)
             {
                 return retorno;
@@ -184,8 +182,8 @@ namespace ProjetoPortifolio.Controllers
 
          if (ModelState.IsValid)
             {
-              var urlSite = HttpContext.Request.Form["cadastroLink.linkUrl"];
-              var descricaoLink = HttpContext.Request.Form["cadastroLink.linkDescricao"];
+              var urlSite = HttpContext.Request.Form["linkUrl"];
+              var descricaoLink = HttpContext.Request.Form["linkDescricao"];
               if (urlSite == "")
               {
                   erroUrl = "Campo url não pode ficar em branco !";

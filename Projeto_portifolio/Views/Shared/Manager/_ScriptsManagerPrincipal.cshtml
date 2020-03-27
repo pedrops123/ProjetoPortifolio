@@ -11,21 +11,6 @@
     /* Carrega dados titulo geral */
 
     $(document).ready(function () {
-
-        $.ajax({
-            type: "GET",
-            url: "@Url.Action("getDadosTituloGeral","managerAlteracao")",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (response) {
-                $("#cadastroLink_linkUrl").val(response[0]);
-                $("#cadastroLink_linkDescricao").val(response[1]);
-            },
-            failure: function () {
-                alert("Ocorreu um erro na captura dos dados");
-            }
-        });
-
         // Data Table para listagem de dados
         $('#listagem_telas').DataTable({
             "paging": true, // false to disable pagination (or any other option)
@@ -163,7 +148,7 @@
 
     }
 
-    function chamaPopOver(idFoto) {
+    function chamaPopOver(idFoto ,urlFoto) {
 
         $('[data-toggle="popover"]').popover('hide');
 
@@ -174,11 +159,46 @@
         //Desabilita o focus no modal para clicar no popover
         $(document).off('focusin.modal');
         $("#hdnIdFoto").text(idFoto);
-        setTimeout(setDataPop, 10);
+        setTimeout(function(){setDataPop(urlFoto)}, 10);
     }
 
-    function setDataPop() {
-        $(".popover-body").html("<form><div class='form-group'><label for='descImg'>Descrição  Imagem  &nbsp <br/></label><input id='cmpDesc' type=\"" + "text" + "\" class=\"" + "form-control" + "\" placeholder='Descrição da Imagem'> <br/> <button onclick='closePopOver()' type='button' class='btn btn-danger'> Fechar </button>  <button onclick='gravaDescricaoFoto()' type='button' class='btn btn-success'> Salvar Descrição </button></div></form>");
+    function setDataPop(urlFoto) {
+        $(".popover-body")
+        .append(
+            $('<form>')
+            .append(
+                $('<div class="form-group">')
+                .append(
+                    $("<div class='row'>").append(
+                        $("<div class='col col-12'>")
+                            .append("<label for='descImg'>Descrição  Imagem  &nbsp <br/></label>")
+                            .append("<input id='cmpDesc' type=\"" + "text" + "\" class=\"" + "form-control" + "\" placeholder='Descrição da Imagem'>")
+                            
+                            )
+                    
+                    )
+                    .append("<br/>")
+                    .append(
+                        $("<div class='row'>")
+                            .append(
+                                $("<div class='col col-12'>")
+                                    .append("<button onclick='closePopOver()' type='button' class='btn btn-danger'> Fechar </button>")
+                                    .append("<button onclick='gravaDescricaoFoto()' type='button' class='btn btn-success'> Salvar Descrição </button>")
+                            )
+                        
+                    ) 
+                    .append("<br/>")
+                    .append(
+                        $("<div class='row'>")
+                            .append(
+                                $("<div class='col col-12'>").append("<a class='example-image-link' href=" + urlFoto + " data-lightbox='example-1' data-title='Visualização de Imagem'> Visualizar Imagem </a>")
+                            )
+
+                    )
+                    
+                    ));
+  
+        //$(".popover-body").html("<form><div class='form-group'><label for='descImg'>Descrição  Imagem  &nbsp <br/></label><input id='cmpDesc' type=\"" + "text" + "\" class=\"" + "form-control" + "\" placeholder='Descrição da Imagem'> <br/> <button onclick='closePopOver()' type='button' class='btn btn-danger'> Fechar </button>  <button onclick='gravaDescricaoFoto()' type='button' class='btn btn-success'> Salvar Descrição </button> <br/><div class='row'><div class='col col-6'> <button type='button' onClick=\"window.open('" + urlFoto + "', '_blank' , 'fullscreen=yes'); return false;\"" + " class='btn btn-success'> Visualizar Imagem </button></div></div></div></form>");
         setTimeout(setTextPop, 400);
 
     }

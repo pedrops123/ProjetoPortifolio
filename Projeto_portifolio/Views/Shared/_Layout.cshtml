@@ -1,5 +1,5 @@
 ﻿@model ProjetoPortifolio.ViewModel.PortifolioViewModel
-<!DOCTYPE html>
+<html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
@@ -10,7 +10,14 @@
 </head>
 
 <body id="fundoTela">
+<style>
 
+    html
+    {
+        overflow-x: hidden;
+    }
+
+</style>
     <div id="imagemFundo">
 
     <partial name="PartialViewMenu" model="Model.botoes" />
@@ -24,23 +31,28 @@
 
         @RenderBody()
 
-        <a id="gototop" href="#"><span class="fa fa-arrow-alt-circle-up"></span> &nbsp; Ir para o topo</a>
+        
         <hr />
-        <footer>
-            <div class="row">
-                <div class="col col-md-21"></div>
-                <p id="footer-content">&copy; COPYRIGHT @DateTime.Now.Year  -  Pedro Vinicius Rodrigues Furlan - TODOS OS DIREITOS RESERVADOS    </p>
-                <div class="col col-md-21"></div>
-            </div>
-        </footer>
+
         
     </div>
+
+    <footer class="footer-content">
+        <a id="gototop" href="#"><span class="fa fa-arrow-alt-circle-up"></span> &nbsp; Ir para o topo</a>
+        <div class="row">
+            <div class="col col-md-21"></div>
+            <p id="footer-content">&copy; COPYRIGHT @DateTime.Now.Year  -  Pedro Vinicius Rodrigues Furlan - TODOS OS DIREITOS RESERVADOS    </p>
+            <div class="col col-md-21"></div>
+        </div>
+    </footer>
+</div>
+
+
+
 
     <partial name="~/Views/Sections/Scripts.cshtml" />
 
     <partial name="~/Views/Shared/PortifolioScript.cshtml"/>
-
-</div>
 
 </body>
 

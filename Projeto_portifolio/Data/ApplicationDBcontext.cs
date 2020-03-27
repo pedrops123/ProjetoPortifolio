@@ -25,10 +25,10 @@ namespace ProjetoPortifolio.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //Connection string casa 
-            //optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-9IU6ULD\SQLEXPRESS;Initial Catalog=PortifolioDB;Integrated Security=True;Connect Timeout=30; Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-9IU6ULD\SQLEXPRESS;Initial Catalog=PortifolioDB;Integrated Security=True;Connect Timeout=30; Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             
             //Connection string trabalho
-            optionsBuilder.UseSqlServer(@"Data Source=DSK-TI-02\SQLEXPRESS; Initial Catalog=PortifolioDB;Integrated Security=True;Connect Timeout=30; User Id=tap.ti; Password=TrameAp112@;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            //optionsBuilder.UseSqlServer(@"Data Source=DSK-TI-02\SQLEXPRESS; Initial Catalog=PortifolioDB;Integrated Security=True;Connect Timeout=30; User Id=tap.ti; Password=TrameAp112@;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
