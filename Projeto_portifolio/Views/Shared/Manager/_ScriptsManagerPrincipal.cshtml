@@ -1,0 +1,305 @@
+﻿@{
+    Layout = null;
+}
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/js/addons/datatables.min.js"></script>
+<script type="text/javascript">
+
+    var fotosAdicionadas = [];
+
+    /* Carrega dados titulo geral */
+
+    $(document).ready(function () {
+        // Data Table para listagem de dados
+        $('#listagem_telas').DataTable({
+            "paging": true, // false to disable pagination (or any other option)
+             "pagingType": "full_numbers"
+        });
+
+        $('.dataTables_length').addClass('bs-select');
+
+        $("#conteudoSite").css({ "width": "2165px" });
+
+    });
+
+
+    /* functions modal foto */
+    function setDataModalFotos(nome) {
+        limpaImagens();
+        $("#typeHdn").text("foto");
+        $("#nomePagina").text(nome);
+        $("#ModalTitulo").html("Fotos Página " + nome);
+        $(".custom-file-label").html("Escolha suas imagens...");
+        $("#inputFileModal").show();
+
+        $.ajax({
+            type: 'GET',
+            url: "@Url.Action("MakeImages","managerAlteracao")",
+            data: {
+                idTela: nome
+            },
+            success: function (response) {
+                if (response != "") {
+                    $("#conteudo_fotos").html(response);
+                } else {
+                    $("#conteudo_fotos").html("Não há fotos incluidas! ");
+                }
+            },
+            error: function (error) {
+                alert("Ocorreu um erro na busca dos dados !");
+            }
+        });
+
+
+
+    }
+
+    function adicionarFotoPreview() {
+        $("#preview_fotos").html("");
+        fotosAdicionadas = Array.from(document.getElementById("data_fotos").files);
+        $(".custom-file-label").html("");
+        for (var i = 0; i < fotosAdicionadas.length; i++) {
+            //Cria url da foto a ser subido
+            var urlCriada = URL.createObjectURL(document.getElementById("data_fotos").files[i]);
+            //Cria cada elemento div e da imagem preview
+            $("#preview_fotos").append("<div data-placement='top' class='tip-top' data-toggle='tooltip' title='" + document.getElementById("data_fotos").files[i].name + "' id='" + document.getElementById("data_fotos").files[i].name + "'style='border:solid; margin:10px; display: -webkit-flex; -webkit-flex-wrap:wrap; display:inline-flex;flex-wrap:wrap;'><img width='80px' height='80px' src='" + urlCriada + "'><a style='cursor:pointer;'><span onclick='retiraFoto(\"" + document.getElementById("data_fotos").files[i].name + "\")' class='notify-badge'>x</span></a></img></div>");
+            $(".custom-file-label").append(document.getElementById("data_fotos").files[i].name + ";" + " ");
+        }
+    }
+
+    function limpaImagens() {
+        $("#preview_fotos").html("");
+        $("#data_fotos").val("");
+    }
+
+    function retiraFoto(tagFoto) {
+        document.getElementById(tagFoto).remove();
+        for (var i = 0; i < fotosAdicionadas.length; ++i) {
+            if (fotosAdicionadas[i].name == tagFoto) {
+                $(".custom-file-label").html($(".custom-file-label").html().replace(fotosAdicionadas[i].name + ";", ""));
+                document.getElementById("data_fotos").files[i].removed = true;
+            }
+        }
+
+        //document.getElementById("data_fotos").value = fotosAdicionadas;
+    }
+
+    function uploadFoto() {
+        var data = Array.from(document.getElementById("data_fotos").files);
+        var newData = data.filter(function (n) {
+            return n.removed != true;
+        });
+        var nomePagina = $('#nomePagina').text();
+        var tamanhoArray = newData.length;
+
+        var formdata = new FormData();
+
+        for (i = 0; i < tamanhoArray; i++) {
+            formdata.append(newData[i].name + "*" + nomePagina + "*", newData[i]);
+        }
+
+        $.ajax({
+            type: 'post',
+            url: "@Url.Action("uploadImages","managerAlteracao")",
+            data: formdata,
+            dataType: 'json',
+            contentType: false,
+            processData: false,
+            success: function (response) {
+                if (response == true) {
+                    alert('Imagens salvas com sucesso !!');
+                    setDataModalFotos(nomePagina);
+                } else {
+                    alert('Nada foi salvo !');
+                }
+
+            },
+            error: function (error) {
+                alert("Atenção ocorreu um erro no upload de arquivos.");
+            }
+        });
+
+
+
+    }
+
+    function deleteImageBD(idimg) {
+        var nomePagina = $('#nomePagina').text();
+
+        $.ajax({
+            type: 'POST',
+            url: "@Url.Action("DeletaImagemBD","managerAlteracao")",
+            data: {
+                idFoto: idimg
+            },
+            success: function (response) {
+                if (response == true) {
+                    alert('Foto deletada com sucesso !');
+                    setDataModalFotos(nomePagina);
+                } else {
+                    alert('Erro no delete da imagem!');
+                }
+            },
+            error: function (error) {
+                alert("Ocorreu um erro no delete do dado !");
+            }
+        });
+
+    }
+
+    function chamaPopOver(idFoto ,urlFoto) {
+
+        $('[data-toggle="popover"]').popover('hide');
+
+        $('.img-salva').popover({
+            placement: 'top',
+            html: true
+        });
+        //Desabilita o focus no modal para clicar no popover
+        $(document).off('focusin.modal');
+        $("#hdnIdFoto").text(idFoto);
+        setTimeout(function(){setDataPop(urlFoto)}, 10);
+    }
+
+    function setDataPop(urlFoto) {
+        $(".popover-body")
+        .append(
+            $('<form>')
+            .append(
+                $('<div class="form-group">')
+                .append(
+                    $("<div class='row'>").append(
+                        $("<div class='col col-12'>")
+                            .append("<label for='descImg'>Descrição  Imagem  &nbsp <br/></label>")
+                            .append("<input id='cmpDesc' type=\"" + "text" + "\" class=\"" + "form-control" + "\" placeholder='Descrição da Imagem'>")
+                            
+                            )
+                    
+                    )
+                    .append("<br/>")
+                    .append(
+                        $("<div class='row'>")
+                            .append(
+                                $("<div class='col col-12'>")
+                                    .append("<button onclick='closePopOver()' type='button' class='btn btn-danger'> Fechar </button>")
+                                    .append("<button onclick='gravaDescricaoFoto()' type='button' class='btn btn-success'> Salvar Descrição </button>")
+                            )
+                        
+                    ) 
+                    .append("<br/>")
+                    .append(
+                        $("<div class='row'>")
+                            .append(
+                                $("<div class='col col-12'>").append("<a class='example-image-link' href=" + urlFoto + " data-lightbox='example-1' data-title='Visualização de Imagem'> Visualizar Imagem </a>")
+                            )
+
+                    )
+                    
+                    ));
+  
+        //$(".popover-body").html("<form><div class='form-group'><label for='descImg'>Descrição  Imagem  &nbsp <br/></label><input id='cmpDesc' type=\"" + "text" + "\" class=\"" + "form-control" + "\" placeholder='Descrição da Imagem'> <br/> <button onclick='closePopOver()' type='button' class='btn btn-danger'> Fechar </button>  <button onclick='gravaDescricaoFoto()' type='button' class='btn btn-success'> Salvar Descrição </button> <br/><div class='row'><div class='col col-6'> <button type='button' onClick=\"window.open('" + urlFoto + "', '_blank' , 'fullscreen=yes'); return false;\"" + " class='btn btn-success'> Visualizar Imagem </button></div></div></div></form>");
+        setTimeout(setTextPop, 400);
+
+    }
+
+    function setTextPop() {
+
+        var idimg = parseInt($("#hdnIdFoto").text());
+        $.ajax({
+            type: 'GET',
+            url: "@Url.Action("getDescImg","managerAlteracao")",
+            data: {
+                idImg: idimg
+            },
+            success: function (response) {
+                $('#cmpDesc').val(response);
+            },
+            error: function (error) {
+                alert("Ocorreu um erro na busca dos dados !");
+            }
+        });
+
+    }
+
+    function gravaDescricaoFoto() {
+        var idimg = parseInt($("#hdnIdFoto").text());
+        var desc = $("#cmpDesc").val();
+
+        $.ajax({
+            url: "@Url.Action("gravaDescricaoImagem","managerAlteracao")",
+            type: "POST",
+            data: {
+                idImagem: idimg,
+                descricao: desc
+            },
+            success: function (retorno) {
+                if (retorno == true) {
+                    alert("Descrição salva com sucesso !");
+                } else {
+                    alert("Erro na gravacao da descricao !");
+                }
+
+            },
+            error: function (error) {
+                alert("Atenção ocorreu um erro no upload de arquivos.");
+            }
+        });
+    }
+
+    function closePopOver() {
+        $('[data-toggle="popover"]').popover('hide');
+    }
+
+    /* final functions modal foto */
+
+
+
+    function deletaPagina(idPagina) {
+        $.ajax({
+            type: 'GET',
+            url: "@Url.Action("deletaPagina","managerAlteracao")",
+            data: {
+                idTela:idPagina
+            },
+            success: function (response) {
+                if (response[0] == true) {
+                    alert(response[1]);
+                    setTimeout(function () {
+                        location.reload(true);
+                    }, 2000);
+                 
+                } else {
+                    alert(response[1]);
+                }               
+            },
+            error: function (error) {
+                alert("Falha ao deletar pagina");
+            }
+        });
+    }
+
+    $(".btn_toggle").click(function () {
+        var isExpanded = $(this).attr("aria-expanded");
+        if (isExpanded == null) {
+            $(this).removeClass("btn_toggle fa fa-arrow-circle-down fa-pull-right");
+            $(this).addClass('btn_toggle fa fa-arrow-circle-up fa-pull-right');
+        }
+        else {
+
+            if (isExpanded == "true") {
+
+                $(this).removeClass("btn_toggle fa fa-arrow-circle-up fa-pull-right");
+                $(this).addClass('btn_toggle fa fa-arrow-circle-down fa-pull-right');
+
+
+            } else {
+                $(this).removeClass("btn_toggle fa fa-arrow-circle-down fa-pull-right");
+                $(this).addClass('btn_toggle fa fa-arrow-circle-up fa-pull-right');
+            }
+        }
+
+
+    });
+
+</script>

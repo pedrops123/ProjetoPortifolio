@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
-using ProjetoPortifolio.ModelContext;
+using ProjetoPortifolio.RepositoryContext;
 using ProjetoPortifolio.Models;
 
 namespace ProjetoPortifolio.Views.Portifolio

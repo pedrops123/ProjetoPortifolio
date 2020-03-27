@@ -1,0 +1,59 @@
+@model ProjetoPortifolio.Models.ModelCadastroLink
+
+@{
+    Layout = null;
+}
+
+  @using(@Html.BeginForm("gravaLinkUrlPrincipal","managerAlteracao",FormMethod.Post))
+  {
+            @Html.AntiForgeryToken()
+            <div class="row">
+                <div class="col col-md"></div>
+                <div class="col col-sm-6 col-md-5 col-lg-8">
+                    @Html.LabelFor(r=>r.linkUrl)<br/>
+                    @Html.ValidationMessageFor(r => r.linkUrl, "", new { @style = "color:red;!important" })
+                    @Html.TextBoxFor(r=>r.linkUrl , new { @class="form-control input", placeholder="Url do site" })
+                </div>
+                <div class="col col-md"></div>
+            </div>
+            
+            <hr/>
+            
+            <div class="row">
+                    <div class="col col-md"></div>
+                    <div class="col col-sm-6 col-md-5 col-lg-8">    
+                        @Html.LabelFor(r=>r.linkDescricao)<br/>
+                        @Html.ValidationMessageFor(r => r.linkDescricao, "", new { @style = "color:red;!important" })
+                        @Html.TextBoxFor(r=>r.linkDescricao, new { @class="form-control input", placeholder="Descrição da URL" })
+                    </div>  
+                <div class="col col-md"></div>
+            </div>
+        <br/>
+        <div class="row">
+            <div class="col col-md"></div>
+            <div class="col col-md"><button type="submit" class="btn btn-lg btn-primary btn-block"><span class="fa fa-save"></span> &nbsp; Salvar </button></div>
+            <div class="col col-md"></div>
+        </div>
+}
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function(){
+
+  $.ajax({
+        type: "GET",
+        url: "@Url.Action("getDadosTituloGeral","managerAlteracao")",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (response) {
+            $("#linkUrl").val(response[0]);
+            $("#linkDescricao").val(response[1]);
+        },
+        failure: function () {
+            alert("Ocorreu um erro na captura dos dados");
+        }
+    });
+});
+
+</script>

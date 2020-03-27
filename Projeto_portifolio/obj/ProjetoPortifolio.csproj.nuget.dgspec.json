@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\pedro.furlan\\Desktop\\PortifolioTeste\\ProjetoPortifolio\\Projeto_portifolio\\ProjetoPortifolio.csproj": {}
+    "C:\\Users\\Pedro\\Desktop\\projeto_portifolio\\ProjetoPortifolio\\Projeto_portifolio\\ProjetoPortifolio.csproj": {}
   },
   "projects": {
-    "C:\\Users\\pedro.furlan\\Desktop\\PortifolioTeste\\ProjetoPortifolio\\Projeto_portifolio\\ProjetoPortifolio.csproj": {
+    "C:\\Users\\Pedro\\Desktop\\projeto_portifolio\\ProjetoPortifolio\\Projeto_portifolio\\ProjetoPortifolio.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\pedro.furlan\\Desktop\\PortifolioTeste\\ProjetoPortifolio\\Projeto_portifolio\\ProjetoPortifolio.csproj",
+        "projectUniqueName": "C:\\Users\\Pedro\\Desktop\\projeto_portifolio\\ProjetoPortifolio\\Projeto_portifolio\\ProjetoPortifolio.csproj",
         "projectName": "ProjetoPortifolio",
-        "projectPath": "C:\\Users\\pedro.furlan\\Desktop\\PortifolioTeste\\ProjetoPortifolio\\Projeto_portifolio\\ProjetoPortifolio.csproj",
-        "packagesPath": "C:\\Users\\tap.ti\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\pedro.furlan\\Desktop\\PortifolioTeste\\ProjetoPortifolio\\Projeto_portifolio\\obj\\",
+        "projectPath": "C:\\Users\\Pedro\\Desktop\\projeto_portifolio\\ProjetoPortifolio\\Projeto_portifolio\\ProjetoPortifolio.csproj",
+        "packagesPath": "C:\\Users\\Pedro\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Pedro\\Desktop\\projeto_portifolio\\ProjetoPortifolio\\Projeto_portifolio\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\tap.ti\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Pedro\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -41,6 +41,10 @@
       "frameworks": {
         "netcoreapp2.2": {
           "dependencies": {
+            "Microsoft.AspNet.Mvc": {
+              "target": "Package",
+              "version": "[5.2.7, )"
+            },
             "Microsoft.AspNetCore.App": {
               "suppressParent": "All",
               "target": "Package",
@@ -58,7 +62,7 @@
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[2.2.4, )"
+              "version": "[2.2.6, )"
             },
             "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
@@ -68,13 +72,17 @@
               "include": "Runtime, Build, Native, ContentFiles, Analyzers",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[2.2.4, )"
+              "version": "[2.2.6, )"
             },
             "Microsoft.NETCore.App": {
               "suppressParent": "All",
               "target": "Package",
               "version": "[2.2.0, )",
               "autoReferenced": true
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[2.2.4, )"
             },
             "SmartBreadcrumbs": {
               "target": "Package",
@@ -83,6 +91,10 @@
             "System.Drawing.Common": {
               "target": "Package",
               "version": "[4.5.1, )"
+            },
+            "System.Runtime": {
+              "target": "Package",
+              "version": "[4.3.1, )"
             },
             "X.PagedList.Mvc.Core": {
               "target": "Package",

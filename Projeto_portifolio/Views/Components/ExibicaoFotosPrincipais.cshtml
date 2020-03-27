@@ -1,0 +1,52 @@
+﻿@{
+    Layout = null;
+}
+
+
+<style>
+
+    .imagens-portifolio {
+        display: -webkit-flex; /* Safari */
+        -webkit-flex-wrap: wrap; /* Safari 6.1+ */
+        display: inline-flex;
+        flex-wrap: wrap;
+        margin: 26px 0px 0px 45px;
+    }
+</style>
+
+
+
+
+
+
+@foreach (itemFotoGaleriaPrincipal foto in Model.imagensPrincipais)
+{
+
+    <div class="card imagens-portifolio" style="width: 18rem;">
+        <img class="img-project" src="@foto.urlFoto" alt="">
+        <div style="background-color: rgba(0,0,0,0.2);" class="card-body">
+            <h5 class="card-title">@foto.idTela.Replace("_", " ")</h5>
+            <p class="card-text">@Html.Raw(foto.descricaoProjeto)</p>
+            <a id="btn_visit" data-placement="top" data-toggle="tooltip" title="Abrir Galeria de Fotos" class="tip-top btn btn-primary" href="@("/Portifolio/pagina/1/"+foto.idTela)"><span class="fas fa-camera"></span> &nbsp; Galeria de Fotos</a>
+        </div>
+    </div>
+
+
+
+    @*<div style="border:inset; width:253px; height:253px; border-color:black; margin-left:20px; margin-top:20px;" class="imagens-portifolio">
+            <div class="hovereffect">
+                <img class="img-project" src="@foto.urlFoto" alt="">
+                <div class="title" style="margin-top:100px;">
+                <h2>@foto.id_tela.Replace("_", " ")</h2>
+                </div>
+              <img />
+        <div class="overlay" style="width:400px;">
+            <div style="width:300px; margin:2px; margin-left:-44px;">
+                <a id="btn_visit" data-placement="top" data-toggle="tooltip" title="Abrir Galeria de Fotos" class="tip-top btn btn-primary" href="@("/Portifolio/"+foto.id_tela)">Galeria</a>
+                <button type="button" data-placement="top" data-toggle="tooltip" title="Ver História do projeto" id="btn_desc" class="tip-top btn btn-success"> Descrição  Projeto</button>
+            </div>
+         </div>
+             </div>
+        </div>*@
+
+}

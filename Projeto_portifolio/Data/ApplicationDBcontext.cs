@@ -24,68 +24,73 @@ namespace ProjetoPortifolio.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            // optionsBuilder.UseSqlServer(@"Data Source=SP1DES064201\SQLEXPRESS;Initial Catalog=PortifolioDB;Integrated Security=True;Connect Timeout=30; User Id=pedro.furlan; Password=mudar123;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
-            optionsBuilder.UseSqlServer(@"Data Source=DSK-TI-02\SQLEXPRESS;Initial Catalog=PortifolioDB;Integrated Security=True;Connect Timeout=30;User Id=tap.ti;Password=TrameAp1112@;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            //Connection string casa 
+            optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-9IU6ULD\SQLEXPRESS;Initial Catalog=PortifolioDB;Integrated Security=True;Connect Timeout=30; Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            
+            //Connection string trabalho
+            //optionsBuilder.UseSqlServer(@"Data Source=DSK-TI-02\SQLEXPRESS; Initial Catalog=PortifolioDB;Integrated Security=True;Connect Timeout=30; User Id=tap.ti; Password=TrameAp112@;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ItemsPaginaGeral>().HasData(
-                new ItemsPaginaGeral
-                {
+
+                new ItemsPaginaGeral(){
                     id_pagina = 1,
                     nome_pagina = "_main",
                     titulo_aba = "Pagina Principal",
-                    titulo_pagina = "Minha pagina principal",
-                    conteudo_pagina = "Meu site Portifolio , isto é o conteudo inicializado na pagina , para alterar ou incluir alguma tela  favor entrar no manager incluindo o parametro _Login",
+                    titulo_pagina = "Minha Página Principal",
+                    conteudo_pagina = "Site Portifolio criado com sucesso ! <br/> para abrir o login digite na url o seguinte endereço \"/managerlogin/login \" <br/> Obrigado : ) !",
+                    hasFoto = false,
                     hasForm = false,
-                    hasFoto = false
+                    isMainPhoto = false,
+                    cria_botao = true
                 });
 
+            //modelBuilder.Entity<ItemsPaginaGeral>().HasData(
+            //  new ItemsPaginaGeral
+            //  {
+            //      id_pagina = 2,
+            //      nome_pagina = "_login",
+            //      titulo_aba = "Login Manager",
+            //      titulo_pagina = "Manager Administrador",
+            //      conteudo_pagina = "",
+            //      hasForm = true,
+            //      hasFoto = false,
+            //      pagina_pai = "_main"
+            //  });
 
-            modelBuilder.Entity<ItemsPaginaGeral>().HasData(
-              new ItemsPaginaGeral
-              {
-                  id_pagina = 2,
-                  nome_pagina = "_login",
-                  titulo_aba = "Login Manager",
-                  titulo_pagina = "Manager Administrador",
-                  conteudo_pagina = "",
-                  hasForm = true,
-                  hasFoto = false
-              });
+            //modelBuilder.Entity<ModelFormularios>().HasData(
+            //    new ModelFormularios
+            //    {
+            //        id_form = 1,
+            //        class_form = "form-control",
+            //        id_item = "login_cmp",
+            //        estilo_dado = "text",
+            //        isRequired = true,
+            //        label_form = "Login",
+            //        order = 1,
+            //        tipo_form = "input",
+            //        tag_pagina = "_login"
 
-            modelBuilder.Entity<ModelFormularios>().HasData(
-                new ModelFormularios
-                {
-                    id_form = 1,
-                    class_form = "form-control",
-                    id_item = "login_cmp",
-                    estilo_dado = "text",
-                    isRequired = true,
-                    label_form = "Login",
-                    order = 1,
-                    tipo_form = "input",
-                    tag_pagina = "_login"
+            //    });
 
-                });
+            //modelBuilder.Entity<ModelFormularios>().HasData(
+            //new ModelFormularios
+            //{
+            //    id_form = 2,
+            //    class_form = "form-control",
+            //    id_item = "senha_cmp",
+            //    estilo_dado = "password",
+            //    isRequired = true,
+            //    label_form = "Senha",
+            //    order = 2,
+            //    tipo_form = "input",
+            //    tag_pagina = "_login"
 
-            modelBuilder.Entity<ModelFormularios>().HasData(
-            new ModelFormularios
-            {
-                id_form = 2,
-                class_form = "form-control",
-                id_item = "senha_cmp",
-                estilo_dado = "password",
-                isRequired = true,
-                label_form = "Senha",
-                order = 2,
-                tipo_form = "input",
-                tag_pagina = "_login"
+            //});
 
-            });
-
-
+        /*
             modelBuilder.Entity<ModelFormularios>().HasData(
             new ModelFormularios
             {
@@ -100,7 +105,9 @@ namespace ProjetoPortifolio.Data
                 tag_pagina = "manager_principal"
 
             });
+        */
 
+        /*
             modelBuilder.Entity<ModelFormularios>().HasData(
              new ModelFormularios
              {
@@ -115,7 +122,8 @@ namespace ProjetoPortifolio.Data
                  tag_pagina = "manager_principal"
 
              });
-
+        */
+        /*
             modelBuilder.Entity<ModelFormularios>().HasData(
              new ModelFormularios
              {
@@ -130,7 +138,9 @@ namespace ProjetoPortifolio.Data
                  tag_pagina = "manager_alteracao"
 
              });
+    */
 
+/*
             modelBuilder.Entity<ModelFormularios>().HasData(
             new ModelFormularios
             {
@@ -144,7 +154,9 @@ namespace ProjetoPortifolio.Data
                 tipo_form = "input",
                 tag_pagina = "manager_alteracao"
             });
+*/
 
+/*
             modelBuilder.Entity<ModelFormularios>().HasData(
             new ModelFormularios
             {
@@ -158,7 +170,9 @@ namespace ProjetoPortifolio.Data
                 tipo_form = "input",
                 tag_pagina = "manager_alteracao"
             });
+*/
 
+/*
             modelBuilder.Entity<ModelFormularios>().HasData(
             new ModelFormularios
             {
@@ -172,7 +186,8 @@ namespace ProjetoPortifolio.Data
                 tipo_form = "textarea",
                 tag_pagina = "manager_alteracao"
             });
-
+*/
+/*
             modelBuilder.Entity<ModelFormularios>().HasData(
             new ModelFormularios
             {
@@ -186,7 +201,8 @@ namespace ProjetoPortifolio.Data
                 tipo_form = "select",
                 tag_pagina = "manager_alteracao"
             });
-
+*/
+/*
             modelBuilder.Entity<ModelFormularios>().HasData(
             new ModelFormularios
             {
@@ -202,6 +218,9 @@ namespace ProjetoPortifolio.Data
             });
 
 
+*/
+/*
+
             modelBuilder.Entity<ModelFormularios>().HasData(
             new ModelFormularios
             {
@@ -216,7 +235,9 @@ namespace ProjetoPortifolio.Data
                 tag_pagina = "manager_alteracao"
             });
 
+*/
 
+/*
             modelBuilder.Entity<ModelFormularios>().HasData(
             new ModelFormularios
             {
@@ -230,7 +251,7 @@ namespace ProjetoPortifolio.Data
                 tipo_form = "checkbox",
                 tag_pagina = "manager_alteracao"
             });
-
+*/
             modelBuilder.Entity<ButtonSite>().HasData(
                 new ButtonSite
                 {
@@ -241,26 +262,26 @@ namespace ProjetoPortifolio.Data
                     type = "link"
                 });
 
-            modelBuilder.Entity<ButtonSite>().HasData(
-            new ButtonSite
-            {
-                id_button = 2,
-                descricao = "Voltar",
-                caminhoUrl = "_main",
-                tagPagina = "_login",
-                type = "redirect"
-            });
+            //modelBuilder.Entity<ButtonSite>().HasData(
+            //new ButtonSite
+            //{
+            //    id_button = 2,
+            //    descricao = "Voltar",
+            //    caminhoUrl = "_main",
+            //    tagPagina = "_login",
+            //    type = "redirect"
+            //});
 
 
-            modelBuilder.Entity<ButtonSite>().HasData(
-            new ButtonSite
-            {
-                id_button = 3,
-                descricao = "Entrar",
-                caminhoUrl = "_manager-index",
-                tagPagina = "_login",
-                type = "submit"
-            });
+            //modelBuilder.Entity<ButtonSite>().HasData(
+            //new ButtonSite
+            //{
+            //    id_button = 3,
+            //    descricao = "Entrar",
+            //    caminhoUrl = "_manager-index",
+            //    tagPagina = "_login",
+            //    type = "submit"
+            //});
 
             modelBuilder.Entity<ButtonSite>().HasData(
             new ButtonSite
@@ -272,26 +293,30 @@ namespace ProjetoPortifolio.Data
                 type = "linkMaster"
             });
 
+/*
             modelBuilder.Entity<ButtonSite>().HasData(
             new ButtonSite
             {
                 id_button = 5,
-                descricao = "Gravar Alterações",
+                descricao = "<span class=\"fas fa-save\"></span> &nbsp Gravar Alterações",
                 caminhoUrl = "_titleGeral",
                 tagPagina = "manager_principal",
                 type = "submit"
             });
+*/
+
+/*
             modelBuilder.Entity<ButtonSite>().HasData(
             new ButtonSite
             {
                 id_button = 6,
-                descricao = "Gravar Alterações",
+                descricao = "<span class=\"fas fa-save\"></span> &nbsp Gravar Alterações",
                 caminhoUrl = "manager_alteracao",
                 tagPagina = "manager_alteracao",
                 type = "submit"
             });
 
-
+*/
             modelBuilder.Entity<UsersAdmin>().HasData(
                 new UsersAdmin
                 {
@@ -300,6 +325,7 @@ namespace ProjetoPortifolio.Data
                     nome_completo = "Pedro Vinicius Rodrigues Furlan",
                     senha = "97083252"
                 });
+                /*
 
             modelBuilder.Entity<OptionsForm>().HasData(
                 new OptionsForm
@@ -334,6 +360,8 @@ namespace ProjetoPortifolio.Data
                 cmp_form = 10,
                 IsDeletado = false
             });
+
+            */
         }
 
     }

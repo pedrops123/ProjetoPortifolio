@@ -1,0 +1,25 @@
+﻿@{
+    Layout = null;
+}
+
+<style>
+
+    .imagens-portifolio-item {
+        display: -webkit-flex; /* Safari */
+        -webkit-flex-wrap: wrap; /* Safari 6.1+ */
+        display: inline-flex;
+        flex-wrap: wrap;
+        border: none;
+    }
+
+</style>
+
+
+@foreach (ImagensPortifolio foto in Model.imagens)
+{
+    <div class="imagens-portifolio-item  view overlay zoom">
+        <div style="border:inset; width:253px; height:253px;  margin-left:20px; margin-top:20px;">
+            <a class="example-image-link" href="@foto.urlFoto" data-lightbox="example-1" data-title="@foto.descricao_foto"><img style="width:253px; height:253px;" class="example-image img-thumbnail" src="@foto.urlFoto" alt="image-1" /></a>
+        </div>
+    </div>
+}

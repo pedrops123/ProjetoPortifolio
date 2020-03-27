@@ -11,10 +11,14 @@ namespace ProjetoPortifolio.ViewModel
     {
         public ItemsPaginaGeral dadosPagina { get; set; }
         public IPagedList<ImagensPortifolio> imagens { get; set; }
+        public IPagedList<itemFotoGaleriaPrincipal> imagensPrincipais { get; set; }
         public List<ButtonSite> botoes { get; set; }
         public List<string> formularios { get; set; }
         public List<ItemsPaginaGeral> listaPaginasSistema { get; set; }
         public string mainFoto { get; set; }
+        public ValidaUser login { get; set; }
+        public ModelCadastroLink cadastroLink { get; set; }
+        public ItemsPaginaGeral cadastroTela { get;set; }
 
     }
 }

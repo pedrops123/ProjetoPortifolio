@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SmartBreadcrumbs.Extensions;
+using ProjetoPortifolio.ViewModel;
 
 namespace ProjetoPortifolio
 {
@@ -27,6 +28,7 @@ namespace ProjetoPortifolio
         public void ConfigureServices(IServiceCollection services)
         {
 
+            /*
             services.AddBreadcrumbs(GetType().Assembly, options =>
             {
                 options.TagName = "div";
@@ -37,7 +39,8 @@ namespace ProjetoPortifolio
                 options.ActiveLiClasses = "breadcrumb-item active";
                 options.SeparatorElement = "<li class=\"separator\">&nbsp/&nbsp</li>";
             });
-
+            
+            */
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -45,27 +48,29 @@ namespace ProjetoPortifolio
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.ConfigureApplicationCookie(options => {
-                options.AccessDeniedPath = new PathString("Portifolio/_login");
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.AccessDeniedPath = new PathString("/managerlogin/login");
                 options.Cookie.Name = "Cookie_port";
                 options.Cookie.HttpOnly = true;
-              //  options.ExpireTimeSpan = TimeSpan.FromMinutes(720);
-                options.LoginPath = "/Portifolio/Login";
+                //  options.ExpireTimeSpan = TimeSpan.FromMinutes(720);
+                options.LoginPath = "/managerlogin/login";
                 options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
                 options.SlidingExpiration = true;
-                
+
             });
 
-            services.AddAuthentication("FiverSecurityScheme")
-             .AddCookie("FiverSecurityScheme", options =>
+            services.AddAuthentication("Auth_manager")
+             .AddCookie("Auth_manager", options =>
              {
-                 options.AccessDeniedPath = new PathString(@"/Portifolio/_login");
-                 options.LoginPath = new PathString(@"/Portifolio/_login");
+                 options.AccessDeniedPath = new PathString(@"/managerlogin/login");
+                 options.LoginPath = new PathString(@"/managerlogin/login");
              });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            
+
+
 
         }
 
@@ -89,22 +94,80 @@ namespace ProjetoPortifolio
             app.UseCookiePolicy();
             app.UseMvc(routes =>
             {
-                routes.MapRoute("Portifolio", "Portifolio/{*nomeTela}",
+
+                // Rota Paginas gerais Criadas 
+                routes.MapRoute(
+                    name: "Portifolio",
+                    template: "{controller}/pagina/{pagina}/{*nomeTela}",
                     defaults: new { controller = "Portifolio", action = "ChamaViewDinamica" });
 
-                routes.MapRoute("Portifolio", "Portifolio/manager_principal",
-                   defaults: new { controller = "Portifolio", action = "chamaManagerPrincipal" });
+                // Rota Login
+                routes.MapRoute(
+                    name: "login",
+                    template: "managerlogin/login",
+                    defaults: new { controller = "LoginLogout", action = "Index" });
 
-                routes.MapRoute("Portifolio", "Portifolio/ConfiguracaoPagina/{*id}",
-                  defaults: new { controller = "Portifolio", action = "DadosTelaDinamicoManager" });
+                // Rota Valida Login
+                routes.MapRoute(
+                    name: "validaUser",
+                    template: "managerlogin/validaUser",
+                    defaults: new { controller = "LoginLogout", action = "loginManager" });
 
-                //routes.MapRoute("PortifolioPedro", "{controller=Portifolio}/{action=PortifolioPedro}/{id?}");
-                //routes.MapRoute("Login", "{controller=Portifolio}/{action=Login}/{id?}");
+                // Rota de redirect com usuario
+                routes.MapRoute(
+                    name: "loginWithErrrors",
+                    template: "managerlogin/loginRedirect/{login}",
+                    defaults: new { controller = "LoginLogout", action = "LoginWithModelErrors"});
+
+              // Rota de redirect em branco
+                routes.MapRoute(
+                    name: "loginWithErrrors",
+                    template: "managerlogin/loginRedirect",
+                    defaults: new { controller = "LoginLogout", action = "LoginWithModelErrors"});
+
+                // Rota Logout 
+                routes.MapRoute(
+                    name: "logout",
+                    template: "managerlogin/logout",
+                    defaults: new { controller = "LoginLogout", action = "logout" });
+
+                // Rota Manager Principal
+                routes.MapRoute(
+                    name: "managerPrincipal",
+                    template: "managerSistema/manager_principal",
+                    defaults: new { controller = "managerAlteracao", action = "Index" });
 
                 routes.MapRoute(
+                    name:"managerRedirect",
+                    template:"managerSistema/manager_principal_redirect",
+                    defaults:new {controller = "managerAlteracao", action = "redirectManager"});
+
+                // Rota cadastro paginas
+                routes.MapRoute(
+                   name: "cadastroPaginas",
+                   template: "{controller}/ConfiguracaoPagina/{*tagPagina}",
+                   defaults: new { controller = "Portifolio", action = "DadosTelaDinamicoManager" });
+
+
+
+                // Rota Manager Alteracao pagina 
+                routes.MapRoute(
+                    name:"AlteracaoPagina",
+                    template:"ManagerAlteracao/{*idPagina}",
+                    defaults: new { controller = "managerAlteracaoPaginas" , action = "Index" , idPagina = "" });
+
+                // Rota Manager Alteracao pagina errors 
+                
+                routes.MapRoute(
+                    name:"AlteracaoPaginaErrors",
+                    template:"ManagerAlteracaoRedirect",
+                    defaults: new { controller = "managerAlteracaoPaginas" , action = "validaCadastro" });
+                
+
+                // Rota padrão default
+                routes.MapRoute(
                     name: "default",
-                    template: "{controller=Portifolio}/{action=ChamaViewDinamica}/{id?}"
-                    );               
+                    template: "{controller=Portifolio}/{action=ChamaViewDinamica}/{id?}");
             });
         }
     }
