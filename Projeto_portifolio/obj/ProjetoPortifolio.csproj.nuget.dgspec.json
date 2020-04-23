@@ -90,7 +90,7 @@
             },
             "System.Drawing.Common": {
               "target": "Package",
-              "version": "[4.5.1, )"
+              "version": "[4.7.0, )"
             },
             "System.Runtime": {
               "target": "Package",
@@ -99,6 +99,10 @@
             "X.PagedList.Mvc.Core": {
               "target": "Package",
               "version": "[7.6.0, )"
+            },
+            "iTextSharp.LGPLv2.Core": {
+              "target": "Package",
+              "version": "[1.6.6, )"
             }
           },
           "imports": [

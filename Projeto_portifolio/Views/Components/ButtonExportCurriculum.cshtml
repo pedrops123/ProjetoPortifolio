@@ -12,7 +12,24 @@
 <script>
 
     $("#dowloadCurriculum").click(function () {
-        alert("Exporta curriculum \n \n  Em Breve !");
+        $.ajax({
+            type:'GET',
+            url:'@Url.Action("geraPDFCurriculum","GeraPDF")',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success:function(response){
+                if(response[0] == true){
+                      window.location.href = '@Url.Content("~/GeraPDF/DonwloadArquivo")?caminhoArquivo=' + response[1];
+                }
+                else
+                {
+                    alert(reponse[1]);
+                }
+            },
+            failure:function(){
+                alert("Houve um erro ao tentar gerar o Curriculum !");
+            }
+        });
     });
 
 </script>
